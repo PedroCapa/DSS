@@ -1,5 +1,4 @@
-
-package configurafacil;
+package Classes;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -81,7 +80,5 @@ public abstract class Peca {
         Peca other = (Peca) obj;
         return (this.quantidade != other.quantidade && this.nome.equals(other.nome) 
          && this.obrigatorias.equals(other.obrigatorias) && Objects.equals(this.incompativeis, other.incompativeis));
-    }
-    
-    
+    }   
 }

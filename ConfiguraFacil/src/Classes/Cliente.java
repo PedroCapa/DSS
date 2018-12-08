@@ -1,49 +1,39 @@
-package configurafacil;
+package Classes;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Objects;
 
-public class Cliente {
+public class Cliente extends Utilizador{
     
-    private String nome;
-    private String password;
+    private String email;
     private List<Carro> carros;
 
-    public Cliente(String nome, String password, List<Carro> carros) {
-        this.nome = nome;
-        this.password = password;
+    public Cliente(String nome, String password, String email, List<Carro> carros) {
+        super(nome, password);
+        this.email = email;
         this.carros = carros;
     }
 
     public Cliente() {
-        this.nome = "";
-        this.password = "";
+        super();
+        this.email = "";
         this.carros = new ArrayList<>();
     }
     
     public Cliente(Cliente umCliente){
-        this.nome = umCliente.getNome();
-        this.password = umCliente.getPassword();
+        super(umCliente);
+        this.email = umCliente.getEmail();
         this.carros = umCliente.getCarros();
     }
     
-    public String getNome() {
-        return nome;
+    public String getEmail(){
+        return this.email;
     }
-
-    public void setNome(String nome) {
-        this.nome = nome;
+    
+    public void setEmail(String email){
+        this.email = email;
     }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
+    
     public List<Carro> getCarros() {
         List l = new ArrayList<>();
         for(Carro c: this.carros)
@@ -56,12 +46,7 @@ public class Cliente {
         for(Carro c: Carros)
             this.carros.add(c.clone());
     }
-    
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(this.nome);
-    }
-    
+       
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -73,8 +58,7 @@ public class Cliente {
         
         Cliente other = (Cliente) obj;
         
-        if (this.nome.equals(other.nome) && this.password.equals(other.password) 
-            && this.carros.equals(other.carros)) {
+        if (super.equals(other) && this.email.equals(other.getEmail())&& this.carros.equals(other.getCarros())) {
             return true;
         }
         return false;

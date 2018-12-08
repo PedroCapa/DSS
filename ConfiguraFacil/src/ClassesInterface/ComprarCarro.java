@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package configurafacil;
+package ClassesInterface;
 
 /**
  *
@@ -99,22 +99,22 @@ public class ComprarCarro extends javax.swing.JFrame {
             }
         });
 
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configurafacil/Model T.jpg"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Model T.jpg"))); // NOI18N
         jLabel2.setText("jLabel2");
 
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configurafacil/Ford 302 Mustang.jpg"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Ford 302 Mustang.jpg"))); // NOI18N
         jLabel3.setText("jLabel3");
 
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configurafacil/ThunderBird.jpg"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ThunderBird.jpg"))); // NOI18N
         jLabel4.setText("jLabel4");
 
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configurafacil/Indigo Concept.jpg"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Indigo Concept.jpg"))); // NOI18N
         jLabel5.setText("jLabel5");
 
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configurafacil/Boss 429 mustang.jpg"))); // NOI18N
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Boss 429 mustang.jpg"))); // NOI18N
         jLabel6.setText("jLabel6");
 
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/configurafacil/Edge.jpg"))); // NOI18N
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/Edge.jpg"))); // NOI18N
         jLabel7.setText("jLabel7");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

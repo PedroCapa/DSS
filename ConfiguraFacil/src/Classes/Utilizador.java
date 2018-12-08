@@ -1,28 +1,35 @@
-
-package configurafacil;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package Classes;
 
 import java.util.Objects;
 
-public class Funcionario {
-    
+/**
+ *
+ * @author pmcca
+ */
+public class Utilizador {
     private String nome;
     private String password;
 
-    public Funcionario(String nome, String password) {
+    public Utilizador(String nome, String password) {
         this.nome = nome;
         this.password = password;
     }
-
-    public Funcionario() {
+    
+    public Utilizador(){
         this.nome = "";
         this.password = "";
     }
     
-    public Funcionario(Funcionario umCliente){
-        this.nome = umCliente.getNome();
-        this.password = umCliente.getPassword();
+    public Utilizador(Utilizador umUtilizador){
+        this.nome = umUtilizador.getNome();
+        this.password = umUtilizador.getPassword();
     }
-    
+
     public String getNome() {
         return nome;
     }
@@ -38,12 +45,7 @@ public class Funcionario {
     public void setPassword(String password) {
         this.password = password;
     }
-   
-    @Override
-    public int hashCode() {
-        return Objects.hashCode(this.nome);
-    }
-    
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -53,11 +55,7 @@ public class Funcionario {
             return false;
         }
         
-        Funcionario other = (Funcionario) obj;
-        
-        if (this.nome.equals(other.nome) && this.password.equals(other.password)) {
-            return true;
-        }
-        return false;
-    }
+        Utilizador other = (Utilizador) obj;
+        return (this.nome.equals(other.getNome()) && this.password.equals(other.getPassword()));
+    }    
 }

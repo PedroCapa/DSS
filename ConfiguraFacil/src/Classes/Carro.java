@@ -1,4 +1,4 @@
-package configurafacil;
+package Classes;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -33,11 +33,6 @@ public class Carro {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hashCode(this.pecas);
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -47,9 +42,6 @@ public class Carro {
         }
         
         Carro other = (Carro) obj;
-        if (this.pecas.equals(other.pecas)) {
-            return true;
-        }
-        return false;
+        return (this.pecas.equals(other.getPecas()));
     }   
 }

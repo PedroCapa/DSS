@@ -1,6 +1,4 @@
-
-
-package configurafacil;
+package Classes;
 
 import java.util.List;
 
