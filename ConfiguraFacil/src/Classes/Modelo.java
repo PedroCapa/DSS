@@ -10,7 +10,7 @@ public class Modelo {
 
     public Modelo(String nome, List<Pacote> pacotes, float custoBase) {
         this.nome = nome;
-        this.pacotes = pacotes;
+        this.pacotes = new ArrayList<>(pacotes);
         this.custoBase = custoBase;
     }
     
@@ -35,11 +35,11 @@ public class Modelo {
     }
 
     public List<Pacote> getPacotes() {
-        return pacotes;
+        return new ArrayList<>(this.pacotes);
     }
 
     public void setPacotes(List<Pacote> pacotes) {
-        this.pacotes = pacotes;
+        this.pacotes = new ArrayList<>(pacotes);
     }
 
     public float getCustoBase() {
@@ -49,7 +49,12 @@ public class Modelo {
     public void setCustoBase(float custoBase) {
         this.custoBase = custoBase;
     }
-
+    
+    @Override
+    public Modelo clone(){
+        return new Modelo(this);
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -60,7 +65,7 @@ public class Modelo {
         }
         
         Modelo other = (Modelo) obj;
-        return (this.custoBase != other.getCustoBase() && this.nome.equals(other.nome) 
-            && this.pacotes.equals(other.pacotes));
+        return (this.custoBase != other.getCustoBase() && this.nome.equals(other.getNome()) 
+            && this.pacotes.equals(other.getPacotes()));
     }    
 }

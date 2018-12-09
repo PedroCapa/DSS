@@ -11,7 +11,7 @@ public class Cliente extends Utilizador{
     public Cliente(String nome, String password, String email, List<Carro> carros) {
         super(nome, password);
         this.email = email;
-        this.carros = carros;
+        this.carros = new ArrayList<>(carros);
     }
 
     public Cliente() {
@@ -35,18 +35,18 @@ public class Cliente extends Utilizador{
     }
     
     public List<Carro> getCarros() {
-        List l = new ArrayList<>();
-        for(Carro c: this.carros)
-            l.add(c.clone());
-        return l;
+        return new ArrayList<>(this.carros);
     }
 
     public void setCarros(List<Carro> Carros) {
-        this.carros = new ArrayList<>();
-        for(Carro c: Carros)
-            this.carros.add(c.clone());
+        this.carros = new ArrayList<>(carros);
     }
-       
+    
+    @Override
+    public Cliente clone(){
+        return new Cliente(this);
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -63,5 +63,4 @@ public class Cliente extends Utilizador{
         }
         return false;
     }
-    
 }

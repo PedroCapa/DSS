@@ -13,8 +13,8 @@ public abstract class Peca {
     public Peca(int quantidade, String nome, List<Peca> obrigatorias, List<Peca> incompativeis) {
         this.quantidade = quantidade;
         this.nome = nome;
-        this.obrigatorias = obrigatorias;
-        this.incompativeis = incompativeis;
+        this.obrigatorias = new ArrayList<>(obrigatorias);
+        this.incompativeis = new ArrayList<>(incompativeis);
     }
     
     public Peca() {
@@ -48,21 +48,21 @@ public abstract class Peca {
     }
 
     public List<Peca> getObrigatorias() {
-        return obrigatorias;
+        return new ArrayList<>(this.obrigatorias);
     }
 
     public void setObrigatorias(List<Peca> obrigatorias) {
-        this.obrigatorias = obrigatorias;
+        this.obrigatorias = new ArrayList<>(obrigatorias);
     }
 
     public List<Peca> getIncompativeis() {
-        return incompativeis;
+        return new ArrayList<>(this.incompativeis);
     }
 
     public void setIncompativeis(List<Peca> incompativeis) {
-        this.incompativeis = incompativeis;
+        this.incompativeis = new ArrayList<>(incompativeis);
     }
-
+        
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

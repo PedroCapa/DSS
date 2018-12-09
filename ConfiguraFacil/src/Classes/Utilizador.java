@@ -39,7 +39,12 @@ public class Utilizador {
     public void setPassword(String password) {
         this.password = password;
     }
-
+    
+    @Override
+    public Utilizador clone(){
+        return new Utilizador(this);
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

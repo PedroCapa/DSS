@@ -9,7 +9,7 @@ public class Pacote {
 
     public Pacote(String nome, List<Peca> pecas) {
         this.nome = nome;
-        this.pecas = pecas;
+        this.pecas = new ArrayList<>(pecas);
     }
     
     public Pacote(){
@@ -31,13 +31,18 @@ public class Pacote {
     }
 
     public List<Peca> getPecas() {
-        return pecas;
+        return new ArrayList<>(this.pecas);
     }
 
     public void setPecas(List<Peca> pecas) {
-        this.pecas = pecas;
+        this.pecas = new ArrayList<>(pecas);
     }
-
+    
+    @Override
+    public Pacote clone(){
+        return new Pacote(this);
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

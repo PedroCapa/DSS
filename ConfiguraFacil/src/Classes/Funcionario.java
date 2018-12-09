@@ -26,6 +26,11 @@ public class Funcionario extends Utilizador{
     }
     
     @Override
+    public Funcionario clone(){
+        return new Funcionario(this);
+    }
+    
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;

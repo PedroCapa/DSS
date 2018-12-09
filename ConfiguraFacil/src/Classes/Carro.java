@@ -8,7 +8,9 @@ public class Carro {
     private float custo;
 
     public Carro(List<String> pecas, float custo) {
-        this.pecas = pecas;
+        this.pecas = new ArrayList<>();
+        for(String s: pecas)
+            pecas.add(s);
         this.custo = custo;
     }
 
@@ -23,11 +25,11 @@ public class Carro {
     }
 
     public List<String> getPecas() {
-        return pecas;
+        return new ArrayList<>(this.pecas);
     }
 
     public void setPecas(List<String> pecas) {
-        this.pecas = pecas;
+        this.pecas = new ArrayList<>(pecas);
     }
     
     public float getCusto(){
