@@ -2,7 +2,6 @@ package Classes;
 
 import java.util.List;
 
-
 public class Estofos extends Peca{
 
     public Estofos(int quantidade, String nome, List<Peca> obrigatorias, List<Peca> incompativeis) {

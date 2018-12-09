@@ -64,11 +64,6 @@ public abstract class Peca {
     }
 
     @Override
-    public int hashCode() {
-        return Objects.hashCode(this.nome);
-    }
-
-    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -79,6 +74,6 @@ public abstract class Peca {
         
         Peca other = (Peca) obj;
         return (this.quantidade != other.quantidade && this.nome.equals(other.nome) 
-         && this.obrigatorias.equals(other.obrigatorias) && Objects.equals(this.incompativeis, other.incompativeis));
+         && this.obrigatorias.equals(other.obrigatorias) && this.incompativeis.equals(other.getIncompativeis()));
     }   
 }

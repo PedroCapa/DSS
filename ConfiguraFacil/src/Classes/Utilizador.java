@@ -5,12 +5,6 @@
  */
 package Classes;
 
-import java.util.Objects;
-
-/**
- *
- * @author pmcca
- */
 public class Utilizador {
     private String nome;
     private String password;

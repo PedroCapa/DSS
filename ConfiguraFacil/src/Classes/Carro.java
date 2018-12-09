@@ -2,21 +2,24 @@ package Classes;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class Carro {
     private List<String> pecas;
+    private float custo;
 
-    public Carro(List<String> pecas) {
+    public Carro(List<String> pecas, float custo) {
         this.pecas = pecas;
+        this.custo = custo;
     }
 
     public Carro() {
-        this.pecas = new ArrayList<>(); 
+        this.pecas = new ArrayList<>();
+        this.custo = 0;
     }
     
     public Carro(Carro umCarro){
         this.pecas = umCarro.getPecas();
+        this.custo = umCarro.getCusto();
     }
 
     public List<String> getPecas() {
@@ -25,6 +28,14 @@ public class Carro {
 
     public void setPecas(List<String> pecas) {
         this.pecas = pecas;
+    }
+    
+    public float getCusto(){
+        return this.custo;
+    }
+    
+    public void setCusto(float custo){
+        this.custo = custo;
     }
     
     @Override
@@ -42,6 +53,6 @@ public class Carro {
         }
         
         Carro other = (Carro) obj;
-        return (this.pecas.equals(other.getPecas()));
+        return (this.pecas.equals(other.getPecas())  && this.custo != other.getCusto());
     }   
 }

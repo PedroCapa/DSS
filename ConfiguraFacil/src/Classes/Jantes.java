@@ -2,7 +2,6 @@ package Classes;
 
 import java.util.List;
 
-
 public class Jantes extends Peca{
 
     public Jantes(int quantidade, String nome, List<Peca> obrigatorias, List<Peca> incompativeis) {
