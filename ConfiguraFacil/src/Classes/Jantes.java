@@ -15,12 +15,4 @@ public class Jantes extends Peca{
     public Jantes(Peca umaPeca) {
         super(umaPeca);
     }
-    
-    public Jantes clone(){
-        return new Jantes(this);
-    }
-    
-    public boolean equals(Object o){
-        return super.equals(o);
-    }
 }

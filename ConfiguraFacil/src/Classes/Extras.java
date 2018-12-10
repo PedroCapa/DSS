@@ -15,12 +15,4 @@ public class Extras extends Peca{
     public Extras(Peca umaPeca) {
         super(umaPeca);
     }
-    
-    public Extras clone(){
-        return new Extras(this);
-    }
-    
-    public boolean equals(Object o){
-        return super.equals(o);
-    }
 }
