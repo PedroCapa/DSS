@@ -62,7 +62,7 @@ public abstract class Peca {
     public void setIncompativeis(List<Peca> incompativeis) {
         this.incompativeis = new ArrayList<>(incompativeis);
     }
-        
+
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

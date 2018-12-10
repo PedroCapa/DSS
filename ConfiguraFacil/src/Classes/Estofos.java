@@ -14,5 +14,13 @@ public class Estofos extends Peca{
 
     public Estofos(Peca umaPeca) {
         super(umaPeca);
-    }   
+    }
+    
+    public Estofos clone(){
+        return new Estofos(this);
+    }
+    
+    public boolean equals(Object o){
+        return super.equals(o);
+    }
 }
