@@ -15,4 +15,5 @@ public class Cor extends Peca{
     public Cor(Peca umaPeca) {
         super(umaPeca);
     }
+    
 }
