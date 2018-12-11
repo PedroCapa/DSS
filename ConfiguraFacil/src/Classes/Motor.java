@@ -14,5 +14,13 @@ public class Motor extends Peca{
 
     public Motor(Peca umaPeca) {
         super(umaPeca);
-    }    
+    }
+    
+    public Motor clone(){
+        return new Motor(this);
+    }
+    
+    public boolean equals(Object obj){
+        return super.equals(obj);
+    }
 }

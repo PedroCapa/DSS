@@ -16,4 +16,11 @@ public class Cor extends Peca{
         super(umaPeca);
     }
     
+    public Cor clone(){
+        return new Cor(this);
+    }
+    
+    public boolean equals(Object obj){
+        return super.equals(obj);
+    }
 }

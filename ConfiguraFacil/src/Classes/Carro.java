@@ -2,26 +2,31 @@ package Classes;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.time.LocalDate;
 
 public class Carro {
     private List<String> pecas;
     private float custo;
+    private LocalDate data;
 
-    public Carro(List<String> pecas, float custo) {
+    public Carro(List<String> pecas, float custo, LocalDate data) {
         this.pecas = new ArrayList<>();
         for(String s: pecas)
             pecas.add(s);
         this.custo = custo;
+        this.data = data;
     }
 
     public Carro() {
         this.pecas = new ArrayList<>();
         this.custo = 0;
+        this.data = LocalDate.now();
     }
     
     public Carro(Carro umCarro){
         this.pecas = umCarro.getPecas();
         this.custo = umCarro.getCusto();
+        this.data = umCarro.getData();
     }
 
     public List<String> getPecas() {
@@ -38,6 +43,14 @@ public class Carro {
     
     public void setCusto(float custo){
         this.custo = custo;
+    }
+
+    public LocalDate getData() {
+        return data;
+    }
+
+    public void setData(LocalDate data) {
+        this.data = data;
     }
     
     @Override
