@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Cor extends Peca{
 
-    public Cor(int quantidade, String nome, List<Peca> obrigatorias, List<Peca> incompativeis) {
-        super(quantidade, nome, obrigatorias, incompativeis);
+    public Cor(int quantidade, String nome, String id, List<Peca> obrigatorias, List<Peca> incompativeis) {
+        super(quantidade, nome, id, obrigatorias, incompativeis);
     }
 
     public Cor() {

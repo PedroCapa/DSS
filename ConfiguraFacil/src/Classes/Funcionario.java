@@ -1,11 +1,9 @@
 package Classes;
 
 public class Funcionario extends Utilizador{
-    
-    private int id;
 
-    public Funcionario(String nome, String password) {
-        super(nome, password);
+    public Funcionario(String nome, String password, String email) {
+        super(nome, password, email);
     }
 
     public Funcionario() {
@@ -14,15 +12,6 @@ public class Funcionario extends Utilizador{
     
     public Funcionario(Funcionario umFuncionario){
         super(umFuncionario);
-        this.id = umFuncionario.getId();
-    }
-    
-    public int getId(){
-        return id;
-    }
-    
-    public void setId(int id){
-        this.id = id;
     }
     
     @Override
@@ -40,7 +29,6 @@ public class Funcionario extends Utilizador{
         }
         
         Funcionario other = (Funcionario) obj;
-        
-        return (super.equals(other) && this.id == other.getId());
+        return (super.equals(other));
     }
 }

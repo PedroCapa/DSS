@@ -5,20 +5,24 @@ import java.util.ArrayList;
 
 public class Pacote {
     private String nome;
+    private float desconto;
     private List<Peca> pecas;
 
-    public Pacote(String nome, List<Peca> pecas) {
+    public Pacote(String nome, float desconto, List<Peca> pecas) {
         this.nome = nome;
+        this.desconto = desconto;
         this.pecas = new ArrayList<>(pecas);
     }
     
     public Pacote(){
         this.nome = "";
+        this.desconto = 0;
         this.pecas = new ArrayList<>();
     }
     
     public Pacote(Pacote umPacote){
         this.nome = umPacote.getNome();
+        this.desconto = umPacote.getDesconto();
         this.pecas = umPacote.getPecas();
     }
 
@@ -28,6 +32,14 @@ public class Pacote {
 
     public void setNome(String nome) {
         this.nome = nome;
+    }
+
+    public float getDesconto() {
+        return desconto;
+    }
+
+    public void setDesconto(float desconto) {
+        this.desconto = desconto;
     }
 
     public List<Peca> getPecas() {
@@ -53,6 +65,7 @@ public class Pacote {
         }
 
         Pacote other = (Pacote) obj;
-        return (this.nome.equals(other.getNome()) && this.pecas.equals(other.getPecas()));
+        return (this.nome.equals(other.getNome()) && this.desconto == other.getDesconto() 
+                && this.pecas.equals(other.getPecas()));
     }    
 }

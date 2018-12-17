@@ -4,32 +4,31 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
-import java.util.Objects;
 
 public class ConfiguraFacil {
 
    private Map<String, Utilizador> clientes;
    private Map<String, Carro> carros;
-   private List<Modelo> modelos;
-   private List<Peca> pecas;
-   private List<Carro> espera;
+   private Map<String, Modelo> modelos;
+   private Map<String, Peca> pecas;
+   private Map<String, Pacote> pacotes;
    private List<Carro> producao;
 
-    public ConfiguraFacil(Map<String, Utilizador> clientes, Map<String, Carro> carros, List<Modelo> modelos, List<Peca> pecas, List<Carro> espera, List<Carro> producao) {
+    public ConfiguraFacil(Map<String, Utilizador> clientes, Map<String, Carro> carros, Map<String, Modelo> modelos, Map<String, Peca> pecas, Map<String, Pacote> pacotes, List<Carro> producao) {
         this.clientes = new HashMap<>(clientes);
         this.carros = new HashMap<>(carros);
-        this.modelos = new ArrayList<>(modelos);
-        this.pecas = new ArrayList<>(pecas);
-        this.espera = new ArrayList<>(espera);
+        this.modelos = new HashMap<>(modelos);
+        this.pecas = new HashMap<>(pecas);
+        this.pacotes = new HashMap<>(pacotes);
         this.producao = new ArrayList<>(producao);
     }
 
     public ConfiguraFacil() {
         this.clientes = new HashMap<>();
         this.carros = new HashMap<>();
-        this.modelos = new ArrayList<>();
-        this.pecas = new ArrayList<>();
-        this.espera = new ArrayList<>();
+        this.modelos = new HashMap<>();
+        this.pecas = new HashMap<>();
+        this.pacotes = new HashMap<>();
         this.producao = new ArrayList<>();
     }
     
@@ -38,7 +37,7 @@ public class ConfiguraFacil {
         this.carros = umConfiguraFacil.getCarros();
         this.modelos = umConfiguraFacil.getModelos();
         this.pecas = umConfiguraFacil.getPecas();
-        this.espera = umConfiguraFacil.getEspera();
+        this.pacotes = umConfiguraFacil.getPacotes();
         this.producao = umConfiguraFacil.getProducao();
     }
 
@@ -58,28 +57,28 @@ public class ConfiguraFacil {
         this.carros = new HashMap<>(carros);
     }
 
-    public List<Modelo> getModelos() {
-        return new ArrayList<>(this.modelos);
+    public Map<String, Modelo> getModelos() {
+        return new HashMap<>(this.modelos);
     }
 
-    public void setModelos(List<Modelo> modelos) {
-        this.modelos = new ArrayList<>(modelos);
+    public void setModelos(Map<String, Modelo> modelos) {
+        this.modelos = new HashMap<>(modelos);
     }
 
-    public List<Peca> getPecas() {
-        return new ArrayList<>(this.pecas);
+    public Map<String, Peca> getPecas() {
+        return new HashMap<>(this.pecas);
     }
 
-    public void setPecas(List<Peca> pecas) {
-        this.pecas = new ArrayList<>(pecas);
+    public void setPecas(Map<String, Peca> pecas) {
+        this.pecas = new HashMap<>(pecas);
     }
 
-    public List<Carro> getEspera() {
-        return new ArrayList<>(this.espera);
+    public Map<String, Pacote> getPacotes() {
+       return new HashMap<>(this.pacotes);
     }
 
-    public void setEspera(List<Carro> espera) {
-        this.espera = new ArrayList<>(espera);
+    public void setPacotes(Map<String, Pacote> pacotes) {
+         this.pacotes = new HashMap<>(pacotes);
     }
 
     public List<Carro> getProducao() {
@@ -89,9 +88,7 @@ public class ConfiguraFacil {
     public void setProducao(List<Carro> producao) {
         this.producao = new ArrayList<>(producao);
     }
-
-    
-    
+   
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -104,6 +101,6 @@ public class ConfiguraFacil {
         ConfiguraFacil other = (ConfiguraFacil) obj;
         return (this.clientes.equals(other.getClientes()) && this.carros.equals(other.getCarros()) 
                 && this.modelos.equals(other.getModelos()) && this.pecas.equals(other.getPecas()) 
-                && this.espera.equals(other.getEspera()) && this.producao.equals(other.getProducao()));
-        }   
+                && this.pacotes.equals(other.getPacotes()) && this.producao.equals(other.getProducao()));
+        }
 }

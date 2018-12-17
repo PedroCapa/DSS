@@ -5,14 +5,18 @@ import java.util.ArrayList;
 import java.time.LocalDate;
 
 public class Carro {
+    private String id;
+    private int estado;
     private List<String> pecas;
     private float custo;
     private LocalDate data;
 
-    public Carro(List<String> pecas, float custo, LocalDate data) {
+    public Carro(String id, int estado, List<String> pecas, float custo, LocalDate data) {
         this.pecas = new ArrayList<>();
         for(String s: pecas)
             pecas.add(s);
+        this.id = id;
+        this.estado = estado;
         this.custo = custo;
         this.data = data;
     }
@@ -20,13 +24,33 @@ public class Carro {
     public Carro() {
         this.pecas = new ArrayList<>();
         this.custo = 0;
+        this.id = "";
+        this.estado = 0;
         this.data = LocalDate.now();
     }
     
     public Carro(Carro umCarro){
+        this.id = umCarro.getId();
+        this.estado = umCarro.getEstado();
         this.pecas = umCarro.getPecas();
         this.custo = umCarro.getCusto();
         this.data = umCarro.getData();
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public int getEstado() {
+        return estado;
+    }
+
+    public void setEstado(int estado) {
+        this.estado = estado;
     }
 
     public List<String> getPecas() {
@@ -68,6 +92,7 @@ public class Carro {
         }
         
         Carro other = (Carro) obj;
-        return (this.pecas.equals(other.getPecas())  && this.custo != other.getCusto());
+        return (this.pecas.equals(other.getPecas())  && this.custo != other.getCusto() && this.id.equals(other.getId())
+                && this.estado == other.getEstado() && this.data.equals(other.getData()));
     }   
 }

@@ -2,17 +2,18 @@ package Classes;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public abstract class Peca {
     private int quantidade;
     private String nome;
+    private String id;
     private List<Peca> obrigatorias;
     private List<Peca> incompativeis;
 
-    public Peca(int quantidade, String nome, List<Peca> obrigatorias, List<Peca> incompativeis) {
+    public Peca(int quantidade, String nome, String id, List<Peca> obrigatorias, List<Peca> incompativeis) {
         this.quantidade = quantidade;
         this.nome = nome;
+        this.id = id;
         this.obrigatorias = new ArrayList<>(obrigatorias);
         this.incompativeis = new ArrayList<>(incompativeis);
     }
@@ -20,6 +21,7 @@ public abstract class Peca {
     public Peca() {
         this.quantidade = 0;
         this.nome = "";
+        this.id = "";
         this.obrigatorias = new ArrayList<>();
         this.incompativeis = new ArrayList<>();
     }
@@ -27,6 +29,7 @@ public abstract class Peca {
     public Peca(Peca umaPeca){
         this.quantidade = umaPeca.getQuantidade();
         this.nome = umaPeca.getNome();
+        this.id = umaPeca.getId();
         this.obrigatorias = umaPeca.getObrigatorias();
         this.incompativeis = umaPeca.getIncompativeis();        
     }
@@ -47,6 +50,14 @@ public abstract class Peca {
         this.nome = nome;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+    
     public List<Peca> getObrigatorias() {
         return new ArrayList<>(this.obrigatorias);
     }
@@ -73,7 +84,7 @@ public abstract class Peca {
         }
         
         Peca other = (Peca) obj;
-        return (this.quantidade != other.quantidade && this.nome.equals(other.nome) 
+        return (this.quantidade != other.quantidade && this.nome.equals(other.nome) && this.id.equals(other.getId())
          && this.obrigatorias.equals(other.obrigatorias) && this.incompativeis.equals(other.getIncompativeis()));
     }   
 }

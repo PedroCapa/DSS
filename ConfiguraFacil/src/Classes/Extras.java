@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Extras extends Peca{
 
-    public Extras(int quantidade, String nome, List<Peca> obrigatorias, List<Peca> incompativeis) {
-        super(quantidade, nome, obrigatorias, incompativeis);
+    public Extras(int quantidade, String nome, String id, List<Peca> obrigatorias, List<Peca> incompativeis) {
+        super(quantidade, nome, id, obrigatorias, incompativeis);
     }
 
     public Extras() {
