@@ -202,4 +202,27 @@ public class ConfiguraFacil {
             }       
         }
     }
+    
+    public Carro comprarCarro(List<Peca> pecas, Modelo m, float preco){
+        Carro car = new Carro();
+        List<String> nomes = pecas.stream().map(p -> p.getNome()).collect(Collectors.toList());
+        
+        car.setModelo(m);
+        
+        for(String s: nomes){
+            int stock = this.pecas.get(s).getQuantidade();
+            if(stock > 0){
+                car.addPecaCarro(s);
+                this.pecas.get(s).reduzStock();
+            }
+            else{
+                car.addFaltaCarro(s);
+            }
+        }
+        
+        if(car.getFalta().isEmpty())
+            car.setEstado(1);
+        else car.setEstado(0);
+        return car;
+    } 
 }

@@ -6,6 +6,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 public class Carro {
+    private Modelo modelo;
     private String id;
     private int estado;
     private List<String> pecas;
@@ -13,7 +14,8 @@ public class Carro {
     private LocalDate data;
     private List<String> falta;
     
-    public Carro(String id, int estado, List<String> pecas, float custo, LocalDate data, List<String> falta) {
+    public Carro(Modelo modelo, String id, int estado, List<String> pecas, float custo, LocalDate data, List<String> falta) {
+        this.modelo = modelo;
         this.pecas = new ArrayList<>();
         pecas.forEach((s) -> {
             this.pecas.add(s);
@@ -28,6 +30,7 @@ public class Carro {
     }
 
     public Carro() {
+        this.modelo = new Modelo();
         this.pecas = new ArrayList<>();
         this.custo = 0;
         this.id = "";
@@ -37,6 +40,7 @@ public class Carro {
     }
     
     public Carro(Carro umCarro){
+        this.modelo = umCarro.getModelo();
         this.id = umCarro.getId();
         this.estado = umCarro.getEstado();
         this.pecas = umCarro.getPecas();
@@ -45,8 +49,16 @@ public class Carro {
         this.falta = umCarro.getFalta();
     }
 
+    public Modelo getModelo() {
+        return this.modelo;
+    }
+
+    public void setModelo(Modelo modelo) {
+        this.modelo = new Modelo(modelo);
+    }
+    
     public String getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(String id) {
@@ -54,7 +66,7 @@ public class Carro {
     }
 
     public int getEstado() {
-        return estado;
+        return this.estado;
     }
 
     public void setEstado(int estado) {
@@ -78,7 +90,7 @@ public class Carro {
     }
 
     public LocalDate getData() {
-        return data;
+        return this.data;
     }
 
     public void setData(LocalDate data) {
@@ -115,7 +127,7 @@ public class Carro {
         Carro other = (Carro) obj;
         return (this.pecas.equals(other.getPecas())  && this.custo != other.getCusto() && this.id.equals(other.getId())
                 && this.estado == other.getEstado() && this.data.equals(other.getData()) 
-                && this.falta.equals(other.getFalta()));
+                && this.falta.equals(other.getFalta()) && this.modelo.equals(other.getModelo()));
     }
     
     public void carroPronto(){
@@ -131,5 +143,13 @@ public class Carro {
         if(this.falta.isEmpty())
             this.estado = 1;
         return flag;
+    }
+    
+    public void addPecaCarro(String s){
+        this.pecas.add(s);
+    }
+    
+    public void addFaltaCarro(String s){
+        this.falta.add(s);
     }
 }
