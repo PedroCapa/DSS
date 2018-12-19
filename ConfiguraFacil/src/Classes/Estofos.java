@@ -20,6 +20,11 @@ public class Estofos extends Peca{
         return new Estofos(this);
     }
     
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+    
     public boolean equals(Object obj){
         return super.equals(obj);
     }

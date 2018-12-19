@@ -164,9 +164,35 @@ public class ConfiguraFacil {
             if(!ob || !pr)
                 flag = false;
         }
-        
         return flag;
     }
+    
+    public void addStock(String nome, int numero) throws PecaNaoExisteException{
+        boolean flag;
+        if(!pecas.containsKey(nome))
+            throw new PecaNaoExisteException("A nome da peça que tentou inserir não existe");
+        Peca p = pecas.get(nome);
+        int n = p.getQuantidade();
+        p.addStock(numero); // No caso de ser um novo apontador ele é alterado?
+        if(n == 0){
+            for(int i = 0; i < this.producao.size() && p.getQuantidade() > 0; i++){
+                Carro c = producao.get(i);
+                flag = c.remove(nome);
+                if(flag)
+                    p.reduzStock();
+            }                
+        }
+    }
+}
+
+class PecaNaoExisteException extends Exception{
+	public PecaNaoExisteException(){
+		super();
+	}
+
+	public PecaNaoExisteException(String s){
+		super(s);
+	}
 }
 
 class CarroNaoExisteException extends Exception{

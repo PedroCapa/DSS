@@ -92,5 +92,13 @@ public abstract class Peca {
         Peca other = (Peca) obj;
         return (this.quantidade != other.quantidade && this.nome.equals(other.nome) && this.id.equals(other.getId())
          && this.obrigatorias.equals(other.obrigatorias) && this.incompativeis.equals(other.getIncompativeis()));
-    }   
+    }
+    
+    public void addStock(int numero){
+        this.quantidade = this.quantidade + numero;
+    }
+    
+    public void reduzStock(){
+        this.quantidade--;
+    }
 }

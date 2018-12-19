@@ -20,6 +20,11 @@ public class Extras extends Peca{
         return new Extras(this);
     }
     
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+    
     public boolean equals(Object obj){
         return super.equals(obj);
     }

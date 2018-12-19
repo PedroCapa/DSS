@@ -11,15 +11,18 @@ public class Carro {
     private List<String> pecas;
     private float custo;
     private LocalDate data;
-
-    public Carro(String id, int estado, List<String> pecas, float custo, LocalDate data) {
+    private List<String> falta;
+    
+    public Carro(String id, int estado, List<String> pecas, float custo, LocalDate data, List<String> falta) {
         this.pecas = new ArrayList<>();
         for(String s: pecas)
-            pecas.add(s);
+            this.pecas.add(s);
         this.id = id;
         this.estado = estado;
         this.custo = custo;
         this.data = data;
+        for(String s: falta)
+            this.falta.add(s);
     }
 
     public Carro() {
@@ -28,6 +31,7 @@ public class Carro {
         this.id = "";
         this.estado = 0;
         this.data = LocalDate.now();
+        this.falta = new ArrayList<>();
     }
     
     public Carro(Carro umCarro){
@@ -36,6 +40,7 @@ public class Carro {
         this.pecas = umCarro.getPecas();
         this.custo = umCarro.getCusto();
         this.data = umCarro.getData();
+        this.falta = umCarro.getFalta();
     }
 
     public String getId() {
@@ -77,6 +82,14 @@ public class Carro {
     public void setData(LocalDate data) {
         this.data = data;
     }
+
+    public List<String> getFalta() {
+        return new ArrayList<>(this.falta);
+    }
+
+    public void setFalta(List<String> falta) {
+       this.falta = new ArrayList<>(falta);
+    }
     
     @Override
     public Carro clone(){
@@ -104,5 +117,16 @@ public class Carro {
     
     public void carroPronto(){
         this.estado = 2;
+    }
+    
+    public boolean remove(String nome){
+        boolean flag;
+        if(flag = this.falta.contains(nome)){
+           this.falta.remove(nome);
+           this.pecas.add(nome);            
+        }
+        if(this.falta.isEmpty())
+            this.estado = 1;
+        return flag;
     }
 }

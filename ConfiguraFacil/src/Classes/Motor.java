@@ -1,6 +1,7 @@
 package Classes;
 
 import java.util.List;
+import java.util.Objects;
 
 public class Motor extends Peca{
 
@@ -20,6 +21,11 @@ public class Motor extends Peca{
         return new Motor(this);
     }
     
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+        
     public boolean equals(Object obj){
         return super.equals(obj);
     }
