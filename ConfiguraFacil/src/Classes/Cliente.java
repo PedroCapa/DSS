@@ -5,14 +5,17 @@ import java.util.ArrayList;
 
 public class Cliente extends Utilizador{
     
-    private String email;
     private List<Carro> carros;
 
     public Cliente(String nome, String password, String email, List<Carro> carros) {
         super(nome, password, email);
         this.carros = new ArrayList<>(carros);
     }
-
+    
+    public Cliente(String nome, String password, String email){
+        super(nome, password, email);
+    }
+    
     public Cliente() {
         super();
         this.carros = new ArrayList<>();

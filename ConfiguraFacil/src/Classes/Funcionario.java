@@ -1,7 +1,7 @@
 package Classes;
 
 public class Funcionario extends Utilizador{
-
+        
     public Funcionario(String nome, String password, String email) {
         super(nome, password, email);
     }
@@ -11,7 +11,7 @@ public class Funcionario extends Utilizador{
     }
     
     public Funcionario(Funcionario umFuncionario){
-        super(umFuncionario);
+        super(umFuncionario);        
     }
     
     @Override

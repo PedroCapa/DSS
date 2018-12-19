@@ -69,5 +69,11 @@ public class Utilizador {
         Utilizador other = (Utilizador) obj;
         return (this.nome.equals(other.getNome()) && this.password.equals(other.getPassword()) 
                 && this.email.equals(other.getEmail()));
-    }    
+    }
+    
+    public boolean validaCredenciais(String email){
+        boolean b;
+        b = email.equals(this.password);
+        return b;
+    }
 }
