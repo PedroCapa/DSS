@@ -6,10 +6,10 @@ import java.util.Objects;
 
 public class Modelo {
     private String nome;
-    private List<Pacote> pacotes;
+    private List<String> pacotes;
     private float custoBase;
 
-    public Modelo(String nome, List<Pacote> pacotes, float custoBase) {
+    public Modelo(String nome, List<String> pacotes, float custoBase) {
         this.nome = nome;
         this.pacotes = new ArrayList<>(pacotes);
         this.custoBase = custoBase;
@@ -35,11 +35,11 @@ public class Modelo {
         this.nome = nome;
     }
 
-    public List<Pacote> getPacotes() {
+    public List<String> getPacotes() {
         return new ArrayList<>(this.pacotes);
     }
 
-    public void setPacotes(List<Pacote> pacotes) {
+    public void setPacotes(List<String> pacotes) {
         this.pacotes = new ArrayList<>(pacotes);
     }
 

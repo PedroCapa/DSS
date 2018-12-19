@@ -15,14 +15,16 @@ public class Carro {
     
     public Carro(String id, int estado, List<String> pecas, float custo, LocalDate data, List<String> falta) {
         this.pecas = new ArrayList<>();
-        for(String s: pecas)
+        pecas.forEach((s) -> {
             this.pecas.add(s);
+        });
         this.id = id;
         this.estado = estado;
         this.custo = custo;
         this.data = data;
-        for(String s: falta)
+        falta.forEach((s) -> {
             this.falta.add(s);
+        });
     }
 
     public Carro() {
@@ -112,7 +114,8 @@ public class Carro {
         
         Carro other = (Carro) obj;
         return (this.pecas.equals(other.getPecas())  && this.custo != other.getCusto() && this.id.equals(other.getId())
-                && this.estado == other.getEstado() && this.data.equals(other.getData()));
+                && this.estado == other.getEstado() && this.data.equals(other.getData()) 
+                && this.falta.equals(other.getFalta()));
     }
     
     public void carroPronto(){

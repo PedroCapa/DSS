@@ -7,9 +7,9 @@ import java.util.Objects;
 public class Pacote {
     private String nome;
     private float desconto;
-    private List<Peca> pecas;
+    private List<String> pecas;
 
-    public Pacote(String nome, float desconto, List<Peca> pecas) {
+    public Pacote(String nome, float desconto, List<String> pecas) {
         this.nome = nome;
         this.desconto = desconto;
         this.pecas = new ArrayList<>(pecas);
@@ -43,11 +43,11 @@ public class Pacote {
         this.desconto = desconto;
     }
 
-    public List<Peca> getPecas() {
+    public List<String> getPecas() {
         return new ArrayList<>(this.pecas);
     }
 
-    public void setPecas(List<Peca> pecas) {
+    public void setPecas(List<String> pecas) {
         this.pecas = new ArrayList<>(pecas);
     }
     
