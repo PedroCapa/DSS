@@ -1,12 +1,11 @@
 package Classes;
 
 import java.util.List;
-import java.util.Objects;
 
 public class Motor extends Peca{
 
-    public Motor(int quantidade, String nome, String id, List<Peca> obrigatorias, List<Peca> incompativeis) {
-        super(quantidade, nome, id, obrigatorias, incompativeis);
+    public Motor(int quantidade, String nome, List<String> obrigatorias, List<String> incompativeis) {
+        super(quantidade, nome, obrigatorias, incompativeis);
     }
 
     public Motor() {

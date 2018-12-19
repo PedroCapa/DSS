@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Jantes extends Peca{
 
-    public Jantes(int quantidade, String nome, String id, List<Peca> obrigatorias, List<Peca> incompativeis) {
-        super(quantidade, nome, id, obrigatorias, incompativeis);
+    public Jantes(int quantidade, String nome, List<String> obrigatorias, List<String> incompativeis) {
+        super(quantidade, nome, obrigatorias, incompativeis);
     }
 
     public Jantes() {
@@ -25,6 +25,7 @@ public class Jantes extends Peca{
         return super.hashCode();
     }
     
+    @Override
     public boolean equals(Object obj){
         return super.equals(obj);
     }

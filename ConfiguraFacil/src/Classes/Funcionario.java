@@ -1,7 +1,5 @@
 package Classes;
 
-import java.util.Objects;
-
 public class Funcionario extends Utilizador{
         
     public Funcionario(String nome, String password, String email) {
@@ -17,15 +15,15 @@ public class Funcionario extends Utilizador{
     }
     
     @Override
-    public int hashCode() {
-        return super.hashCode();
-    }
-    
-    @Override
     public Funcionario clone(){
         return new Funcionario(this);
     }
     
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
+        
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

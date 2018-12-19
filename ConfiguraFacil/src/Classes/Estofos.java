@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Estofos extends Peca{
 
-    public Estofos(int quantidade, String nome, String id, List<Peca> obrigatorias, List<Peca> incompativeis) {
-        super(quantidade, nome, id, obrigatorias, incompativeis);
+    public Estofos(int quantidade, String nome, List<String> obrigatorias, List<String> incompativeis) {
+        super(quantidade, nome, obrigatorias, incompativeis);
     }
 
     public Estofos() {
@@ -25,6 +25,7 @@ public class Estofos extends Peca{
         return super.hashCode();
     }
     
+    @Override
     public boolean equals(Object obj){
         return super.equals(obj);
     }

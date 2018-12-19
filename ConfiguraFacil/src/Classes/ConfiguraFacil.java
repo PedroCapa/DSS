@@ -4,7 +4,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.Objects;
 import java.util.stream.*;
+import Exceptions.*;
 
 public class ConfiguraFacil {
 
@@ -89,7 +91,19 @@ public class ConfiguraFacil {
     public void setProducao(List<Carro> producao) {
         this.producao = new ArrayList<>(producao);
     }
-   
+    
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.utilizadores);
+        hash = 59 * hash + Objects.hashCode(this.carros);
+        hash = 59 * hash + Objects.hashCode(this.modelos);
+        hash = 59 * hash + Objects.hashCode(this.pecas);
+        hash = 59 * hash + Objects.hashCode(this.pacotes);
+        hash = 59 * hash + Objects.hashCode(this.producao);
+        return hash;
+    }
+    
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {
@@ -141,14 +155,18 @@ public class ConfiguraFacil {
         if(!utilizadores.containsKey(email))
             throw new UtilizadorNaoExisteException("Utilizador não existe");
         Cliente c = (Cliente)this.utilizadores.get(email);
-        return c.getCarros();
+        List<Carro> l = new ArrayList<>();
+        c.getCarros().forEach((s) -> {
+            l.add(this.carros.get(s));
+        });
+        return l;
     }
     
-    public boolean valido(List<Peca> pecas, List<Peca> proibidas){
+    public boolean valido(List<String> pecas, List<String> proibidas){
         boolean flag = true;
-        for(Peca p: pecas){
-            for(Peca pe: proibidas)
-                if(!p.getNome().equals(pe.getNome()))
+        for(String str: pecas){
+            for(String s: proibidas)
+                if(!str.equals(s))
                 flag = false;
         }
         return flag;
@@ -156,11 +174,12 @@ public class ConfiguraFacil {
     
     public boolean validaPecas(List<Peca> pecas){
         boolean flag = true;
+        List<String> nomes = pecas.stream().map(p -> p.getNome()).collect(Collectors.toList());
         for(Peca p: pecas){
-            List<Peca> proibidas = p.getIncompativeis();
-            List<Peca> obrigatorias = p.getObrigatorias();
-            boolean ob = pecas.retainAll(obrigatorias);
-            boolean pr = valido(pecas, proibidas);
+            List<String> proibidas = p.getIncompativeis();
+            List<String> obrigatorias = p.getObrigatorias();
+            boolean ob = nomes.retainAll(obrigatorias);
+            boolean pr = valido(nomes, proibidas);
             if(!ob || !pr)
                 flag = false;
         }
@@ -173,74 +192,14 @@ public class ConfiguraFacil {
             throw new PecaNaoExisteException("A nome da peça que tentou inserir não existe");
         Peca p = pecas.get(nome);
         int n = p.getQuantidade();
-        p.addStock(numero); // No caso de ser um novo apontador ele é alterado?
+        p.addStock(numero);
         if(n == 0){
             for(int i = 0; i < this.producao.size() && p.getQuantidade() > 0; i++){
                 Carro c = producao.get(i);
                 flag = c.remove(nome);
                 if(flag)
                     p.reduzStock();
-            }                
+            }       
         }
     }
-}
-
-class PecaNaoExisteException extends Exception{
-	public PecaNaoExisteException(){
-		super();
-	}
-
-	public PecaNaoExisteException(String s){
-		super(s);
-	}
-}
-
-class CarroNaoExisteException extends Exception{
-	public CarroNaoExisteException(){
-		super();
-	}
-
-	public CarroNaoExisteException(String s){
-		super(s);
-	}
-}
-
-class NaoExisteCarroEmProducaoException extends Exception{
-	public NaoExisteCarroEmProducaoException(){
-		super();
-	}
-
-	public NaoExisteCarroEmProducaoException(String s){
-		super(s);
-	}
-}
-
-class PasswordIncorretaException extends Exception{
-	public PasswordIncorretaException(){
-		super();
-	}
-
-	public PasswordIncorretaException(String s){
-		super(s);
-	}
-}
-
-class UtilizadorNaoExisteException extends Exception{
-	public UtilizadorNaoExisteException(){
-		super();
-	}
-
-	public UtilizadorNaoExisteException(String s){
-		super(s);
-	}
-}
-
-class UtilizadorJaRegistadoException extends Exception{
-	public UtilizadorJaRegistadoException(){
-		super();
-	}
-
-	public UtilizadorJaRegistadoException(String s){
-		super(s);
-	}
 }
