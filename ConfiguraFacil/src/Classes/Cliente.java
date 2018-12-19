@@ -38,6 +38,11 @@ public class Cliente extends Utilizador{
     public Cliente clone(){
         return new Cliente(this);
     }
+
+    @Override
+    public int hashCode() {
+        return super.hashCode();
+    }
     
     @Override
     public boolean equals(Object obj) {

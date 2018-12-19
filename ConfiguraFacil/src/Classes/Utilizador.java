@@ -5,7 +5,9 @@
  */
 package Classes;
 
-public class Utilizador {
+import java.util.Objects;
+
+public abstract class Utilizador{
     private String nome;
     private String email;
     private String password;
@@ -51,12 +53,12 @@ public class Utilizador {
     public void setEmail(String email) {
         this.email = email;
     }
-    
+
     @Override
-    public Utilizador clone(){
-        return new Utilizador(this);
+    public int hashCode() {
+        return Objects.hashCode(this.email);
     }
-    
+        
     @Override
     public boolean equals(Object obj) {
         if (this == obj) {

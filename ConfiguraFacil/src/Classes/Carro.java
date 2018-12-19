@@ -3,6 +3,7 @@ package Classes;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;
+import java.util.Objects;
 
 public class Carro {
     private String id;
@@ -83,6 +84,11 @@ public class Carro {
     }
 
     @Override
+    public int hashCode() {
+        return Objects.hashCode(this.id);
+    }
+    
+    @Override
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
@@ -94,5 +100,9 @@ public class Carro {
         Carro other = (Carro) obj;
         return (this.pecas.equals(other.getPecas())  && this.custo != other.getCusto() && this.id.equals(other.getId())
                 && this.estado == other.getEstado() && this.data.equals(other.getData()));
-    }   
+    }
+    
+    public void carroPronto(){
+        this.estado = 2;
+    }
 }

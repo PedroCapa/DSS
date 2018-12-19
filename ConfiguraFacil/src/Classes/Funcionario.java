@@ -1,5 +1,7 @@
 package Classes;
 
+import java.util.Objects;
+
 public class Funcionario extends Utilizador{
         
     public Funcionario(String nome, String password, String email) {
@@ -12,6 +14,11 @@ public class Funcionario extends Utilizador{
     
     public Funcionario(Funcionario umFuncionario){
         super(umFuncionario);        
+    }
+    
+    @Override
+    public int hashCode() {
+        return super.hashCode();
     }
     
     @Override

@@ -2,6 +2,7 @@ package Classes;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public abstract class Peca {
     private int quantidade;
@@ -72,6 +73,11 @@ public abstract class Peca {
 
     public void setIncompativeis(List<Peca> incompativeis) {
         this.incompativeis = new ArrayList<>(incompativeis);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.nome);
     }
         
     @Override

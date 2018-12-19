@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
+import java.util.stream.*;
 
 public class ConfiguraFacil {
 
@@ -121,7 +122,72 @@ public class ConfiguraFacil {
             throw new PasswordIncorretaException("Palavra passe está incorreta");        
         return u;
     }
-} 
+    
+    public List<Peca> getStockDisponivel(){
+        return this.pecas.values().stream().collect(Collectors.toList());
+    }
+    
+    public void carroPronto(String id) throws CarroNaoExisteException, NaoExisteCarroEmProducaoException{
+        if(!carros.containsKey(id))
+            throw new CarroNaoExisteException("Carro não existe no sistema");
+        Carro c = carros.get(id);
+        if(this.producao.contains(c))
+            throw new NaoExisteCarroEmProducaoException("Nao existe carro em producao com o id " + id);
+        this.producao.remove(c);
+        c.carroPronto();
+    }
+    
+    public List<Carro> getCarrosComprados(String email) throws UtilizadorNaoExisteException{
+        if(!utilizadores.containsKey(email))
+            throw new UtilizadorNaoExisteException("Utilizador não existe");
+        Cliente c = (Cliente)this.utilizadores.get(email);
+        return c.getCarros();
+    }
+    
+    public boolean valido(List<Peca> pecas, List<Peca> proibidas){
+        boolean flag = true;
+        for(Peca p: pecas){
+            for(Peca pe: proibidas)
+                if(!p.getNome().equals(pe.getNome()))
+                flag = false;
+        }
+        return flag;
+    }
+    
+    public boolean validaPecas(List<Peca> pecas){
+        boolean flag = true;
+        for(Peca p: pecas){
+            List<Peca> proibidas = p.getIncompativeis();
+            List<Peca> obrigatorias = p.getObrigatorias();
+            boolean ob = pecas.retainAll(obrigatorias);
+            boolean pr = valido(pecas, proibidas);
+            if(!ob || !pr)
+                flag = false;
+        }
+        
+        return flag;
+    }
+}
+
+class CarroNaoExisteException extends Exception{
+	public CarroNaoExisteException(){
+		super();
+	}
+
+	public CarroNaoExisteException(String s){
+		super(s);
+	}
+}
+
+class NaoExisteCarroEmProducaoException extends Exception{
+	public NaoExisteCarroEmProducaoException(){
+		super();
+	}
+
+	public NaoExisteCarroEmProducaoException(String s){
+		super(s);
+	}
+}
 
 class PasswordIncorretaException extends Exception{
 	public PasswordIncorretaException(){
@@ -152,4 +218,3 @@ class UtilizadorJaRegistadoException extends Exception{
 		super(s);
 	}
 }
-

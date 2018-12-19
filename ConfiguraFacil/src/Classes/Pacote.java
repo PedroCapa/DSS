@@ -2,6 +2,7 @@ package Classes;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Pacote {
     private String nome;
@@ -53,6 +54,11 @@ public class Pacote {
     @Override
     public Pacote clone(){
         return new Pacote(this);
+    }
+    
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(this.nome);
     }
     
     @Override
