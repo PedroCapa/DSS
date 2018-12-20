@@ -5,17 +5,24 @@
  */
 package ClassesInterface;
 
+import Classes.ConfiguraFacil;
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author pmcca
  */
 public class Personalizar extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Personalizar
-     */
+    private ConfiguraFacil cf;
+    
     public Personalizar() {
         initComponents();
+    }
+    
+    public Personalizar(ConfiguraFacil cf){
+        this();
+        this.cf = cf;
     }
 
     /**
@@ -54,14 +61,14 @@ public class Personalizar extends javax.swing.JFrame {
         jRadioButton19 = new javax.swing.JRadioButton();
         jRadioButton20 = new javax.swing.JRadioButton();
         jLabel6 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Confirmar = new javax.swing.JButton();
+        Voltar = new javax.swing.JButton();
         jRadioButton21 = new javax.swing.JRadioButton();
         jRadioButton22 = new javax.swing.JRadioButton();
         jRadioButton23 = new javax.swing.JRadioButton();
         jRadioButton24 = new javax.swing.JRadioButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jRadioButton1.setText("Spoiler");
 
@@ -127,9 +134,21 @@ public class Personalizar extends javax.swing.JFrame {
         jLabel6.setFont(new java.awt.Font("Harlow Solid Italic", 0, 18)); // NOI18N
         jLabel6.setText(" Estofos");
 
-        jButton1.setText("Confirmar");
+        Confirmar.setText("Confirmar");
+        Confirmar.setToolTipText("Confirmar compra");
+        Confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Voltar");
+        Voltar.setText("Voltar");
+        Voltar.setToolTipText("Voltar atrás");
+        Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VoltarActionPerformed(evt);
+            }
+        });
 
         Estofos.add(jRadioButton21);
         jRadioButton21.setText("Couro Cognac");
@@ -156,9 +175,9 @@ public class Personalizar extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(Voltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1))
+                        .addComponent(Confirmar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1)
@@ -270,8 +289,8 @@ public class Personalizar extends javax.swing.JFrame {
                     .addComponent(jRadioButton24))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(Confirmar)
+                    .addComponent(Voltar))
                 .addContainerGap())
         );
 
@@ -281,6 +300,17 @@ public class Personalizar extends javax.swing.JFrame {
     private void jRadioButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton21ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton21ActionPerformed
+
+    private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_VoltarActionPerformed
+
+    private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
+        ConfirmaCompra cc = new ConfirmaCompra(this.cf);
+        cc.setVisible(true);
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }//GEN-LAST:event_ConfirmarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -318,12 +348,12 @@ public class Personalizar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Confirmar;
     private javax.swing.ButtonGroup Cor;
     private javax.swing.ButtonGroup Estofos;
     private javax.swing.ButtonGroup Jantes;
     private javax.swing.ButtonGroup Motor;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Voltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

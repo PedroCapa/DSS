@@ -5,17 +5,25 @@
  */
 package ClassesInterface;
 
+import Classes.*;
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author pmcca
  */
 public class MenuInicial extends javax.swing.JFrame {
-
-    /**
-     * Creates new form MenuInicial
-     */
-    public MenuInicial() {
+    
+    private ConfiguraFacil cf;
+    
+    public MenuInicial(ConfiguraFacil cf) {
         initComponents();
+        cf = new ConfiguraFacil();
+    }
+
+    private MenuInicial() {
+        initComponents();
+        cf = new ConfiguraFacil();
     }
 
     /**
@@ -28,25 +36,27 @@ public class MenuInicial extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Login = new javax.swing.JButton();
+        Registar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Configura Fácil");
 
-        jButton1.setText("Login");
-        jButton1.setActionCommand("");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Login.setText("Login");
+        Login.setToolTipText("Iniciar sessão");
+        Login.setActionCommand("");
+        Login.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                LoginActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Registar");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        Registar.setText("Registar");
+        Registar.setToolTipText("Registar no Sistema");
+        Registar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                RegistarActionPerformed(evt);
             }
         });
 
@@ -62,13 +72,13 @@ public class MenuInicial extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 234, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton2)
+                        .addComponent(Registar)
                         .addGap(74, 74, 74)
-                        .addComponent(jButton1)))
+                        .addComponent(Login)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Login, Registar});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -77,23 +87,27 @@ public class MenuInicial extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 73, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(Login)
+                    .addComponent(Registar))
                 .addContainerGap())
         );
 
-        jButton1.getAccessibleContext().setAccessibleDescription("Login como cliente");
+        Login.getAccessibleContext().setAccessibleDescription("Login como cliente");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
+        Login l = new Login(this.cf);
+        l.setVisible(true);
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }//GEN-LAST:event_LoginActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    private void RegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistarActionPerformed
+        Registar r = new Registar(this.cf);
+        r.setVisible(true);
+        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+    }//GEN-LAST:event_RegistarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -124,6 +138,7 @@ public class MenuInicial extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
+            @Override
             public void run() {
                 new MenuInicial().setVisible(true);
             }
@@ -131,9 +146,9 @@ public class MenuInicial extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Login;
+    private javax.swing.JButton Registar;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
 }

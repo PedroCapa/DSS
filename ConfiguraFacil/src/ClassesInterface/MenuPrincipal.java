@@ -5,6 +5,9 @@
  */
 package ClassesInterface;
 
+import Classes.*;
+import java.awt.event.WindowEvent;
+
 /**
  *
  * @author pmcca
@@ -14,10 +17,16 @@ public class MenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
+private ConfiguraFacil cf;
+    
     public MenuPrincipal() {
         initComponents();
     }
-
+    
+    public MenuPrincipal(ConfiguraFacil cf){
+        this();
+        this.cf = cf;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -27,32 +36,35 @@ public class MenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Comprar = new javax.swing.JButton();
+        Historico = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        Tabela = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setText("Comprar Carro");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        Comprar.setText("Comprar Carro");
+        Comprar.setToolTipText("Comprar um carro");
+        Comprar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                ComprarActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Historico de Compras");
+        Historico.setText("Historico de Compras");
+        Historico.setToolTipText("Lista de carros comprados");
 
         jLabel1.setFont(new java.awt.Font("Harlow Solid Italic", 0, 18)); // NOI18N
         jLabel1.setText(" Bem-vindo ao sitio nº1 de compra de carros online");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        Tabela.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 25));
+        Tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Nome", "Ano", "Estado"
+                "Nome", "Data", "Estado"
             }
         ) {
             Class[] types = new Class [] {
@@ -70,7 +82,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(Tabela);
+        if (Tabela.getColumnModel().getColumnCount() > 0) {
+            Tabela.getColumnModel().getColumn(0).setResizable(false);
+        }
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -86,14 +101,14 @@ public class MenuPrincipal extends javax.swing.JFrame {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(167, 167, 167)
-                                .addComponent(jButton1)
+                                .addComponent(Comprar)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton2))
+                                .addComponent(Historico))
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 367, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 13, Short.MAX_VALUE))))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Comprar, Historico});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,17 +119,18 @@ public class MenuPrincipal extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 104, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(Historico)
+                    .addComponent(Comprar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void ComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprarActionPerformed
+        ComprarCarro cc = new ComprarCarro(this.cf);
+        cc.setVisible(true);
+    }//GEN-LAST:event_ComprarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,10 +168,10 @@ public class MenuPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Comprar;
+    private javax.swing.JButton Historico;
+    private javax.swing.JTable Tabela;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }

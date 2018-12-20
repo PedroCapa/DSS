@@ -5,17 +5,26 @@
  */
 package ClassesInterface;
 
+import Classes.ConfiguraFacil;
+import java.awt.event.WindowEvent;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+
 /**
  *
  * @author pmcca
  */
 public class EscolherPacote extends javax.swing.JFrame {
 
-    /**
-     * Creates new form EscolherPacote
-     */
+    private ConfiguraFacil cf;
+    
     public EscolherPacote() {
         initComponents();
+    }
+    
+    public EscolherPacote(ConfiguraFacil cf){
+        this();
+        this.cf = cf;
     }
 
     /**
@@ -27,31 +36,43 @@ public class EscolherPacote extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        Pacotes = new javax.swing.ButtonGroup();
+        pacotes = new javax.swing.ButtonGroup();
         jRadioButton1 = new javax.swing.JRadioButton();
         jRadioButton2 = new javax.swing.JRadioButton();
         jRadioButton4 = new javax.swing.JRadioButton();
         jRadioButton3 = new javax.swing.JRadioButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Confirmar = new javax.swing.JButton();
+        Voltar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        Pacotes.add(jRadioButton1);
+        pacotes.add(jRadioButton1);
         jRadioButton1.setText("Desportivo");
 
-        Pacotes.add(jRadioButton2);
+        pacotes.add(jRadioButton2);
         jRadioButton2.setText("Classico");
 
-        Pacotes.add(jRadioButton4);
+        pacotes.add(jRadioButton4);
         jRadioButton4.setText("Eco");
 
-        Pacotes.add(jRadioButton3);
+        pacotes.add(jRadioButton3);
         jRadioButton3.setText("Confort");
 
-        jButton1.setText("Confirmar");
+        Confirmar.setText("Confirmar");
+        Confirmar.setToolTipText("Confirmar o pacote escolhido");
+        Confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarActionPerformed(evt);
+            }
+        });
 
-        jButton2.setText("Voltar");
+        Voltar.setText("Voltar");
+        Voltar.setToolTipText("Voltar atrás");
+        Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -62,7 +83,7 @@ public class EscolherPacote extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton2))
+                        .addComponent(Voltar))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRadioButton1)
@@ -70,13 +91,13 @@ public class EscolherPacote extends javax.swing.JFrame {
                         .addGap(0, 35, Short.MAX_VALUE)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addComponent(Confirmar)
                     .addComponent(jRadioButton4)
                     .addComponent(jRadioButton2))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2, jRadioButton4});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Confirmar, Voltar, jRadioButton4});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -91,13 +112,41 @@ public class EscolherPacote extends javax.swing.JFrame {
                     .addComponent(jRadioButton3))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(Confirmar)
+                    .addComponent(Voltar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    private String validaDados() {
+        String escolhido = "";
+        for(Enumeration<AbstractButton> buttons = pacotes.getElements(); buttons.hasMoreElements();){
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+                System.out.println(button);
+                escolhido =  button.getText();
+            }
+        }
+        if ("".equals(escolhido))
+            javax.swing.JOptionPane.showMessageDialog(this, "Campos por preencher", "Dados incorretos", 0);
+
+        return escolhido;
+    }    
+    
+    private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
+       if(!validaDados().equals("")){
+            Personalizar p = new Personalizar(this.cf);
+            p.setVisible(true);
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+       }
+    }//GEN-LAST:event_ConfirmarActionPerformed
+
+    private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_VoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -135,12 +184,12 @@ public class EscolherPacote extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup Pacotes;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Confirmar;
+    private javax.swing.JButton Voltar;
     private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JRadioButton jRadioButton4;
+    private javax.swing.ButtonGroup pacotes;
     // End of variables declaration//GEN-END:variables
 }

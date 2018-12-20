@@ -2,11 +2,11 @@
 
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <NonVisualComponents>
-    <Component class="javax.swing.ButtonGroup" name="Pacotes">
+    <Component class="javax.swing.ButtonGroup" name="pacotes">
     </Component>
   </NonVisualComponents>
   <Properties>
-    <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="defaultCloseOperation" type="int" value="2"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -32,7 +32,7 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
-                      <Component id="jButton2" linkSize="1" min="-2" max="-2" attributes="0"/>
+                      <Component id="Voltar" linkSize="1" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="0" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -44,7 +44,7 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="jButton1" linkSize="1" min="-2" max="-2" attributes="0"/>
+                  <Component id="Confirmar" linkSize="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jRadioButton4" linkSize="1" min="-2" max="-2" attributes="0"/>
                   <Component id="jRadioButton2" min="-2" max="-2" attributes="0"/>
               </Group>
@@ -67,8 +67,8 @@
               </Group>
               <EmptySpace pref="27" max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jButton2" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Confirmar" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="Voltar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
@@ -79,7 +79,7 @@
     <Component class="javax.swing.JRadioButton" name="jRadioButton1">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="Pacotes"/>
+          <ComponentRef name="pacotes"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Desportivo"/>
       </Properties>
@@ -87,7 +87,7 @@
     <Component class="javax.swing.JRadioButton" name="jRadioButton2">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="Pacotes"/>
+          <ComponentRef name="pacotes"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Classico"/>
       </Properties>
@@ -95,7 +95,7 @@
     <Component class="javax.swing.JRadioButton" name="jRadioButton4">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="Pacotes"/>
+          <ComponentRef name="pacotes"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Eco"/>
       </Properties>
@@ -103,20 +103,28 @@
     <Component class="javax.swing.JRadioButton" name="jRadioButton3">
       <Properties>
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
-          <ComponentRef name="Pacotes"/>
+          <ComponentRef name="pacotes"/>
         </Property>
         <Property name="text" type="java.lang.String" value="Confort"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="Confirmar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Confirmar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Confirmar o pacote escolhido"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="ConfirmarActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton2">
+    <Component class="javax.swing.JButton" name="Voltar">
       <Properties>
         <Property name="text" type="java.lang.String" value="Voltar"/>
+        <Property name="toolTipText" type="java.lang.String" value="Voltar atr&#xe1;s"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="VoltarActionPerformed"/>
+      </Events>
     </Component>
   </SubComponents>
 </Form>

@@ -5,17 +5,26 @@
  */
 package ClassesInterface;
 
+import Classes.ConfiguraFacil;
+import java.awt.event.WindowEvent;
+import java.util.Enumeration;
+import javax.swing.AbstractButton;
+
 /**
  *
  * @author pmcca
  */
 public class ComprarCarro extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ComprarCarro
-     */
+    private ConfiguraFacil cf;
+    
     public ComprarCarro() {
         initComponents();
+    }
+    
+    public ComprarCarro(ConfiguraFacil cf){
+        this();
+        this.cf = cf;
     }
 
     /**
@@ -27,17 +36,17 @@ public class ComprarCarro extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        buttonGroup1 = new javax.swing.ButtonGroup();
+        modelos = new javax.swing.ButtonGroup();
         jLabel1 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
-        jRadioButton5 = new javax.swing.JRadioButton();
-        jRadioButton6 = new javax.swing.JRadioButton();
+        Pacote = new javax.swing.JButton();
+        Otima = new javax.swing.JButton();
+        Personalizar = new javax.swing.JButton();
+        modelT = new javax.swing.JRadioButton();
+        Boss302Mustang = new javax.swing.JRadioButton();
+        Boss429Mustang = new javax.swing.JRadioButton();
+        Thunderbird = new javax.swing.JRadioButton();
+        Indigo = new javax.swing.JRadioButton();
+        edge = new javax.swing.JRadioButton();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -45,57 +54,76 @@ public class ComprarCarro extends javax.swing.JFrame {
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         jLabel1.setFont(new java.awt.Font("Harlow Solid Italic", 0, 18)); // NOI18N
         jLabel1.setText(" Selecione a melhor opção para si ");
 
-        jButton1.setText("Escolher Pacote");
-
-        jButton2.setText("Configuração ótima");
-
-        jButton3.setText("Personalizar");
-
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setText("Model T");
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        Pacote.setText("Escolher Pacote");
+        Pacote.setToolTipText("Escolher um pacote de forma a ter um desconto");
+        Pacote.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                PacoteActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setText("Boss 302 Mustang");
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        Otima.setText("Configuração ótima");
+        Otima.setToolTipText("Melhor escolha de acordo com o seu orçamento");
+        Otima.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                OtimaActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setText("Boss 429 Mustang");
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        Personalizar.setText("Personalizar");
+        Personalizar.setToolTipText("Carro conforme o seu gosto");
+        Personalizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                PersonalizarActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton4);
-        jRadioButton4.setText("Thunderbird");
-        jRadioButton4.addActionListener(new java.awt.event.ActionListener() {
+        modelos.add(modelT);
+        modelT.setText("Model T");
+        modelT.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton4ActionPerformed(evt);
+                modelTActionPerformed(evt);
             }
         });
 
-        buttonGroup1.add(jRadioButton5);
-        jRadioButton5.setText("Indigo Concept");
-
-        buttonGroup1.add(jRadioButton6);
-        jRadioButton6.setText("Edge");
-        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+        modelos.add(Boss302Mustang);
+        Boss302Mustang.setText("Boss 302 Mustang");
+        Boss302Mustang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton6ActionPerformed(evt);
+                Boss302MustangActionPerformed(evt);
+            }
+        });
+
+        modelos.add(Boss429Mustang);
+        Boss429Mustang.setText("Boss 429 Mustang");
+        Boss429Mustang.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Boss429MustangActionPerformed(evt);
+            }
+        });
+
+        modelos.add(Thunderbird);
+        Thunderbird.setText("Thunderbird");
+        Thunderbird.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ThunderbirdActionPerformed(evt);
+            }
+        });
+
+        modelos.add(Indigo);
+        Indigo.setText("Indigo Concept");
+
+        modelos.add(edge);
+        edge.setText("Edge");
+        edge.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                edgeActionPerformed(evt);
             }
         });
 
@@ -121,24 +149,36 @@ public class ComprarCarro extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Otima)
+                .addGap(10, 10, 10)
+                .addComponent(Pacote, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10)
+                .addComponent(Personalizar, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(10, 10, 10))
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(222, 222, 222)
-                        .addComponent(jRadioButton3))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Indigo, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(222, 222, 222)
+                                .addComponent(edge, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(Boss302Mustang)
+                                .addGap(222, 222, 222)
+                                .addComponent(Thunderbird, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(modelT, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(222, 222, 222)
+                                .addComponent(Boss429Mustang))))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(95, 95, 95)
-                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(jRadioButton2)
-                        .addGap(222, 222, 222)
-                        .addComponent(jRadioButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(14, 14, 14)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(116, 116, 116)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 230, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -146,21 +186,11 @@ public class ComprarCarro extends javax.swing.JFrame {
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 257, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(jRadioButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(222, 222, 222)
-                        .addComponent(jRadioButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(14, 14, 14)
-                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jButton2)
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(95, 95, 95)
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 265, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -169,8 +199,8 @@ public class ComprarCarro extends javax.swing.JFrame {
                 .addComponent(jLabel1)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton3))
+                    .addComponent(modelT)
+                    .addComponent(Boss429Mustang))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2)
@@ -179,50 +209,89 @@ public class ComprarCarro extends javax.swing.JFrame {
                         .addComponent(jLabel6)))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton4))
+                    .addComponent(Boss302Mustang)
+                    .addComponent(Thunderbird))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 138, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jRadioButton5)
-                    .addComponent(jRadioButton6))
+                    .addComponent(Indigo)
+                    .addComponent(edge))
                 .addGap(7, 7, 7)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1)
-                    .addComponent(jButton3))
+                    .addComponent(Otima)
+                    .addComponent(Pacote)
+                    .addComponent(Personalizar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    private String validaDados() {
+        String escolhido = "";
+        for(Enumeration<AbstractButton> buttons = modelos.getElements(); buttons.hasMoreElements();){
+             AbstractButton button = buttons.nextElement();
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+            if (button.isSelected()) {
+                escolhido =  button.getText();
+            }
+        }
+        if (escolhido.equals(""))
+            javax.swing.JOptionPane.showMessageDialog(this, "Campos por preencher", "Dados incorretos", 0);
 
-    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
+        return escolhido;
+    }
+    
+    private void Boss302MustangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boss302MustangActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton6ActionPerformed
+    }//GEN-LAST:event_Boss302MustangActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void modelTActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modelTActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_modelTActionPerformed
 
-    private void jRadioButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton4ActionPerformed
+    private void edgeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edgeActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRadioButton4ActionPerformed
+    }//GEN-LAST:event_edgeActionPerformed
+
+    private void Boss429MustangActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Boss429MustangActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Boss429MustangActionPerformed
+
+    private void ThunderbirdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThunderbirdActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_ThunderbirdActionPerformed
+
+    private void PacoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacoteActionPerformed
+        if(!validaDados().equals("")){    
+            EscolherPacote ep = new EscolherPacote(this.cf);
+            ep.setVisible(true);
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+    }//GEN-LAST:event_PacoteActionPerformed
+
+    private void OtimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OtimaActionPerformed
+        if(!validaDados().equals("")){
+            ConfiguracaoOtima co = new ConfiguracaoOtima(this.cf);
+            co.setVisible(true);
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+    }//GEN-LAST:event_OtimaActionPerformed
+
+    private void PersonalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonalizarActionPerformed
+        if(!validaDados().equals("")){
+            Personalizar p = new Personalizar(this.cf);
+            p.setVisible(true);
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+    }//GEN-LAST:event_PersonalizarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -260,10 +329,14 @@ public class ComprarCarro extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
+    private javax.swing.JRadioButton Boss302Mustang;
+    private javax.swing.JRadioButton Boss429Mustang;
+    private javax.swing.JRadioButton Indigo;
+    private javax.swing.JButton Otima;
+    private javax.swing.JButton Pacote;
+    private javax.swing.JButton Personalizar;
+    private javax.swing.JRadioButton Thunderbird;
+    private javax.swing.JRadioButton edge;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -271,11 +344,7 @@ public class ComprarCarro extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
-    private javax.swing.JRadioButton jRadioButton5;
-    private javax.swing.JRadioButton jRadioButton6;
+    private javax.swing.JRadioButton modelT;
+    private javax.swing.ButtonGroup modelos;
     // End of variables declaration//GEN-END:variables
 }

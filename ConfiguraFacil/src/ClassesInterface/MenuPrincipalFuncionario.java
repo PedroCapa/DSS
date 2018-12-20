@@ -5,6 +5,8 @@
  */
 package ClassesInterface;
 
+import Classes.ConfiguraFacil;
+
 /**
  *
  * @author pmcca
@@ -14,8 +16,15 @@ public class MenuPrincipalFuncionario extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipalFuncionario
      */
+    private ConfiguraFacil cf;
+    
     public MenuPrincipalFuncionario() {
         initComponents();
+    }
+    
+    public MenuPrincipalFuncionario(ConfiguraFacil cf){
+        this();
+        this.cf = cf;
     }
 
     /**
@@ -27,26 +36,28 @@ public class MenuPrincipalFuncionario extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jToggleButton1 = new javax.swing.JToggleButton();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        AdicionarStock = new javax.swing.JToggleButton();
+        Carro = new javax.swing.JToggleButton();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        StockDisponivel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jToggleButton1.setText("AdicionarStock");
-        jToggleButton1.addActionListener(new java.awt.event.ActionListener() {
+        AdicionarStock.setText("AdicionarStock");
+        AdicionarStock.setToolTipText("Adicionar peças");
+        AdicionarStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton1ActionPerformed(evt);
+                AdicionarStockActionPerformed(evt);
             }
         });
 
-        jToggleButton2.setText("Carro Pronto");
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
+        Carro.setText("Carro Pronto");
+        Carro.setToolTipText("Mudar o estado do carro no caso de estar pronto");
+        Carro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                CarroActionPerformed(evt);
             }
         });
 
@@ -66,7 +77,13 @@ public class MenuPrincipalFuncionario extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Stock Disponível");
+        StockDisponivel.setText("Stock Disponível");
+        StockDisponivel.setToolTipText("Verificar o stock ");
+        StockDisponivel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                StockDisponivelActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -76,18 +93,18 @@ public class MenuPrincipalFuncionario extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
+                        .addComponent(StockDisponivel)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton2)
+                        .addComponent(Carro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jToggleButton1))
+                        .addComponent(AdicionarStock))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel1)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 375, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jToggleButton1, jToggleButton2});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {AdicionarStock, Carro, StockDisponivel});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -98,22 +115,29 @@ public class MenuPrincipalFuncionario extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jToggleButton1)
-                    .addComponent(jToggleButton2)
-                    .addComponent(jButton1))
+                    .addComponent(AdicionarStock)
+                    .addComponent(Carro)
+                    .addComponent(StockDisponivel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jToggleButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton1ActionPerformed
+    private void AdicionarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarStockActionPerformed
+        AdicionaStock as = new AdicionaStock(this.cf);
+        as.setVisible(true);
+    }//GEN-LAST:event_AdicionarStockActionPerformed
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    private void CarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarroActionPerformed
+        CarroPronto cc = new CarroPronto(this.cf);
+        cc.setVisible(true);
+    }//GEN-LAST:event_CarroActionPerformed
+
+    private void StockDisponivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockDisponivelActionPerformed
+        StockDisponivel cc = new StockDisponivel(this.cf);
+        cc.setVisible(true);
+    }//GEN-LAST:event_StockDisponivelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -151,11 +175,11 @@ public class MenuPrincipalFuncionario extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JToggleButton AdicionarStock;
+    private javax.swing.JToggleButton Carro;
+    private javax.swing.JButton StockDisponivel;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JToggleButton jToggleButton1;
-    private javax.swing.JToggleButton jToggleButton2;
     // End of variables declaration//GEN-END:variables
 }

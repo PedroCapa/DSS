@@ -5,19 +5,24 @@
  */
 package ClassesInterface;
 
+import Classes.ConfiguraFacil;
+
 /**
  *
  * @author pmcca
  */
 public class ConfirmaCompra extends javax.swing.JFrame {
 
-    /**
-     * Creates new form ConfirmaCompra
-     */
+    private ConfiguraFacil cf;
+    
     public ConfirmaCompra() {
         initComponents();
     }
-
+    
+    public ConfirmaCompra(ConfiguraFacil cf){
+        this();
+        this.cf = cf;
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -29,8 +34,8 @@ public class ConfirmaCompra extends javax.swing.JFrame {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        Confirmar = new javax.swing.JButton();
+        Voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -39,9 +44,16 @@ public class ConfirmaCompra extends javax.swing.JFrame {
         jTextArea1.setText("Escolheu o Model T com:\n.\n.\n.");
         jScrollPane1.setViewportView(jTextArea1);
 
-        jButton1.setText("Confirmar Compra");
+        Confirmar.setText("Confirmar Compra");
+        Confirmar.setToolTipText("Confirmar Compra");
 
-        jButton2.setText("Voltar");
+        Voltar.setText("Voltar");
+        Voltar.setToolTipText("Voltar atrás");
+        Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -53,13 +65,13 @@ public class ConfirmaCompra extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 136, Short.MAX_VALUE)
-                        .addComponent(jButton2)
+                        .addComponent(Voltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton1)))
+                        .addComponent(Confirmar)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jButton1, jButton2});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Confirmar, Voltar});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -68,13 +80,18 @@ public class ConfirmaCompra extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(Confirmar)
+                    .addComponent(Voltar))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_VoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -112,8 +129,8 @@ public class ConfirmaCompra extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton Confirmar;
+    private javax.swing.JButton Voltar;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     // End of variables declaration//GEN-END:variables

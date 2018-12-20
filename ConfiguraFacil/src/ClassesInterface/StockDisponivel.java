@@ -5,17 +5,23 @@
  */
 package ClassesInterface;
 
+import Classes.ConfiguraFacil;
+
 /**
  *
  * @author pmcca
  */
 public class StockDisponivel extends javax.swing.JFrame {
 
-    /**
-     * Creates new form StockDisponivel
-     */
+    private ConfiguraFacil cf;
+    
     public StockDisponivel() {
         initComponents();
+    }
+    
+    public StockDisponivel(ConfiguraFacil cf){
+        this();
+        this.cf = cf;
     }
 
     /**
@@ -30,7 +36,7 @@ public class StockDisponivel extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
+        Voltar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -64,7 +70,13 @@ public class StockDisponivel extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
-        jButton1.setText("Voltar");
+        Voltar.setText("Voltar");
+        Voltar.setToolTipText("Voltar atrás");
+        Voltar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                VoltarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -73,7 +85,7 @@ public class StockDisponivel extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jButton1)
+                    .addComponent(Voltar)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addGap(336, 336, 336))
@@ -88,12 +100,17 @@ public class StockDisponivel extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(23, 23, 23)
-                .addComponent(jButton1)
+                .addComponent(Voltar)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_VoltarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -131,7 +148,7 @@ public class StockDisponivel extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton Voltar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;

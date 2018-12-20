@@ -36,7 +36,7 @@ public class ConfiguraFacil {
     }
     
     public ConfiguraFacil(ConfiguraFacil umConfiguraFacil) {
-        this.utilizadores = umConfiguraFacil.getClientes();
+        this.utilizadores = umConfiguraFacil.getUtilizadores();
         this.carros = umConfiguraFacil.getCarros();
         this.modelos = umConfiguraFacil.getModelos();
         this.pecas = umConfiguraFacil.getPecas();
@@ -44,11 +44,11 @@ public class ConfiguraFacil {
         this.producao = umConfiguraFacil.getProducao();
     }
 
-    public Map<String, Utilizador> getClientes() {
+    public Map<String, Utilizador> getUtilizadores() {
         return new HashMap<>(this.utilizadores);
     }
 
-    public void setClientes(Map<String, Utilizador> utilizadores) {
+    public void setUtilizadores(Map<String, Utilizador> utilizadores) {
         this.utilizadores = new HashMap<>(utilizadores);
     }
 
@@ -114,7 +114,7 @@ public class ConfiguraFacil {
         }
         
         ConfiguraFacil other = (ConfiguraFacil) obj;
-        return (this.utilizadores.equals(other.getClientes()) && this.carros.equals(other.getCarros()) 
+        return (this.utilizadores.equals(other.getUtilizadores()) && this.carros.equals(other.getCarros()) 
                 && this.modelos.equals(other.getModelos()) && this.pecas.equals(other.getPecas()) 
                 && this.pacotes.equals(other.getPacotes()) && this.producao.equals(other.getProducao()));
         }
@@ -127,7 +127,7 @@ public class ConfiguraFacil {
         this.utilizadores.put(email, c);
     }
     
-    public Utilizador fazerlogin(String email, String password) throws UtilizadorNaoExisteException, PasswordIncorretaException{
+    public Utilizador fazerLogin(String email, String password) throws UtilizadorNaoExisteException, PasswordIncorretaException{
         if(!utilizadores.containsKey(email))
             throw new UtilizadorNaoExisteException("Utilizador não existe");
         Utilizador u = utilizadores.get(email);
