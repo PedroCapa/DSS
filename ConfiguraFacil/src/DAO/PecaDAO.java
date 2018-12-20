@@ -10,6 +10,7 @@ import Classes.Estofos;
 import Classes.Motor;
 import Classes.Jantes;
 import Classes.Extras;
+import Exceptions.PecaJaExisteException;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
@@ -18,6 +19,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -43,53 +46,13 @@ public class PecaDAO implements Map<String, Peca>{
 
     @Override
     public Collection<Peca> values(){
-        try{
-            Statement st = this.conn.createStatement();
-            String str = "Select * From Peca";
-            ResultSet res = st.executeQuery(str);
-            Map<String, Peca> pecas = new HashMap<>();
-            while(res.next()){
-                String id = res.getString("id");
-                String nome = res.getString("nome");
-                int quantidade = res.getInt("Quantidade");
-                float custo = res.getFloat("Custo");
-                int tipo = res.getInt("Tipo");
-                List<String> obrigatorias = new ArrayList<>();
-                List<String> proibidas = new ArrayList<>();
-                Peca p = null;
-                switch(tipo){
-                    case 1: p = new Motor(quantidade, nome, custo, obrigatorias, proibidas);
-                    break;
-                    case 2: p = new Cor(quantidade, nome, custo, obrigatorias, proibidas);
-                    break;
-                    case 3: p = new Jantes(quantidade, nome, custo, obrigatorias, proibidas);
-                    break;
-                    case 4: p = new Estofos(quantidade, nome, custo, obrigatorias, proibidas);
-                    break;
-                    case 5: p = new Extras(quantidade, nome, custo, obrigatorias, proibidas);
-                }
-                pecas.put(id, p);
-                //carros.put(id, car);
-            }
-            String sql = "Select * From Peca_Peca";
-            ResultSet rs = st.executeQuery(sql);
-            while(rs.next()){
-                String peca1 = rs.getString("idPeca1");
-                String peca2 = rs.getString("idPeca2");
-                int tipo = rs.getInt("Tipo");
-                Peca peca = pecas.get(peca1);
-                if(tipo == 1){
-                    //peca.addObrigatorio(peca2);
-                }
-                else{
-                    //peca.addProibido(peca2);
-                }
-            }
-            return pecas.values();
+        Collection<Peca> pecas = new HashSet<>();
+        Set<String> keys = this.keySet();
+        for(String str: keys){
+            Peca peca = this.get(str);
+            pecas.add(peca);
         }
-        catch(NumberFormatException | SQLException exc){
-            throw new NullPointerException(exc.getMessage());
-        }
+        return pecas;
     }
     
     @Override
@@ -97,10 +60,10 @@ public class PecaDAO implements Map<String, Peca>{
         try{
             Set<String> ids = new HashSet<>();
             Statement st = conn.createStatement();
-            String str = "Select id From Peca";
+            String str = "Select Nome From Peca";
             ResultSet res = st.executeQuery(str);
             while(res.next()){
-                ids.add(res.getString("id"));
+                ids.add(res.getString("Nome"));
             }
             return ids;
         }
@@ -126,8 +89,10 @@ public class PecaDAO implements Map<String, Peca>{
             String chave = (String)key;
             Peca peca = this.get(chave);
             Statement stm = conn.createStatement();
-            String sql = "DELETE '"+chave+"' FROM Carros";
-            int i  = stm.executeUpdate(sql);
+            String sql = "DELETE FROM Peca Where Nome='"+chave+"'";
+            int i = stm.executeUpdate(sql);
+            String str = "Delete From Peca_Peca Where idPeca1='"+chave+"'";
+            int j = stm.executeUpdate(str);
             return peca;
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -135,38 +100,27 @@ public class PecaDAO implements Map<String, Peca>{
     
     @Override
     public Peca put(String key, Peca value) {
+        this.remove(key);
+        Peca peca = this.putPeca(key, value);
+        this.putPeca_Peca(value);
+        return peca;
+    }
+    
+    public Peca putPeca(String key, Peca value){
         try {
+            Peca p;
             int tipo;
-            Peca peca;
             Statement stm = conn.createStatement();
-            stm.executeUpdate("DELETE FROM Peca WHERE id='"+key+"'");
-            if(value instanceof Motor){
-                tipo = 1;
-                peca = new Motor(value);
-            }
-            else if(value instanceof Cor){
-                tipo = 2;
-                peca = new Cor(value);
-            }
-            else if(value instanceof Jantes){
-                tipo = 3;
-                peca = new Jantes(value);
-            }
-            else if(value instanceof Estofos){
-                tipo = 4;
-                peca = new Estofos(value);
-            }
-            else{
-                tipo = 5;
-                peca = new Extras(value);
-            }
-            // apagar carros de tabelas intermedias
+            if(value instanceof Motor){tipo = 1; p = new Motor(value);}
+            else if(value instanceof Cor){tipo = 2; p = new Cor(value);}
+            else if(value instanceof Jantes){tipo = 3; p = new Jantes(value);}
+            else if(value instanceof Estofos){tipo = 4; p = new Estofos(value);}
+            else{tipo = 5; p = new Extras(value);}
             String sql = "INSERT INTO Peca VALUES ('"+key+"',"+value.getQuantidade()+",";
             sql += +tipo+","+value.getPreco()+")";
             int i  = stm.executeUpdate(sql);
-            return peca;
-        }
-        catch (SQLException e) {throw new NullPointerException(e.getMessage());}
+            return p;
+        } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
     
     @Override
@@ -174,7 +128,7 @@ public class PecaDAO implements Map<String, Peca>{
         try {
             Peca p = null;
             Statement stm = conn.createStatement();
-            String sql = "SELECT * FROM Peca WHERE id='"+(String)key+"'";
+            String sql = "SELECT * FROM Peca WHERE Nome='"+(String)key+"'";
             ResultSet rs = stm.executeQuery(sql);
             if (rs.next()){
                 int tipo = rs.getInt("Tipo");
@@ -199,15 +153,15 @@ public class PecaDAO implements Map<String, Peca>{
                 String idPeca = res.getString("idPeca2");
                 int type = res.getInt("Tipo");
                 if(type == 1){
-                    //p.addObrigatorio();
+                    p.addObrigatoria(idPeca);
                 }
-                if(type == 2){
-                    //p.addProibida();
+                if(type == 0){
+                    p.addProibida(idPeca);
                 }
             }
             return p;
         }
-        catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}
+        catch (NumberFormatException | SQLException | PecaJaExisteException e) {throw new NullPointerException(e.getMessage());}
     }
     
     @Override
@@ -246,5 +200,51 @@ public class PecaDAO implements Map<String, Peca>{
             return i;
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
+    }
+    
+    public void insereProibidas(Peca p){
+        try{
+            String nome = p.getNome();
+            Statement st = conn.createStatement();
+            String sql = "Select idPeca1 From Peca_Peca Where idPeca1 = '" + nome + "' AND Tipo = 0";
+            ResultSet res = st.executeQuery(sql);
+            List<String> pecas = new ArrayList<>();
+            while(res.next()){
+                String id2 = res.getString("idPeca2");
+                pecas.add(id2);
+            }
+            p.setIncompativeis(pecas);
+        } catch (SQLException ex) {}
+    }
+    
+    public void insereObrigatorias(Peca p){
+        
+        try{
+            String nome = p.getNome();
+            Statement st = conn.createStatement();
+            String sql = "Select idPeca2 From Peca_Peca Where idPeca1 = '" + nome + "' AND Tipo = 1";
+            ResultSet res = st.executeQuery(sql);
+            List<String> pecas = new ArrayList<>();
+            while(res.next()){
+                String id2 = res.getString("idPeca2");
+                pecas.add(id2);
+            }
+            p.setIncompativeis(pecas);
+        } catch (SQLException ex) {}
+    }
+    
+    public void putPeca_Peca(Peca value){
+        try {
+            String id1 = value.getNome();
+            Statement stm = conn.createStatement();
+            for(String str: value.getIncompativeis()){
+                String sql = "Insert Into Peca_Peca Values (0, '"+ id1 + "','" + str + "'";
+                int i = stm.executeUpdate(sql);
+            }
+            for(String s: value.getObrigatorias()){
+                String sql = "Insert Into Peca_Peca Values (1, '"+ id1 + "','" + s + "'";
+                int i = stm.executeUpdate(sql);
+            }
+        } catch (SQLException ex) {}
     }
 }

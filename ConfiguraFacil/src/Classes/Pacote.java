@@ -73,5 +73,9 @@ public class Pacote {
         Pacote other = (Pacote) obj;
         return (this.nome.equals(other.getNome()) && this.desconto == other.getDesconto() 
                 && this.pecas.equals(other.getPecas()));
-    }    
+    }
+    
+    public void addPeca(String peca){
+        this.pecas.add(peca);
+    }
 }

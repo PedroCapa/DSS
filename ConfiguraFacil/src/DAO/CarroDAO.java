@@ -13,9 +13,11 @@ import java.util.HashMap;
 import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
-import java.time.format.DateTimeFormatter;
 import java.time.LocalDate;
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -40,34 +42,13 @@ public class CarroDAO implements Map<String, Carro>{
     
     @Override
     public Collection<Carro> values(){
-        try{
-            Statement st = this.conn.createStatement();
-            String str = "Select * From Carro";
-            ResultSet res = st.executeQuery(str);
-            Map<String, Carro> carros = new HashMap<>();
-            while(res.next()){
-                String id = res.getString("id");
-                int estado = Integer.parseInt(res.getString("Estado"));
-                float custo = Float.valueOf(res.getString("Custo"));
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/d");
-                String date = res.getString("Data");
-                LocalDate data = LocalDate.parse(date, formatter);
-                List<Peca> pecas = new ArrayList<>();
-                List<Peca> pecasFalta = new ArrayList<>();
-                // Fazer retrieve do modelo
-                //Carro car = new Carro(id, estado, pecas, pecasFalta, custo, data);
-                //carros.put(id, car);
-            }
-            String sql = "Select * From Peca_Carro";
-            ResultSet rs = st.executeQuery(sql);
-            /*
-            Fazer retrieve da peça
-            */
-            return carros.values();
+        Collection<Carro> carros = new HashSet<>();
+        Set<String> keys = this.keySet();
+        for(String str: keys){
+            Carro car = this.get(str);
+            carros.add(car);
         }
-        catch(NumberFormatException | SQLException exc){
-            throw new NullPointerException(exc.getMessage());
-        }
+        return carros;
     }
     
     @Override
@@ -105,26 +86,46 @@ public class CarroDAO implements Map<String, Carro>{
             String chave = (String)key;
             Carro car = this.get(chave);
             Statement stm = conn.createStatement();
-            String sql = "DELETE '"+chave+"' FROM Carros";
+            String sql = "DELETE FROM Carro Where id='"+chave+"'";
             int i  = stm.executeUpdate(sql);
+            String s = "Delete From Peca_Carro Where Carro_id='"+chave+"'";
+            int j = stm.executeUpdate(s);
             return car;
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
     
-    // Verificar primeiro statement qual o nome da chave primaria
     @Override
     public Carro put(String key, Carro value) {
         try {
+            String data = value.getData().toString();
+            Date date = java.sql.Date.valueOf(data);
+            String m = value.getModelo().getNome();
             Statement stm = conn.createStatement();
-            stm.executeUpdate("DELETE FROM Carro WHERE id='"+key+"'");
-            // apagar carros de tabelas intermedias
-            String sql = "INSERT INTO Carro VALUES ('"+key+"','"+value.getEstado()+"',";
-            sql += value.getCusto()+", '"+value.getData().format(DateTimeFormatter.ofPattern("yyyy/MM/d"))+"')";
+            this.remove(key);
+            String sql = "INSERT INTO Carro (id, Estado, Data, Preco, Modelo_Nome) VALUES ";
+            sql += "('"+key+"',"+value.getEstado()+",";
+            sql += value.getCusto()+", '"+date+"', '"+m+"')";
             int i  = stm.executeUpdate(sql);
             return new Carro(value);
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
+    }
+    
+    public void putPecaCarro(String key, List<String> p, List<String> f){
+        try {
+            Statement stm = conn.createStatement();
+            for(String str: p){
+                String sql = "INSERT INTO Peca_Carro VALUES ('"+key+"', 1, '"+str+"')";
+                int i = stm.executeUpdate(sql);
+            }
+            for(String s: f){
+                String sql = "INSERT INTO Peca_Carro VALUES ('"+key+"', 0, '"+s+"')";
+                int i = stm.executeUpdate(sql);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(CarroDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override
@@ -139,15 +140,31 @@ public class CarroDAO implements Map<String, Carro>{
                 car.setId(rs.getString("id"));
                 car.setEstado(Integer.parseInt(rs.getString("Estado")));
                 car.setCusto(Float.valueOf("Custo"));
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/d");
-                String date = rs.getString("Data");
-                LocalDate data = LocalDate.parse(date, formatter);
+                String date = rs.getDate("Data").toString();
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                LocalDate data = LocalDate.parse(date,formatter);
                 car.setData(data);
+                this.getPecaCarro((String)key, car);
             }
-            //Inserir id das pecas atraves da tabela intermedia
             return car;
         }
         catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}
+    }
+    
+    public void getPecaCarro(String key, Carro value){
+        try {
+            Statement stm = conn.createStatement();
+            String sql = "SELECT * FROM Peca_Carro WHERE Carro_id='"+key+"'";
+            ResultSet rs = stm.executeQuery(sql);
+            List<String> pecas = new ArrayList<>();
+            List<String> falta = new ArrayList<>();
+            while(rs.next()){
+                if(rs.getBoolean("Colocada")){pecas.add(rs.getString("Peca_Nome"));}
+                else {falta.add(rs.getString("Peca_Nome"));}
+            }
+            value.setFalta(falta);
+            value.setPecas(pecas);
+        } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
     
     @Override
