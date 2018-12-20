@@ -156,8 +156,8 @@ public class ConfiguraFacil {
             throw new UtilizadorNaoExisteException("Utilizador não existe");
         Cliente c = (Cliente)this.utilizadores.get(email);
         List<Carro> l = new ArrayList<>();
-        c.getCarros().forEach((s) -> {
-            l.add(this.carros.get(s));
+        c.getCarros().forEach((nomes) -> {
+            l.add(this.carros.get(nomes));
         });
         return l;
     }
@@ -247,5 +247,13 @@ public class ConfiguraFacil {
         if(flag)
             preco = preco - preco*p.getDesconto();
         return preco;
+    }
+    
+    public void insereCarroSistema(Cliente c, Carro car){
+        String id = c.getNome() + c.getCarros().size();
+        car.setId(id);
+        producao.add(car);
+        carros.put(id, car);
+        c.addCarro(id);
     }
 }
