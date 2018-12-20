@@ -224,5 +224,28 @@ public class ConfiguraFacil {
             car.setEstado(1);
         else car.setEstado(0);
         return car;
-    } 
+    }
+    
+    public float calculaPreco(Modelo m, List<Peca> pecas){
+        float preco = m.getCustoBase();
+        
+        for(Peca peca: pecas)
+            preco = preco + peca.getPreco();
+        
+        return preco;
+    }
+    
+    public float calculaPreco(Pacote p, Modelo m, List<Peca> pecas) {
+        float preco = m.getCustoBase();
+        for(Peca peca: pecas)
+            preco = preco + peca.getPreco();
+        
+        boolean flag = true;
+        for(String s: p.getPecas())
+            if(!pecas.contains(this.pecas.get(s)))
+                flag = false;
+        if(flag)
+            preco = preco - preco*p.getDesconto();
+        return preco;
+    }
 }

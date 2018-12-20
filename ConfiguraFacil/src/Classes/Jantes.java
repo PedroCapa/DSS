@@ -4,8 +4,8 @@ import java.util.List;
 
 public class Jantes extends Peca{
 
-    public Jantes(int quantidade, String nome, List<String> obrigatorias, List<String> incompativeis) {
-        super(quantidade, nome, obrigatorias, incompativeis);
+    public Jantes(int quantidade, String nome, float preco, List<String> obrigatorias, List<String> incompativeis) {
+        super(quantidade, nome, preco, obrigatorias, incompativeis);
     }
 
     public Jantes() {

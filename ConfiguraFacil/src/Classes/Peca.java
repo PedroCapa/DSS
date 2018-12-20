@@ -1,5 +1,6 @@
 package Classes;
 
+import Exceptions.*;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Objects;
@@ -7,12 +8,14 @@ import java.util.Objects;
 public abstract class Peca {
     private int quantidade;
     private String nome;
+    private float preco;
     private List<String> obrigatorias;
     private List<String> incompativeis;
 
-    public Peca(int quantidade, String nome, List<String> obrigatorias, List<String> incompativeis) {
+    public Peca(int quantidade, String nome, float preco, List<String> obrigatorias, List<String> incompativeis) {
         this.quantidade = quantidade;
         this.nome = nome;
+        this.preco = preco;
         this.obrigatorias = new ArrayList<>(obrigatorias);
         this.incompativeis = new ArrayList<>(incompativeis);
     }
@@ -20,6 +23,7 @@ public abstract class Peca {
     public Peca() {
         this.quantidade = 0;
         this.nome = "";
+        this.preco = 0;
         this.obrigatorias = new ArrayList<>();
         this.incompativeis = new ArrayList<>();
     }
@@ -27,6 +31,7 @@ public abstract class Peca {
     public Peca(Peca umaPeca){
         this.quantidade = umaPeca.getQuantidade();
         this.nome = umaPeca.getNome();
+        this.preco = umaPeca.getPreco();
         this.obrigatorias = umaPeca.getObrigatorias();
         this.incompativeis = umaPeca.getIncompativeis();        
     }
@@ -46,6 +51,14 @@ public abstract class Peca {
     public void setNome(String nome) {
         this.nome = nome;
     }
+
+    public float getPreco() {
+        return preco;
+    }
+
+    public void setPreco(float preco) {
+        this.preco = preco;
+    }
     
     public List<String> getObrigatorias() {
         return new ArrayList<>(this.obrigatorias);
@@ -62,7 +75,7 @@ public abstract class Peca {
     public void setIncompativeis(List<String> incompativeis) {
         this.incompativeis = new ArrayList<>(incompativeis);
     }
-
+    
     @Override
     public int hashCode() {
         return Objects.hashCode(this.nome);
@@ -78,8 +91,20 @@ public abstract class Peca {
         }
         
         Peca other = (Peca) obj;
-        return (this.quantidade != other.quantidade && this.nome.equals(other.nome) 
+        return (this.quantidade != other.quantidade && this.nome.equals(other.nome) && this.preco == other.getPreco()
             && this.obrigatorias.equals(other.obrigatorias) && this.incompativeis.equals(other.getIncompativeis()));
+    }
+    
+    public void addProibida(String p)throws PecaJaExisteException{
+        if(this.incompativeis.contains(p))
+            throw new PecaJaExisteException("Essa peca ja era considerada incompativel");
+        this.incompativeis.add(p);
+    }
+    
+    public void addObrigatoria(String p)throws PecaJaExisteException{
+        if(this.incompativeis.contains(p))
+            throw new PecaJaExisteException("Essa peca ja era considerada incompativel");
+        this.incompativeis.add(p);
     }
     
     public void addStock(int numero){
