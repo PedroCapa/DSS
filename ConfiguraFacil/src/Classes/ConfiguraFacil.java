@@ -256,4 +256,11 @@ public class ConfiguraFacil {
         carros.put(id, car);
         c.addCarro(id);
     }
+    
+    public List<Peca> stringToPeca(List<String> sPecas){
+        List<Peca> pecas = new ArrayList<>();
+        for(String s: sPecas)
+            pecas.add(this.pecas.get(s));
+        return pecas;
+    }
 }

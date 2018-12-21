@@ -5,7 +5,7 @@
  */
 package ClassesInterface;
 
-import Classes.ConfiguraFacil;
+import Classes.*;
 import java.awt.event.WindowEvent;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
@@ -17,14 +17,18 @@ import javax.swing.AbstractButton;
 public class EscolherPacote extends javax.swing.JFrame {
 
     private ConfiguraFacil cf;
+    private Cliente c;
+    private Modelo m;
     
     public EscolherPacote() {
         initComponents();
     }
     
-    public EscolherPacote(ConfiguraFacil cf){
+    public EscolherPacote(ConfiguraFacil cf, Cliente c, Modelo m){
         this();
         this.cf = cf;
+        this.c = c;
+        this.m = m;
     }
 
     /**
@@ -125,7 +129,7 @@ public class EscolherPacote extends javax.swing.JFrame {
         for(Enumeration<AbstractButton> buttons = pacotes.getElements(); buttons.hasMoreElements();){
             AbstractButton button = buttons.nextElement();
             if (button.isSelected()) {
-                System.out.println(button);
+                System.out.println(button.getText());
                 escolhido =  button.getText();
             }
         }
@@ -137,8 +141,8 @@ public class EscolherPacote extends javax.swing.JFrame {
     
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
        if(!validaDados().equals("")){
-            Personalizar p = new Personalizar(this.cf);
-            p.setVisible(true);
+            Extras e = new Extras(this.cf, this.c, this.m, this.cf.getPacotes().get(validaDados()));
+            e.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
        }
     }//GEN-LAST:event_ConfirmarActionPerformed

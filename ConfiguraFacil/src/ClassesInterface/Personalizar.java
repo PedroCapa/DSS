@@ -5,8 +5,12 @@
  */
 package ClassesInterface;
 
-import Classes.ConfiguraFacil;
+import Classes.*;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.List;
+import javax.swing.AbstractButton;
 
 /**
  *
@@ -15,14 +19,18 @@ import java.awt.event.WindowEvent;
 public class Personalizar extends javax.swing.JFrame {
 
     private ConfiguraFacil cf;
+    private Cliente c;
+    private Modelo m;
     
     public Personalizar() {
         initComponents();
     }
     
-    public Personalizar(ConfiguraFacil cf){
+    public Personalizar(ConfiguraFacil cf, Cliente c, Modelo m){
         this();
         this.cf = cf;
+        this.c = c;
+        this.m = m;
     }
 
     /**
@@ -38,10 +46,10 @@ public class Personalizar extends javax.swing.JFrame {
         Motor = new javax.swing.ButtonGroup();
         Jantes = new javax.swing.ButtonGroup();
         Estofos = new javax.swing.ButtonGroup();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
-        jRadioButton4 = new javax.swing.JRadioButton();
+        spoiler = new javax.swing.JRadioButton();
+        automatico = new javax.swing.JRadioButton();
+        escape = new javax.swing.JRadioButton();
+        teto = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jRadioButton5 = new javax.swing.JRadioButton();
         jRadioButton6 = new javax.swing.JRadioButton();
@@ -56,7 +64,7 @@ public class Personalizar extends javax.swing.JFrame {
         jRadioButton13 = new javax.swing.JRadioButton();
         jRadioButton14 = new javax.swing.JRadioButton();
         jRadioButton15 = new javax.swing.JRadioButton();
-        jRadioButton18 = new javax.swing.JRadioButton();
+        climatizacao = new javax.swing.JRadioButton();
         jLabel5 = new javax.swing.JLabel();
         jRadioButton19 = new javax.swing.JRadioButton();
         jRadioButton20 = new javax.swing.JRadioButton();
@@ -66,17 +74,22 @@ public class Personalizar extends javax.swing.JFrame {
         jRadioButton21 = new javax.swing.JRadioButton();
         jRadioButton22 = new javax.swing.JRadioButton();
         jRadioButton23 = new javax.swing.JRadioButton();
-        jRadioButton24 = new javax.swing.JRadioButton();
+        vidrosEscuros = new javax.swing.JRadioButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jRadioButton1.setText("Spoiler");
+        spoiler.setText("Spoiler");
 
-        jRadioButton2.setText("Condutor Automatico");
+        automatico.setText("Condutor Automatico");
 
-        jRadioButton3.setText("Escape Regulavel");
+        escape.setText("Escape Regulavel");
+        escape.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                escapeActionPerformed(evt);
+            }
+        });
 
-        jRadioButton4.setText("Teto de Abir");
+        teto.setText("Teto de Abir");
 
         jLabel1.setFont(new java.awt.Font("Harlow Solid Italic", 0, 18)); // NOI18N
         jLabel1.setText("Motor");
@@ -120,7 +133,7 @@ public class Personalizar extends javax.swing.JFrame {
         Cor.add(jRadioButton15);
         jRadioButton15.setText("Preto");
 
-        jRadioButton18.setText("Sistema de Climatização");
+        climatizacao.setText("Sistema de Climatização");
 
         jLabel5.setFont(new java.awt.Font("Harlow Solid Italic", 0, 18)); // NOI18N
         jLabel5.setText("Jantes");
@@ -164,7 +177,7 @@ public class Personalizar extends javax.swing.JFrame {
         Estofos.add(jRadioButton23);
         jRadioButton23.setText("Couro Recaro  Red");
 
-        jRadioButton24.setText("Vidros Escurecidos");
+        vidrosEscuros.setText("Vidros Escurecidos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -222,21 +235,21 @@ public class Personalizar extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton3)
+                                .addComponent(escape)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton18))
+                                .addComponent(climatizacao))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jRadioButton1)
+                                .addComponent(spoiler)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jRadioButton2)))
+                                .addComponent(automatico)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jRadioButton24)
-                            .addComponent(jRadioButton4))))
+                            .addComponent(vidrosEscuros)
+                            .addComponent(teto))))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {jRadioButton1, jRadioButton2, jRadioButton3, jRadioButton4});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {automatico, escape, spoiler, teto});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -279,14 +292,14 @@ public class Personalizar extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton4)
-                    .addComponent(jRadioButton3)
-                    .addComponent(jRadioButton18))
+                    .addComponent(teto)
+                    .addComponent(escape)
+                    .addComponent(climatizacao))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1)
-                    .addComponent(jRadioButton2)
-                    .addComponent(jRadioButton24))
+                    .addComponent(spoiler)
+                    .addComponent(automatico)
+                    .addComponent(vidrosEscuros))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Confirmar)
@@ -297,6 +310,49 @@ public class Personalizar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private List<String> validaDados() {
+        List<String> pecas = new ArrayList<>();
+        for(Enumeration<AbstractButton> buttons = Cor.getElements(); buttons.hasMoreElements();){
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+                pecas.add(button.getText());
+            }
+        }
+        for(Enumeration<AbstractButton> buttons = Motor.getElements(); buttons.hasMoreElements();){
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+                pecas.add(button.getText());
+            }
+        }
+        for(Enumeration<AbstractButton> buttons = Jantes.getElements(); buttons.hasMoreElements();){
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+                pecas.add(button.getText());
+            }
+        }
+        for(Enumeration<AbstractButton> buttons = Estofos.getElements(); buttons.hasMoreElements();){
+            AbstractButton button = buttons.nextElement();
+            if (button.isSelected()) {
+                pecas.add(button.getText());
+            }
+        }
+        if (pecas.size() < 4)
+            javax.swing.JOptionPane.showMessageDialog(this, "Campos por preencher", "Dados incorretos", 0);
+        if (this.escape.isSelected())
+            pecas.add(this.escape.getText());
+        if (this.climatizacao.isSelected())
+            pecas.add(this.climatizacao.getText());
+        if (this.teto.isSelected())
+            pecas.add(this.teto.getText());
+        if (this.spoiler.isSelected())
+            pecas.add(this.spoiler.getText());
+        if (this.automatico.isSelected())
+            pecas.add(this.automatico.getText());
+        if (this.vidrosEscuros.isSelected())
+            pecas.add(this.vidrosEscuros.getText());
+        return pecas;
+    }    
+    
     private void jRadioButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton21ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton21ActionPerformed
@@ -307,10 +363,14 @@ public class Personalizar extends javax.swing.JFrame {
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-        ConfirmaCompra cc = new ConfirmaCompra(this.cf);
+        ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, new Pacote(),this.cf.stringToPeca(validaDados()));
         cc.setVisible(true);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_ConfirmarActionPerformed
+
+    private void escapeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escapeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_escapeActionPerformed
 
     /**
      * @param args the command line arguments
@@ -354,32 +414,32 @@ public class Personalizar extends javax.swing.JFrame {
     private javax.swing.ButtonGroup Jantes;
     private javax.swing.ButtonGroup Motor;
     private javax.swing.JButton Voltar;
+    private javax.swing.JRadioButton automatico;
+    private javax.swing.JRadioButton climatizacao;
+    private javax.swing.JRadioButton escape;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JRadioButton jRadioButton1;
     private javax.swing.JRadioButton jRadioButton10;
     private javax.swing.JRadioButton jRadioButton11;
     private javax.swing.JRadioButton jRadioButton12;
     private javax.swing.JRadioButton jRadioButton13;
     private javax.swing.JRadioButton jRadioButton14;
     private javax.swing.JRadioButton jRadioButton15;
-    private javax.swing.JRadioButton jRadioButton18;
     private javax.swing.JRadioButton jRadioButton19;
-    private javax.swing.JRadioButton jRadioButton2;
     private javax.swing.JRadioButton jRadioButton20;
     private javax.swing.JRadioButton jRadioButton21;
     private javax.swing.JRadioButton jRadioButton22;
     private javax.swing.JRadioButton jRadioButton23;
-    private javax.swing.JRadioButton jRadioButton24;
-    private javax.swing.JRadioButton jRadioButton3;
-    private javax.swing.JRadioButton jRadioButton4;
     private javax.swing.JRadioButton jRadioButton5;
     private javax.swing.JRadioButton jRadioButton6;
     private javax.swing.JRadioButton jRadioButton7;
     private javax.swing.JRadioButton jRadioButton8;
     private javax.swing.JRadioButton jRadioButton9;
+    private javax.swing.JRadioButton spoiler;
+    private javax.swing.JRadioButton teto;
+    private javax.swing.JRadioButton vidrosEscuros;
     // End of variables declaration//GEN-END:variables
 }

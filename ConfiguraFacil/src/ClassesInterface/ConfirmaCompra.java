@@ -5,7 +5,8 @@
  */
 package ClassesInterface;
 
-import Classes.ConfiguraFacil;
+import Classes.*;
+import java.util.List;
 
 /**
  *
@@ -14,14 +15,22 @@ import Classes.ConfiguraFacil;
 public class ConfirmaCompra extends javax.swing.JFrame {
 
     private ConfiguraFacil cf;
+    private Cliente c;
+    private Modelo m;
+    private Pacote p;
+    private List<Peca> pecas;
     
     public ConfirmaCompra() {
         initComponents();
     }
     
-    public ConfirmaCompra(ConfiguraFacil cf){
+    public ConfirmaCompra(ConfiguraFacil cf, Cliente c, Modelo m, Pacote p, List<Peca> pecas){
         this();
         this.cf = cf;
+        this.c = c;
+        this.m = m;
+        this.p = p;
+        this.pecas = pecas;
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,6 +55,11 @@ public class ConfirmaCompra extends javax.swing.JFrame {
 
         Confirmar.setText("Confirmar Compra");
         Confirmar.setToolTipText("Confirmar Compra");
+        Confirmar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                ConfirmarActionPerformed(evt);
+            }
+        });
 
         Voltar.setText("Voltar");
         Voltar.setToolTipText("Voltar atrás");
@@ -92,6 +106,13 @@ public class ConfirmaCompra extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_VoltarActionPerformed
+
+    private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
+        Carro car = this.cf.comprarCarro(this.pecas, this.m, this.cf.calculaPreco(this.p, this.m, this.pecas));
+        this.cf.insereCarroSistema(this.c, car);
+        this.setVisible(false);
+        this.dispose();
+    }//GEN-LAST:event_ConfirmarActionPerformed
 
     /**
      * @param args the command line arguments

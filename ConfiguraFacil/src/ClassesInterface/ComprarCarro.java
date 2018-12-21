@@ -5,7 +5,7 @@
  */
 package ClassesInterface;
 
-import Classes.ConfiguraFacil;
+import Classes.*;
 import java.awt.event.WindowEvent;
 import java.util.Enumeration;
 import javax.swing.AbstractButton;
@@ -17,14 +17,16 @@ import javax.swing.AbstractButton;
 public class ComprarCarro extends javax.swing.JFrame {
 
     private ConfiguraFacil cf;
+    private Cliente c;
     
     public ComprarCarro() {
         initComponents();
     }
     
-    public ComprarCarro(ConfiguraFacil cf){
+    public ComprarCarro(ConfiguraFacil cf, Cliente c){
         this();
         this.cf = cf;
+        this.c = c;
     }
 
     /**
@@ -239,9 +241,8 @@ public class ComprarCarro extends javax.swing.JFrame {
         for(Enumeration<AbstractButton> buttons = modelos.getElements(); buttons.hasMoreElements();){
              AbstractButton button = buttons.nextElement();
 
-            if (button.isSelected()) {
+            if (button.isSelected())
                 escolhido =  button.getText();
-            }
         }
         if (escolhido.equals(""))
             javax.swing.JOptionPane.showMessageDialog(this, "Campos por preencher", "Dados incorretos", 0);
@@ -268,10 +269,16 @@ public class ComprarCarro extends javax.swing.JFrame {
     private void ThunderbirdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThunderbirdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ThunderbirdActionPerformed
-
+    
+    private Modelo modeloEscolhido(){
+        Modelo m = new Modelo();
+        String s = validaDados();
+        return m;
+    }
+    
     private void PacoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacoteActionPerformed
         if(!validaDados().equals("")){    
-            EscolherPacote ep = new EscolherPacote(this.cf);
+            EscolherPacote ep = new EscolherPacote(this.cf, this.c, this.cf.getModelos().get(validaDados()));
             ep.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
@@ -279,7 +286,7 @@ public class ComprarCarro extends javax.swing.JFrame {
 
     private void OtimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OtimaActionPerformed
         if(!validaDados().equals("")){
-            ConfiguracaoOtima co = new ConfiguracaoOtima(this.cf);
+            ConfiguracaoOtima co = new ConfiguracaoOtima(this.cf, this.c, this.cf.getModelos().get(validaDados()));
             co.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
@@ -287,7 +294,7 @@ public class ComprarCarro extends javax.swing.JFrame {
 
     private void PersonalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonalizarActionPerformed
         if(!validaDados().equals("")){
-            Personalizar p = new Personalizar(this.cf);
+            Personalizar p = new Personalizar(this.cf, this.c, this.cf.getModelos().get(validaDados()));
             p.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }

@@ -5,28 +5,33 @@
  */
 package ClassesInterface;
 
+import Classes.Carro;
 import Classes.*;
 import Exceptions.UtilizadorNaoExisteException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author pmcca
  */
-public class StockDisponivel extends javax.swing.JFrame {
+public class HistoricoCompras extends javax.swing.JFrame {
 
+    /**
+     * Creates new form HistoricoCompras
+     */
     private ConfiguraFacil cf;
+    private Cliente c;
     
-    public StockDisponivel() {
+    public HistoricoCompras() {
         initComponents();
     }
     
-    public StockDisponivel(ConfiguraFacil cf){
+    public HistoricoCompras(ConfiguraFacil cf, Cliente c){
         this();
         this.cf = cf;
+        this.c = c;
     }
 
     /**
@@ -38,16 +43,13 @@ public class StockDisponivel extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tabela = new javax.swing.JTable();
         Voltar = new javax.swing.JButton();
         mostrar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setFont(new java.awt.Font("Harlow Solid Italic", 0, 18)); // NOI18N
-        jLabel1.setText("Stock");
 
         tabela.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -92,6 +94,9 @@ public class StockDisponivel extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Harlow Solid Italic", 0, 18)); // NOI18N
+        jLabel1.setText("Carros");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -107,7 +112,7 @@ public class StockDisponivel extends javax.swing.JFrame {
                         .addComponent(Voltar)
                         .addGap(18, 18, 18)
                         .addComponent(mostrar)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -133,18 +138,32 @@ public class StockDisponivel extends javax.swing.JFrame {
 
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
         try{
-            DefaultTableModel pecas = (DefaultTableModel)tabela.getModel();
-            int tam = this.cf.getCarrosComprados("email").size();
-            pecas.setRowCount(0);
-            List<Peca> lista = this.cf.getPecas().values().stream().map(p -> p).collect(Collectors.toList());
-            for(int i = 0; i < tam; i++){
-                Peca p = lista.get(i);
-                pecas.addRow(new String[]{p.getNome(),Integer.toString(p.getQuantidade())});
-                this.tabela.setModel(pecas);
+            DefaultTableModel modelo = (DefaultTableModel)tabela.getModel();
+            int tam = this.cf.getCarrosComprados("email").size(); // Alterar para oo nome do cliente
+            if(tam == 0){
+                modelo.addRow(new String[]{null, 
+                                           null,
+                                           null,
+                                           null});
+        }        
+            else{
+                modelo.setRowCount(0);
+                List<Carro> lista = this.cf.getCarrosComprados("email");// alterar para o nome do cliente
+                for(int i = 0; i < tam; i++){
+                    Carro c = lista.get(i);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+                    String formattedString = c.getData().format(formatter);
+                    modelo.addRow(new String[]{c.getModelo().getNome(),
+                                               formattedString,
+                                               Integer.toString(c.getEstado())});
+        
+                this.tabela.setModel(modelo);
+                }
             }
         }
         catch(UtilizadorNaoExisteException e){
                 javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
+
             }
     }//GEN-LAST:event_mostrarActionPerformed
 
@@ -165,20 +184,20 @@ public class StockDisponivel extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(StockDisponivel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoricoCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(StockDisponivel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoricoCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(StockDisponivel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoricoCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(StockDisponivel.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoricoCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new StockDisponivel().setVisible(true);
+                new HistoricoCompras().setVisible(true);
             }
         });
     }

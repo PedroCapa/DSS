@@ -5,8 +5,9 @@
  */
 package ClassesInterface;
 
-import Classes.ConfiguraFacil;
+import Classes.*;
 import java.awt.event.WindowEvent;
+import java.util.ArrayList;
 
 /**
  *
@@ -15,14 +16,18 @@ import java.awt.event.WindowEvent;
 public class ConfiguracaoOtima extends javax.swing.JFrame {
 
     private ConfiguraFacil cf;
+    private Cliente c;
+    private Modelo m;
     
     public ConfiguracaoOtima() {
         initComponents();
     }
     
-    public ConfiguracaoOtima(ConfiguraFacil cf){
+    public ConfiguracaoOtima(ConfiguraFacil cf, Cliente c, Modelo m){
         this();
         this.cf = cf;
+        this.c = c;
+        this.m = m;
     }
 
     /**
@@ -103,7 +108,7 @@ public class ConfiguracaoOtima extends javax.swing.JFrame {
     }//GEN-LAST:event_SairActionPerformed
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-        ConfirmaCompra cc = new ConfirmaCompra(this.cf);
+        ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, new Pacote(), new ArrayList<>());
         cc.setVisible(true);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_ConfirmarActionPerformed

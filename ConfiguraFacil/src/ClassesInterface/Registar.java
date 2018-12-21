@@ -134,7 +134,7 @@ public class Registar extends javax.swing.JFrame {
             if(validaDados()){
                 String pass = String.valueOf(this.password.getPassword());
                 cf.registaCliente(this.userName.getText(), pass, this.email.getText());
-                MenuPrincipal mp = new MenuPrincipal(this.cf);
+                MenuPrincipal mp = new MenuPrincipal(this.cf, (Cliente)cf.getUtilizadores().get(this.email.getText()));
                 mp.setVisible(true);
                 this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
             }

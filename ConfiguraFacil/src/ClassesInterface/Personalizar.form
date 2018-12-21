@@ -94,20 +94,20 @@
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jRadioButton3" linkSize="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="escape" linkSize="1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jRadioButton18" min="-2" max="-2" attributes="0"/>
+                              <Component id="climatizacao" min="-2" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" alignment="0" attributes="0">
-                              <Component id="jRadioButton1" linkSize="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="spoiler" linkSize="1" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jRadioButton2" linkSize="1" min="-2" max="-2" attributes="0"/>
+                              <Component id="automatico" linkSize="1" min="-2" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace pref="29" max="32767" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jRadioButton24" min="-2" max="-2" attributes="0"/>
-                          <Component id="jRadioButton4" linkSize="1" min="-2" max="-2" attributes="0"/>
+                          <Component id="vidrosEscuros" min="-2" max="-2" attributes="0"/>
+                          <Component id="teto" linkSize="1" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
               </Group>
@@ -161,15 +161,15 @@
               <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jRadioButton4" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButton3" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButton18" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="teto" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="escape" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="climatizacao" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="jRadioButton1" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButton2" alignment="3" min="-2" max="-2" attributes="0"/>
-                  <Component id="jRadioButton24" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="spoiler" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="automatico" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="vidrosEscuros" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
@@ -182,22 +182,25 @@
     </DimensionLayout>
   </Layout>
   <SubComponents>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton1">
+    <Component class="javax.swing.JRadioButton" name="spoiler">
       <Properties>
         <Property name="text" type="java.lang.String" value="Spoiler"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton2">
+    <Component class="javax.swing.JRadioButton" name="automatico">
       <Properties>
         <Property name="text" type="java.lang.String" value="Condutor Automatico"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton3">
+    <Component class="javax.swing.JRadioButton" name="escape">
       <Properties>
         <Property name="text" type="java.lang.String" value="Escape Regulavel"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="escapeActionPerformed"/>
+      </Events>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton4">
+    <Component class="javax.swing.JRadioButton" name="teto">
       <Properties>
         <Property name="text" type="java.lang.String" value="Teto de Abir"/>
       </Properties>
@@ -314,7 +317,7 @@
         <Property name="text" type="java.lang.String" value="Preto"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton18">
+    <Component class="javax.swing.JRadioButton" name="climatizacao">
       <Properties>
         <Property name="text" type="java.lang.String" value="Sistema de Climatiza&#xe7;&#xe3;o"/>
       </Properties>
@@ -396,7 +399,7 @@
         <Property name="text" type="java.lang.String" value="Couro Recaro  Red"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JRadioButton" name="jRadioButton24">
+    <Component class="javax.swing.JRadioButton" name="vidrosEscuros">
       <Properties>
         <Property name="text" type="java.lang.String" value="Vidros Escurecidos"/>
       </Properties>

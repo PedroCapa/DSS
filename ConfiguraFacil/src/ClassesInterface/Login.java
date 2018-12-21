@@ -123,8 +123,14 @@ public class Login extends javax.swing.JFrame {
            if(validaDados()){
                 String pass = String.valueOf(this.password.getPassword());
                 this.cf.fazerLogin(this.email.getText(), pass);
-                MenuPrincipal mp = new MenuPrincipal(this.cf);
-                mp.setVisible(true);
+                if(cf.getUtilizadores().get(this.email.getText()) instanceof Cliente){
+                    MenuPrincipal mp = new MenuPrincipal(this.cf, (Cliente)cf.getUtilizadores().get(this.email.getText()));
+                    mp.setVisible(true);
+                }
+                else{
+                    MenuPrincipalFuncionario mf = new MenuPrincipalFuncionario(this.cf);
+                    mf.setVisible(true);
+                }
                 this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
            }
        }
