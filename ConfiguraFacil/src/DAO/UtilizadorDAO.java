@@ -10,13 +10,8 @@ import Classes.Cliente;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.HashMap;
 import java.util.Collection;
-import java.util.List;
-import java.util.ArrayList;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 /**
  *
  * @author Luis
@@ -55,7 +50,7 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         try{
             Set<String> ids = new HashSet<>();
             Statement st = conn.createStatement();
-            String str = "Select id From Utilizador";
+            String str = "Select Email From Utilizador";
             ResultSet res = st.executeQuery(str);
             while(res.next()){
                 ids.add(res.getString("Email"));
@@ -98,7 +93,7 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
             int tipo;
             Utilizador u;
             Statement stm = conn.createStatement();
-            stm.executeUpdate("DELETE FROM Peca WHERE Email='"+key+"'");
+            stm.executeUpdate("DELETE FROM Utilizador WHERE Email='"+key+"'");
             if(value instanceof Funcionario){
                 tipo = 0;
                 Funcionario user = (Funcionario)value;
@@ -131,10 +126,11 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
                     break;
                     case 1: u = new Cliente();
                 }
-                u.setNome((String)key);
+                u.setNome(rs.getString("Nome"));
+                u.setEmail((String)key);
                 u.setPassword(rs.getString("Password"));
             }
-            String str = "Select * From Carro Where Utilizador_Email='"+(String)key+"'";
+            String str = "Select id From Carro Where Utilizador_Email='"+(String)key+"'";
             ResultSet res = stm.executeQuery(str);
             while(rs.next()){
                 String idCarro = res.getString("id");
@@ -150,7 +146,7 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
     public boolean containsKey(Object key){
         try{    
             Statement stm = conn.createStatement();
-            String sql = "SELECT * FROM Utilizador WHERE id='"+(String)key+"'";
+            String sql = "SELECT * FROM Utilizador WHERE Email='"+(String)key+"'";
             ResultSet rs = stm.executeQuery(sql);
             return rs.next();
         }
@@ -184,6 +180,9 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
     
+    /*
+    Talvez n seja necessario este metodo
+    */
     public void setCarroUser(String key, Cliente c){
         try {
             String email = c.getEmail();

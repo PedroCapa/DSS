@@ -14,7 +14,6 @@ import Exceptions.PecaJaExisteException;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.HashMap;
 import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
@@ -91,7 +90,7 @@ public class PecaDAO implements Map<String, Peca>{
             Statement stm = conn.createStatement();
             String sql = "DELETE FROM Peca Where Nome='"+chave+"'";
             int i = stm.executeUpdate(sql);
-            String str = "Delete From Peca_Peca Where idPeca1='"+chave+"'";
+            String str = "Delete From Peca_Peca Where idPeca1='"+chave+"' OR idPeca2='"+chave+"'";
             int j = stm.executeUpdate(str);
             return peca;
         }
@@ -100,10 +99,31 @@ public class PecaDAO implements Map<String, Peca>{
     
     @Override
     public Peca put(String key, Peca value) {
-        this.remove(key);
-        Peca peca = this.putPeca(key, value);
-        this.putPeca_Peca(value);
-        return peca;
+        try {
+            Statement stm = conn.createStatement();
+            String sql = "DELETE FROM Peca Where Nome='"+key+"'";
+            int i = stm.executeUpdate(sql);
+            String str = "Delete From Peca_Peca Where idPeca1='"+key+"'";
+            int j = stm.executeUpdate(str);
+            Peca peca = this.putPeca(key, value);
+            this.putPeca_Peca(value);
+            return peca;
+        } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
+    }
+    
+    public void putPeca_Peca(Peca value){
+        try {
+            String id1 = value.getNome();
+            Statement stm = conn.createStatement();
+            for(String str: value.getIncompativeis()){
+                String sql = "Insert Into Peca_Peca Values (0, '"+ id1 + "','" + str + "'";
+                int i = stm.executeUpdate(sql);
+            }
+            for(String s: value.getObrigatorias()){
+                String sql = "Insert Into Peca_Peca Values (1, '"+ id1 + "','" + s + "'";
+                int i = stm.executeUpdate(sql);
+            }
+        } catch (SQLException ex) {}
     }
     
     public Peca putPeca(String key, Peca value){
@@ -230,21 +250,6 @@ public class PecaDAO implements Map<String, Peca>{
                 pecas.add(id2);
             }
             p.setIncompativeis(pecas);
-        } catch (SQLException ex) {}
-    }
-    
-    public void putPeca_Peca(Peca value){
-        try {
-            String id1 = value.getNome();
-            Statement stm = conn.createStatement();
-            for(String str: value.getIncompativeis()){
-                String sql = "Insert Into Peca_Peca Values (0, '"+ id1 + "','" + str + "'";
-                int i = stm.executeUpdate(sql);
-            }
-            for(String s: value.getObrigatorias()){
-                String sql = "Insert Into Peca_Peca Values (1, '"+ id1 + "','" + s + "'";
-                int i = stm.executeUpdate(sql);
-            }
         } catch (SQLException ex) {}
     }
 }
