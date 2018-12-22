@@ -108,7 +108,7 @@ public class ConfirmaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-        Carro car = this.cf.comprarCarro(this.pecas, this.m, this.cf.calculaPreco(this.p, this.m, this.pecas));
+        Carro car = this.cf.comprarCarro(this.pecas, this.m, this.cf.calculaPreco(this.p, this.m, this.pecas), this.c);
         this.cf.insereCarroSistema(this.c, car);
         this.setVisible(false);
         this.dispose();

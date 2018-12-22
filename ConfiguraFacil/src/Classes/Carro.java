@@ -13,8 +13,9 @@ public class Carro {
     private float custo;
     private LocalDate data;
     private List<String> falta;
+    private String cliente;
     
-    public Carro(Modelo modelo, String id, int estado, List<String> pecas, float custo, LocalDate data, List<String> falta) {
+    public Carro(Modelo modelo, String id, int estado, List<String> pecas, float custo, LocalDate data, List<String> falta, String cliente) {
         this.modelo = modelo;
         this.pecas = new ArrayList<>();
         pecas.forEach((s) -> {
@@ -28,6 +29,7 @@ public class Carro {
         falta.forEach((s) -> {
             this.falta.add(s);
         });
+        this.cliente = cliente;
     }
 
     public Carro() {
@@ -48,6 +50,7 @@ public class Carro {
         this.custo = umCarro.getCusto();
         this.data = umCarro.getData();
         this.falta = umCarro.getFalta();
+        this.cliente = umCarro.getCliente();
     }
 
     public Modelo getModelo() {
@@ -105,6 +108,14 @@ public class Carro {
     public void setFalta(List<String> falta) {
        this.falta = new ArrayList<>(falta);
     }
+
+    public String getCliente() {
+        return cliente;
+    }
+
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
+    }
     
     @Override
     public Carro clone(){
@@ -126,8 +137,8 @@ public class Carro {
         }
         
         Carro other = (Carro) obj;
-        return (this.pecas.equals(other.getPecas())  && this.custo != other.getCusto() && this.id.equals(other.getId())
-                && this.estado == other.getEstado() && this.data.equals(other.getData()) 
+        return (this.pecas.equals(other.getPecas())  && this.custo == other.getCusto() && this.id.equals(other.getId())
+                && this.estado == other.getEstado() && this.data.equals(other.getData()) && this.cliente.equals(other.getCliente())
                 && this.falta.equals(other.getFalta()) && this.modelo.equals(other.getModelo()));
     }
 

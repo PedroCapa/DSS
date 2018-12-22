@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.Objects;
 import java.util.stream.*;
 import Exceptions.*;
+import java.time.LocalDate;
 
 public class ConfiguraFacil {
 
@@ -203,7 +204,7 @@ public class ConfiguraFacil {
         }
     }
     
-    public Carro comprarCarro(List<Peca> pecas, Modelo m, float preco){
+    public Carro comprarCarro(List<Peca> pecas, Modelo m, float preco, Cliente c){
         Carro car = new Carro();
         List<String> nomes = pecas.stream().map(p -> p.getNome()).collect(Collectors.toList());
         
@@ -223,6 +224,10 @@ public class ConfiguraFacil {
         if(car.getFalta().isEmpty())
             car.setEstado(1);
         else car.setEstado(0);
+        car.setId(c.getNome() + c.getCarros().size());
+        car.setCusto(preco);
+        car.setData(LocalDate.now());
+        car.setCliente(c.getEmail());
         return car;
     }
     

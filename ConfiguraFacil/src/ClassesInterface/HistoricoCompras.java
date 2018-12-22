@@ -139,7 +139,7 @@ public class HistoricoCompras extends javax.swing.JFrame {
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
         try{
             DefaultTableModel modelo = (DefaultTableModel)tabela.getModel();
-            int tam = this.cf.getCarrosComprados("email").size(); // Alterar para oo nome do cliente
+            int tam = this.cf.getCarrosComprados(c.getEmail()).size(); // Alterar para oo nome do cliente
             if(tam == 0){
                 modelo.addRow(new String[]{null, 
                                            null,
@@ -148,7 +148,7 @@ public class HistoricoCompras extends javax.swing.JFrame {
         }        
             else{
                 modelo.setRowCount(0);
-                List<Carro> lista = this.cf.getCarrosComprados("email");// alterar para o nome do cliente
+                List<Carro> lista = this.cf.getCarrosComprados(c.getEmail());// alterar para o nome do cliente
                 for(int i = 0; i < tam; i++){
                     Carro c = lista.get(i);
                     DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
