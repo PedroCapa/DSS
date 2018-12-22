@@ -33,6 +33,6 @@ public class Connect {
     public static void close(Connection connection) {
         try {
         connection.close();
-        } catch (Exception e) {}
+        } catch (SQLException e) {}
     } 
 }

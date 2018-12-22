@@ -5,17 +5,14 @@
  */
 package DAO;
 import Classes.Carro;
-import Classes.Peca;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
-import java.util.HashMap;
 import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.sql.*;
-import java.time.format.DateTimeFormatter;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -103,10 +100,11 @@ public class CarroDAO implements Map<String, Carro>{
             String m = value.getModelo().getNome();
             Statement stm = conn.createStatement();
             this.remove(key);
-            String sql = "INSERT INTO Carro (id, Estado, Data, Preco, Modelo_Nome) VALUES ";
+            String sql = "INSERT INTO Carro (id, Estado, Preco, Data, Modelo_Nome) VALUES ";
             sql += "('"+key+"',"+value.getEstado()+",";
             sql += value.getCusto()+", '"+date+"', '"+m+"')";
             int i  = stm.executeUpdate(sql);
+            this.putPecaCarro(key, value.getPecas(), value.getFalta());
             return new Carro(value);
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -138,13 +136,16 @@ public class CarroDAO implements Map<String, Carro>{
             if (rs.next()){
                 car = new Carro();
                 car.setId(rs.getString("id"));
-                car.setEstado(Integer.parseInt(rs.getString("Estado")));
-                car.setCusto(Float.valueOf("Custo"));
-                String date = rs.getDate("Data").toString();
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy/MM/dd");
-                LocalDate data = LocalDate.parse(date,formatter);
+                car.setEstado(rs.getInt("Estado"));
+                car.setCusto(rs.getFloat("Preco"));
+                String modeloNome = rs.getString("Modelo_Nome");
+                Object o = rs.getObject("Data");
+                String s = o.toString();
+                LocalDate data = LocalDate.parse(s);
                 car.setData(data);
                 this.getPecaCarro((String)key, car);
+                ModeloDAO m = new ModeloDAO();
+                m.getModeloCarro((String)key, car, modeloNome);
             }
             return car;
         }

@@ -148,8 +148,8 @@ insert into Peca_Peca
           (0, 'Couro Recaro Red'				, 'Couro Alcantara'					);
           
 insert into carro(id, Estado, Data, Preco, Modelo_Nome, Utilizador_Email)
-	VALUES('MustTMP' , 2, 21/12/2018, 35100, '302 Mustang', 'tmp1998@hotmail.com'),
-		  ('EdgeJFEG', 2, 10/10/2018, 62055, 'Edge'		  , 'jfeg1998@gmail.com' );
+	VALUES('MustTMP' , 2, '2018/12/21', 35100, '302 Mustang', 'tmp1998@hotmail.com'),
+		  ('EdgeJFEG', 2, '2018/10/10', 62055, 'Edge'		, 'jfeg1998@gmail.com' );
           
 insert into Peca_Carro
 	VALUES('MustTMP' , 1, 'Lynx'				   ),

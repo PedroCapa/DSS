@@ -72,6 +72,11 @@ public abstract class Utilizador{
         return (this.nome.equals(other.getNome()) && this.password.equals(other.getPassword()) 
                 && this.email.equals(other.getEmail()));
     }
+
+    @Override
+    public String toString() {
+        return "Utilizador{" + "nome=" + nome + ", email=" + email + ", password=" + password + '}';
+    }
     
     public boolean validaCredenciais(String email){
         boolean b;

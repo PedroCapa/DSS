@@ -18,9 +18,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 /**
  *
  * @author Luis
@@ -99,16 +96,10 @@ public class PecaDAO implements Map<String, Peca>{
     
     @Override
     public Peca put(String key, Peca value) {
-        try {
-            Statement stm = conn.createStatement();
-            String sql = "DELETE FROM Peca Where Nome='"+key+"'";
-            int i = stm.executeUpdate(sql);
-            String str = "Delete From Peca_Peca Where idPeca1='"+key+"'";
-            int j = stm.executeUpdate(str);
-            Peca peca = this.putPeca(key, value);
-            this.putPeca_Peca(value);
-            return peca;
-        } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
+        this.remove(key);
+        Peca peca = this.putPeca(key, value);
+        this.putPeca_Peca(value);
+        return peca;
     }
     
     public void putPeca_Peca(Peca value){
@@ -123,7 +114,7 @@ public class PecaDAO implements Map<String, Peca>{
                 String sql = "Insert Into Peca_Peca Values (1, '"+ id1 + "','" + s + "'";
                 int i = stm.executeUpdate(sql);
             }
-        } catch (SQLException ex) {}
+        } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
     
     public Peca putPeca(String key, Peca value){
@@ -136,7 +127,7 @@ public class PecaDAO implements Map<String, Peca>{
             else if(value instanceof Jantes){tipo = 3; p = new Jantes(value);}
             else if(value instanceof Estofos){tipo = 4; p = new Estofos(value);}
             else{tipo = 5; p = new Extras(value);}
-            String sql = "INSERT INTO Peca VALUES ('"+key+"',"+value.getQuantidade()+",";
+            String sql = "INSERT INTO Peca VALUES ("+value.getQuantidade()+",'"+key+"',";
             sql += +tipo+","+value.getPreco()+")";
             int i  = stm.executeUpdate(sql);
             return p;
@@ -167,28 +158,34 @@ public class PecaDAO implements Map<String, Peca>{
                 p.setQuantidade(rs.getInt("Quantidade"));
                 p.setPreco(rs.getFloat("Custo"));
             }
-            String str = "Select * From Peca Where idPeca1='"+(String)key+"'";
-            ResultSet res = stm.executeQuery(str);
-            while(rs.next()){
-                String idPeca = res.getString("idPeca2");
-                int type = res.getInt("Tipo");
-                if(type == 1){
-                    p.addObrigatoria(idPeca);
-                }
-                if(type == 0){
-                    p.addProibida(idPeca);
-                }
+            String str = "Select * From Peca_Peca Where idPeca1='"+(String)key+"' OR idPeca2='"+(String)key+"'";
+            Statement st = this.conn.createStatement();
+            ResultSet res = st.executeQuery(str);
+            List<String> obrig = new ArrayList<>();
+            List<String> proib = new ArrayList<>();
+            while(res.next()){
+                String idPeca2 = res.getString("idPeca2");
+                String idPeca1 = res.getString("idPeca1");
+                boolean type = res.getBoolean("Tipo");
+                if(type == true && idPeca1.equals((String)key)){obrig.add(idPeca2);}
+                else if(type == true && idPeca2.equals((String)key)){obrig.add(idPeca1);}
+                else if(type == false && idPeca1.equals((String)key)){proib.add(idPeca2);}
+                else {proib.add(idPeca1);}
+            }
+            if(p!=null){
+                p.setObrigatorias(obrig);
+                p.setIncompativeis(proib);
             }
             return p;
         }
-        catch (NumberFormatException | SQLException | PecaJaExisteException e) {throw new NullPointerException(e.getMessage());}
+        catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}
     }
     
     @Override
     public boolean containsKey(Object key){
         try{    
             Statement stm = conn.createStatement();
-            String sql = "SELECT * FROM Peca WHERE id='"+(String)key+"'";
+            String sql = "SELECT * FROM Peca WHERE Nome='"+(String)key+"'";
             ResultSet rs = stm.executeQuery(sql);
             return rs.next();
         }
@@ -204,7 +201,7 @@ public class PecaDAO implements Map<String, Peca>{
     public boolean isEmpty(){
         try {
             Statement stm = conn.createStatement();
-            String sql = "SELECT id FROM Peca";
+            String sql = "SELECT Nome FROM Peca";
             ResultSet rs = stm.executeQuery(sql);
             return rs.next();
         } catch (SQLException exc) {throw new NullPointerException(exc.getMessage());}
@@ -215,7 +212,7 @@ public class PecaDAO implements Map<String, Peca>{
         try {
             int i = 0;
             Statement stm = conn.createStatement();
-            ResultSet rs = stm.executeQuery("SELECT id FROM Peca");
+            ResultSet rs = stm.executeQuery("SELECT Nome FROM Peca");
             for (;rs.next();i++);
             return i;
         }

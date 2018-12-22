@@ -24,6 +24,7 @@ public class Carro {
         this.estado = estado;
         this.custo = custo;
         this.data = data;
+        this.falta = new ArrayList<>();
         falta.forEach((s) -> {
             this.falta.add(s);
         });
@@ -128,6 +129,11 @@ public class Carro {
         return (this.pecas.equals(other.getPecas())  && this.custo != other.getCusto() && this.id.equals(other.getId())
                 && this.estado == other.getEstado() && this.data.equals(other.getData()) 
                 && this.falta.equals(other.getFalta()) && this.modelo.equals(other.getModelo()));
+    }
+
+    @Override
+    public String toString() {
+        return "Carro{" + "modelo=" + modelo + ", id=" + id + ", estado=" + estado + ", pecas=" + pecas + ", custo=" + custo + ", data=" + data + ", falta=" + falta + '}';
     }
     
     public void carroPronto(){

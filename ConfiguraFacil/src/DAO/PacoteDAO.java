@@ -101,9 +101,7 @@ public class PacoteDAO implements Map<String, Pacote>{
     
     public void putPacote(String key, Pacote value){
         try {
-            Pacote p;
             Statement stm = conn.createStatement();
-            p = new Pacote(value);
             String sql = "INSERT INTO Pacote VALUES ('"+key+"',"+value.getDesconto()+")";
             int i  = stm.executeUpdate(sql);
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
@@ -113,7 +111,7 @@ public class PacoteDAO implements Map<String, Pacote>{
         try {
             Statement stm = conn.createStatement();
             for(String str: value.getPecas()){
-                String s = "Insert Peca_Pacote Values ('"+key+"',"+str+"')";
+                String s = "Insert Peca_Pacote Values ('"+key+"','"+str+"')";
                 stm.executeUpdate(s);
             }
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
@@ -127,6 +125,7 @@ public class PacoteDAO implements Map<String, Pacote>{
             String sql = "SELECT * FROM Pacote WHERE Nome='"+(String)key+"'";
             ResultSet rs = stm.executeQuery(sql);
             if (rs.next()){
+                p = new Pacote();
                 p.setNome((String)key);
                 p.setDesconto(rs.getFloat("Desconto"));
                 this.getPecasPacote(p);
@@ -142,11 +141,13 @@ public class PacoteDAO implements Map<String, Pacote>{
             Statement stm = conn.createStatement();
             String str = "Select * From Peca_Pacote Where Pacote_Nome='"+key+"'";
             ResultSet res = stm.executeQuery(str);
+            List<String> pecas = new ArrayList<>();
             while(res.next()){
                 String peca = res.getString("Peca_Nome");
-                p.addPeca(peca);
+                pecas.add(peca);
             }
-        } catch (SQLException ex) {}
+            p.setPecas(pecas);
+        } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
     
     @Override
@@ -189,7 +190,7 @@ public class PacoteDAO implements Map<String, Pacote>{
     
     public void getPacoteModelo(Modelo m){
         try {
-            List<Pacote> pacotes = new ArrayList<Pacote>();
+            List<Pacote> pacotes = new ArrayList<>();
             Statement stm = conn.createStatement();
             ResultSet rs = stm.executeQuery("SELECT Pacote_Nome FROM Pacote_Modelo Where Modelo_Nome='"+m.getNome()+"'");
             while(rs.next()){

@@ -74,4 +74,9 @@ public class Modelo {
         return (this.custoBase != other.getCustoBase() && this.nome.equals(other.getNome()) 
             && this.pacotes.equals(other.getPacotes()));
     }
+
+    @Override
+    public String toString() {
+        return "Modelo{" + "nome=" + nome + ", pacotes=" + pacotes + ", custoBase=" + custoBase + '}';
+    }
 }

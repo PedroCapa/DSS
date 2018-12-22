@@ -56,6 +56,11 @@ public class Cliente extends Utilizador{
         Cliente other = (Cliente) obj;
         return super.equals(other) && this.carros.equals(other.getCarros());
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "carros=" + carros + '}' + super.toString();
+    }
     
     public void addCarro(String s){
         this.carros.add(s);

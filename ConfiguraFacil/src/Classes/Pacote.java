@@ -74,6 +74,11 @@ public class Pacote {
         return (this.nome.equals(other.getNome()) && this.desconto == other.getDesconto() 
                 && this.pecas.equals(other.getPecas()));
     }
+
+    @Override
+    public String toString() {
+        return "Pacote{" + "nome=" + nome + ", desconto=" + desconto + ", pecas=" + pecas + '}';
+    }
     
     public void addPeca(String peca){
         this.pecas.add(peca);

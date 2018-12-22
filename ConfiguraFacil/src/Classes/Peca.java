@@ -80,6 +80,11 @@ public abstract class Peca {
     public int hashCode() {
         return Objects.hashCode(this.nome);
     }
+
+    @Override
+    public String toString() {
+        return "Peca{" + "quantidade=" + quantidade + ", nome=" + nome + ", preco=" + preco + ", obrigatorias=" + obrigatorias + ", incompativeis=" + incompativeis + '}';
+    }
         
     @Override
     public boolean equals(Object obj) {

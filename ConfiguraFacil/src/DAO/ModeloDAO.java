@@ -6,6 +6,7 @@
 package DAO;
 import Classes.Modelo;
 import Classes.Pacote;
+import Classes.Carro;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
@@ -110,7 +111,7 @@ public class ModeloDAO implements Map<String, Modelo>{
             Statement stm = conn.createStatement();
             for(Pacote p: value.getPacotes()){
                 String str = p.getNome();
-                String s = "Insert Pacote_Modelo Values ('"+key+"',"+str+"')";
+                String s = "Insert Pacote_Modelo Values ('"+key+"','"+str+"')";
                 stm.executeUpdate(s);
             }
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
@@ -124,11 +125,12 @@ public class ModeloDAO implements Map<String, Modelo>{
             String sql = "SELECT * FROM Modelo WHERE Nome='"+(String)key+"'";
             ResultSet rs = stm.executeQuery(sql);
             if (rs.next()){
+                m = new Modelo();
                 m.setNome((String)key);
-                m.setCustoBase(rs.getFloat("Desconto"));
+                m.setCustoBase(rs.getFloat("CustoBase"));
+                PacoteDAO p = new PacoteDAO();
+                p.getPacoteModelo(m);
             }
-            PacoteDAO p = new PacoteDAO();
-            p.getPacoteModelo(m);
             return m;
         }
         catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -170,5 +172,10 @@ public class ModeloDAO implements Map<String, Modelo>{
             return i;
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
+    }
+    
+    public void getModeloCarro(String key, Carro car, String nome){
+        Modelo m = this.get(nome);
+        car.setModelo(m);
     }
 }

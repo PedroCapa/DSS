@@ -106,7 +106,8 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
             }
             String sql = "INSERT INTO Utilizador VALUES ('"+value.getPassword()+"','"+key+"',";
             sql += +tipo+",'"+value.getNome()+"')";
-            int i  = stm.executeUpdate(sql);
+            Statement st = this.conn.createStatement();
+            int i  = st.executeUpdate(sql);
             return u;
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -131,8 +132,9 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
                 u.setPassword(rs.getString("Password"));
             }
             String str = "Select id From Carro Where Utilizador_Email='"+(String)key+"'";
-            ResultSet res = stm.executeQuery(str);
-            while(rs.next()){
+            Statement st = this.conn.createStatement();
+            ResultSet res = st.executeQuery(str);
+            while(res.next()){
                 String idCarro = res.getString("id");
                 Cliente c = (Cliente)u;
                 c.addCarro(idCarro);
