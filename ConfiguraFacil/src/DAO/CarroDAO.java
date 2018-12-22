@@ -100,9 +100,9 @@ public class CarroDAO implements Map<String, Carro>{
             String m = value.getModelo().getNome();
             Statement stm = conn.createStatement();
             this.remove(key);
-            String sql = "INSERT INTO Carro (id, Estado, Preco, Data, Modelo_Nome) VALUES ";
+            String sql = "INSERT INTO Carro (id, Estado, Preco, Data, Modelo_Nome, Utilizador_Email) VALUES ";
             sql += "('"+key+"',"+value.getEstado()+",";
-            sql += value.getCusto()+", '"+date+"', '"+m+"')";
+            sql += value.getCusto()+", '"+date+"', '"+m+"','"+value.getCliente()+"')";
             int i  = stm.executeUpdate(sql);
             this.putPecaCarro(key, value.getPecas(), value.getFalta());
             return new Carro(value);
@@ -139,10 +139,12 @@ public class CarroDAO implements Map<String, Carro>{
                 car.setEstado(rs.getInt("Estado"));
                 car.setCusto(rs.getFloat("Preco"));
                 String modeloNome = rs.getString("Modelo_Nome");
+                String clienteEmail = rs.getString("Utilizador_Email");
                 Object o = rs.getObject("Data");
                 String s = o.toString();
                 LocalDate data = LocalDate.parse(s);
                 car.setData(data);
+                car.setCliente(clienteEmail);
                 this.getPecaCarro((String)key, car);
                 ModeloDAO m = new ModeloDAO();
                 m.getModeloCarro((String)key, car, modeloNome);

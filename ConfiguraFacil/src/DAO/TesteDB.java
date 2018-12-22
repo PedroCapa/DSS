@@ -22,7 +22,7 @@ public class TesteDB {
         falta.add("Branco");
         falta.add("Ferro");
         falta.add("Couro Recaro Red");
-        Carro car = new Carro(m, "fhalkfsh", 0, new ArrayList<>(), 25000, LocalDate.now(), falta);
+        Carro car = new Carro(m, "fhalkfsh", 0, new ArrayList<>(), 25000, LocalDate.now(), falta, "tmp1998@hotmail.com");
         c.put(car.getId(), car);
         Collection<Carro> carros = c.values();
         for(Carro carro: carros) System.out.println(carro);
