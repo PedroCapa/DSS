@@ -67,6 +67,7 @@ public class CarroDAO implements Map<String, Carro>{
     public void clear(){
         try {
             Statement stm = conn.createStatement();
+            stm.executeUpdate("Delete From Peca_Carro");
             stm.executeUpdate("DELETE FROM Carro");
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -82,11 +83,12 @@ public class CarroDAO implements Map<String, Carro>{
         try {
             String chave = (String)key;
             Carro car = this.get(chave);
+            String s = "Delete From Peca_Carro Where Carro_id='"+chave+"'";
+            Statement st = this.conn.createStatement();
+            int j = st.executeUpdate(s);
             Statement stm = conn.createStatement();
             String sql = "DELETE FROM Carro Where id='"+chave+"'";
             int i  = stm.executeUpdate(sql);
-            String s = "Delete From Peca_Carro Where Carro_id='"+chave+"'";
-            int j = stm.executeUpdate(s);
             return car;
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -99,7 +101,6 @@ public class CarroDAO implements Map<String, Carro>{
             Date date = java.sql.Date.valueOf(data);
             String m = value.getModelo().getNome();
             Statement stm = conn.createStatement();
-            this.remove(key);
             String sql = "INSERT INTO Carro (id, Estado, Preco, Data, Modelo_Nome, Utilizador_Email) VALUES ";
             sql += "('"+key+"',"+value.getEstado()+",";
             sql += value.getCusto()+", '"+date+"', '"+m+"','"+value.getCliente()+"')";
@@ -206,5 +207,19 @@ public class CarroDAO implements Map<String, Carro>{
             return i;
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
+    }
+    
+    public void update(Carro car){
+        try {
+            String id = car.getId();
+            int estado = car.getEstado();
+            String sql = "Update Carro Set Estado="+estado+" Where id='"+id+"'";
+            Statement stm = conn.createStatement();
+            int i = stm.executeUpdate(sql);
+            for(String str: car.getPecas()){
+                String s = "Update Peca_Carro Set Colocada=1 Where Carro_id='"+id+"' AND Peca_Nome='"+str+"'";
+                int j = stm.executeUpdate(s);
+            }
+        } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
 }

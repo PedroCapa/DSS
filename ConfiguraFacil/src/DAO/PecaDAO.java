@@ -10,7 +10,6 @@ import Classes.Estofos;
 import Classes.Motor;
 import Classes.Jantes;
 import Classes.Extras;
-import Exceptions.PecaJaExisteException;
 import java.util.Map;
 import java.util.Set;
 import java.util.HashSet;
@@ -70,6 +69,9 @@ public class PecaDAO implements Map<String, Peca>{
     public void clear(){
         try {
             Statement stm = conn.createStatement();
+            stm.executeUpdate("Delete From Peca_Peca");
+            stm.executeUpdate("Delete From Peca_Carro");
+            stm.executeUpdate("Delete From Peca_Pacote");
             stm.executeUpdate("DELETE FROM Peca");
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -85,10 +87,14 @@ public class PecaDAO implements Map<String, Peca>{
             String chave = (String)key;
             Peca peca = this.get(chave);
             Statement stm = conn.createStatement();
-            String sql = "DELETE FROM Peca Where Nome='"+chave+"'";
-            int i = stm.executeUpdate(sql);
-            String str = "Delete From Peca_Peca Where idPeca1='"+chave+"' OR idPeca2='"+chave+"'";
-            int j = stm.executeUpdate(str);
+            String s1 = "Delete From Peca_Peca Where idPeca1='"+chave+"' OR idPeca2='"+chave+"'";
+            int j = stm.executeUpdate(s1);
+            String s2 = "DELETE FROM Peca_Carro Where Peca_Nome='"+chave+"'";
+            int k = stm.executeUpdate(s2);
+            String s3 = "DELETE FROM Peca_Pacote Where Peca_Nome='"+chave+"'";
+            int l = stm.executeUpdate(s3);
+            String s4 = "DELETE FROM Peca Where Nome='"+chave+"'";
+            int i = stm.executeUpdate(s4);
             return peca;
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -96,7 +102,6 @@ public class PecaDAO implements Map<String, Peca>{
     
     @Override
     public Peca put(String key, Peca value) {
-        this.remove(key);
         Peca peca = this.putPeca(key, value);
         this.putPeca_Peca(value);
         return peca;
@@ -107,11 +112,11 @@ public class PecaDAO implements Map<String, Peca>{
             String id1 = value.getNome();
             Statement stm = conn.createStatement();
             for(String str: value.getIncompativeis()){
-                String sql = "Insert Into Peca_Peca Values (0, '"+ id1 + "','" + str + "'";
+                String sql = "Insert Into Peca_Peca Values (0, '"+ id1 + "','" + str + "')";
                 int i = stm.executeUpdate(sql);
             }
             for(String s: value.getObrigatorias()){
-                String sql = "Insert Into Peca_Peca Values (1, '"+ id1 + "','" + s + "'";
+                String sql = "Insert Into Peca_Peca Values (1, '"+ id1 + "','" + s + "')";
                 int i = stm.executeUpdate(sql);
             }
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
@@ -219,34 +224,13 @@ public class PecaDAO implements Map<String, Peca>{
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
     
-    public void insereProibidas(Peca p){
-        try{
-            String nome = p.getNome();
-            Statement st = conn.createStatement();
-            String sql = "Select idPeca1 From Peca_Peca Where idPeca1 = '" + nome + "' AND Tipo = 0";
-            ResultSet res = st.executeQuery(sql);
-            List<String> pecas = new ArrayList<>();
-            while(res.next()){
-                String id2 = res.getString("idPeca2");
-                pecas.add(id2);
-            }
-            p.setIncompativeis(pecas);
-        } catch (SQLException ex) {}
-    }
-    
-    public void insereObrigatorias(Peca p){
-        
-        try{
-            String nome = p.getNome();
-            Statement st = conn.createStatement();
-            String sql = "Select idPeca2 From Peca_Peca Where idPeca1 = '" + nome + "' AND Tipo = 1";
-            ResultSet res = st.executeQuery(sql);
-            List<String> pecas = new ArrayList<>();
-            while(res.next()){
-                String id2 = res.getString("idPeca2");
-                pecas.add(id2);
-            }
-            p.setIncompativeis(pecas);
-        } catch (SQLException ex) {}
+    public void update(Peca p){
+        try {
+            String s = p.getNome();
+            int quantidade = p.getQuantidade();
+            String sql = "Update Peca Set Quantidade="+quantidade+" Where Nome='"+s+"'";
+            Statement stm = conn.createStatement();
+            int i = stm.executeUpdate(sql);
+        } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
 }

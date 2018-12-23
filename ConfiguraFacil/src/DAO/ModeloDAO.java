@@ -64,6 +64,9 @@ public class ModeloDAO implements Map<String, Modelo>{
     public void clear(){
         try {
             Statement stm = conn.createStatement();
+            stm.executeUpdate("Delete From Pacote_Modelo");
+            stm.executeUpdate("Delete From Peca_Carro");
+            stm.executeUpdate("Delete From Carro");
             stm.executeUpdate("DELETE FROM Modelo");
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -80,10 +83,10 @@ public class ModeloDAO implements Map<String, Modelo>{
             String chave = (String)key;
             Modelo m = this.get(chave);
             Statement stm = conn.createStatement();
+            String s1 = "Delete From Pacote_Modelo Where Modelo_Nome='"+chave+"'";
+            int j = stm.executeUpdate(s1);
             String sql = "DELETE FROM Modelo Where Nome='"+chave+"'";
             int i  = stm.executeUpdate(sql);
-            String s = "Delete From Pacote_Modelo Where Modelo_Nome='"+chave+"'";
-            int j = stm.executeUpdate(s);
             return m;
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -92,7 +95,6 @@ public class ModeloDAO implements Map<String, Modelo>{
     @Override
     public Modelo put(String key, Modelo value) {
         Modelo m = new Modelo(value);
-        this.remove(key);
         this.putModelo(key, value);
         this.putPacoteModelo(key, value);
         return m;

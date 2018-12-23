@@ -65,6 +65,8 @@ public class PacoteDAO implements Map<String, Pacote>{
     public void clear(){
         try {
             Statement stm = conn.createStatement();
+            stm.executeUpdate("Delete From Peca_Pacote");
+            stm.executeUpdate("Delete From Pacote_Modelo");
             stm.executeUpdate("DELETE FROM Pacote");
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -81,10 +83,12 @@ public class PacoteDAO implements Map<String, Pacote>{
             String chave = (String)key;
             Pacote p = this.get(chave);
             Statement stm = conn.createStatement();
-            String sql = "DELETE FROM Pacote Where Nome='"+chave+"'";
-            int i  = stm.executeUpdate(sql);
             String s = "Delete From Peca_Pacote Where Pacote_Nome='"+chave+"'";
             int j = stm.executeUpdate(s);
+            String str = "DELETE FROM Pacote_Modelo Where Pacote_Nome='"+chave+"'";
+            int k = stm.executeUpdate(str);
+            String sql = "DELETE FROM Pacote Where Nome='"+chave+"'";
+            int i  = stm.executeUpdate(sql);
             return p;
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -93,7 +97,6 @@ public class PacoteDAO implements Map<String, Pacote>{
     @Override
     public Pacote put(String key, Pacote value) {
         Pacote p = new Pacote(value);
-        this.remove(key);
         this.putPacote(key, value);
         this.putPecaPacote(key, value);
         return p;

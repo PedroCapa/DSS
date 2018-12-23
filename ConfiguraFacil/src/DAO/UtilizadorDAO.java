@@ -64,6 +64,8 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
     public void clear(){
         try {
             Statement stm = conn.createStatement();
+            stm.executeUpdate("Delete From Peca_Carro");
+            stm.executeUpdate("Delete From Carro");
             stm.executeUpdate("DELETE FROM Utilizador");
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
@@ -92,8 +94,6 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         try {
             int tipo;
             Utilizador u;
-            Statement stm = conn.createStatement();
-            stm.executeUpdate("DELETE FROM Utilizador WHERE Email='"+key+"'");
             if(value instanceof Funcionario){
                 tipo = 0;
                 Funcionario user = (Funcionario)value;
