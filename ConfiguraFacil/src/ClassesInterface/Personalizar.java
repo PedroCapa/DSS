@@ -6,6 +6,7 @@
 package ClassesInterface;
 
 import Classes.*;
+import Exceptions.*;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -314,7 +315,7 @@ public class Personalizar extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private List<String> validaDados() {
+    private List<String> validaDados() throws PecaNaoExisteException, FaltamEscolherPecasException{
         List<String> pecas = new ArrayList<>();
         for(Enumeration<AbstractButton> buttons = Cor.getElements(); buttons.hasMoreElements();){
             AbstractButton button = buttons.nextElement();
@@ -341,7 +342,7 @@ public class Personalizar extends javax.swing.JFrame {
             }
         }
         if (pecas.size() < 4)
-            javax.swing.JOptionPane.showMessageDialog(this, "Campos por preencher", "Dados incorretos", 0);
+           throw new FaltamEscolherPecasException();
         if (this.escape.isSelected())
             pecas.add(this.escape.getText());
         if (this.climatizacao.isSelected())
@@ -367,9 +368,17 @@ public class Personalizar extends javax.swing.JFrame {
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-        ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, new Pacote(),this.cf.stringToPeca(validaDados()));
-        cc.setVisible(true);
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        try{
+            ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, new Pacote(),this.cf.stringToPeca(validaDados()));
+            cc.setVisible(true);
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+        catch(FaltamEscolherPecasException  e){
+            javax.swing.JOptionPane.showMessageDialog(this, "Campos por preencher", "Dados incorretos", 0);
+        }
+        catch(PecaNaoExisteException e){
+             javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
+        }
     }//GEN-LAST:event_ConfirmarActionPerformed
 
     private void escapeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_escapeActionPerformed

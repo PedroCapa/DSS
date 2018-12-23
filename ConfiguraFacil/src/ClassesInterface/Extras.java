@@ -6,6 +6,7 @@
 package ClassesInterface;
 
 import Classes.*;
+import Exceptions.PecaNaoExisteException;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.List;
@@ -160,9 +161,14 @@ public class Extras extends javax.swing.JFrame {
     }
         
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-        ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, this.p, this.cf.stringToPeca(validaDados()));
-        cc.setVisible(true);
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        try{
+            ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, this.p, this.cf.stringToPeca(validaDados()));
+            cc.setVisible(true);
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+        catch(PecaNaoExisteException e){
+             javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
+        }
     }//GEN-LAST:event_ConfirmarActionPerformed
 
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed

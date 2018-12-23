@@ -197,7 +197,7 @@ public class ConfiguraFacil {
         if(n == 0){
             for(int i = 0; i < this.producao.size() && p.getQuantidade() > 0; i++){
                 Carro c = producao.get(i);
-                flag = c.remove(nome);
+                flag = c.pecaEmFalta(nome);
                 if(flag)
                     p.reduzStock();
             }       
@@ -262,10 +262,13 @@ public class ConfiguraFacil {
         c.addCarro(id);
     }
     
-    public List<Peca> stringToPeca(List<String> sPecas){
+    public List<Peca> stringToPeca(List<String> sPecas) throws PecaNaoExisteException{
         List<Peca> pecas = new ArrayList<>();
-        for(String s: sPecas)
+        for(String s: sPecas){
+           // if(!this.pecas.containsKey(s))
+            //    throw new PecaNaoExisteException("Peca " + s + " nao existe");
             pecas.add(this.pecas.get(s));
+        }
         return pecas;
     }
 }

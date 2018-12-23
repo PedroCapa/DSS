@@ -6,7 +6,9 @@
 package ClassesInterface;
 
 import Classes.*;
+import java.awt.Font;
 import java.util.List;
+import javax.swing.JTextArea;
 
 /**
  *
@@ -42,16 +44,17 @@ public class ConfirmaCompra extends javax.swing.JFrame {
     private void initComponents() {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        texto = new javax.swing.JTextArea();
         Confirmar = new javax.swing.JButton();
         Voltar = new javax.swing.JButton();
+        dados = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jTextArea1.setColumns(20);
-        jTextArea1.setRows(5);
-        jTextArea1.setText("Escolheu o Model T com:\n.\n.\n.");
-        jScrollPane1.setViewportView(jTextArea1);
+        texto.setColumns(20);
+        texto.setRows(5);
+        texto.setText("Escolheu o Model T com:\n.\n.\n.");
+        jScrollPane1.setViewportView(texto);
 
         Confirmar.setText("Confirmar Compra");
         Confirmar.setToolTipText("Confirmar Compra");
@@ -69,23 +72,34 @@ public class ConfirmaCompra extends javax.swing.JFrame {
             }
         });
 
+        dados.setText("Ver dados carro");
+        dados.setToolTipText("Ver os dados que escolheu para comprar o carro");
+        dados.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dadosActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGap(0, 136, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
                         .addComponent(Voltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dados)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Confirmar)))
                 .addContainerGap())
         );
 
-        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Confirmar, Voltar});
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Confirmar, Voltar, dados});
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -95,7 +109,8 @@ public class ConfirmaCompra extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Confirmar)
-                    .addComponent(Voltar))
+                    .addComponent(Voltar)
+                    .addComponent(dados))
                 .addContainerGap())
         );
 
@@ -113,6 +128,10 @@ public class ConfirmaCompra extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_ConfirmarActionPerformed
+
+    private void dadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadosActionPerformed
+        
+    }//GEN-LAST:event_dadosActionPerformed
 
     /**
      * @param args the command line arguments
@@ -152,7 +171,8 @@ public class ConfirmaCompra extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Confirmar;
     private javax.swing.JButton Voltar;
+    private javax.swing.JButton dados;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextArea texto;
     // End of variables declaration//GEN-END:variables
 }

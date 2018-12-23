@@ -151,7 +151,7 @@ public class Carro {
         this.estado = 2;
     }
     
-    public boolean remove(String nome){
+    public boolean pecaEmFalta(String nome){
         boolean flag;
         if(flag = this.falta.contains(nome)){
            this.falta.remove(nome);
