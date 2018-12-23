@@ -146,7 +146,7 @@ public class ConfiguraFacil {
         if(!carros.containsKey(id))
             throw new CarroNaoExisteException("Carro não existe no sistema");
         Carro c = carros.get(id);
-        if(this.producao.contains(c))
+        if(this.producao.contains(c) && c.getEstado() == 1)
             throw new NaoExisteCarroEmProducaoException("Nao existe carro em producao com o id " + id);
         this.producao.remove(c);
         c.carroPronto();
@@ -245,11 +245,7 @@ public class ConfiguraFacil {
         for(Peca peca: pecas)
             preco = preco + peca.getPreco();
         
-        boolean flag = true;
-        for(String s: p.getPecas())
-            if(!pecas.contains(this.pecas.get(s)))
-                flag = false;
-        if(flag)
+        if(p != null)
             preco = preco - preco*p.getDesconto();
         return preco;
     }
