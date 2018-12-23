@@ -14,6 +14,7 @@ public class Cliente extends Utilizador{
     
     public Cliente(String nome, String password, String email){
         super(nome, password, email);
+        this.carros = new ArrayList<>();
     }
     
     public Cliente() {

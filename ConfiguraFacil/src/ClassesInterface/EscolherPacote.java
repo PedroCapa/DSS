@@ -54,7 +54,12 @@ public class EscolherPacote extends javax.swing.JFrame {
         jRadioButton1.setText("Desportivo");
 
         pacotes.add(jRadioButton2);
-        jRadioButton2.setText("Classico");
+        jRadioButton2.setText("Clássico");
+        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton2ActionPerformed(evt);
+            }
+        });
 
         pacotes.add(jRadioButton4);
         jRadioButton4.setText("Eco");
@@ -151,6 +156,10 @@ public class EscolherPacote extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_VoltarActionPerformed
+
+    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton2ActionPerformed
 
     /**
      * @param args the command line arguments

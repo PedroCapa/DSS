@@ -140,8 +140,8 @@ public class StockDisponivel extends javax.swing.JFrame {
             for(int i = 0; i < tam; i++){
                 Peca p = lista.get(i);
                 pecas.addRow(new String[]{p.getNome(),Integer.toString(p.getQuantidade())});
-                this.tabela.setModel(pecas);
             }
+            this.tabela.setModel(pecas);
         }
         catch(UtilizadorNaoExisteException e){
                 javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
