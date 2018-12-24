@@ -222,4 +222,10 @@ public class CarroDAO implements Map<String, Carro>{
             }
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
+    
+    public void updateAll(List<Carro> carros){
+        for(Carro c: carros){
+            this.update(c);
+        }
+    }
 }
