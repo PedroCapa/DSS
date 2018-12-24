@@ -240,16 +240,20 @@ public class ConfiguraFacil {
         return preco;
     }
     
+    public float precoPacote(Pacote p){
+        float f = 0;
+        for(Peca peca:stringToPeca(p.getPecas()))
+            f = f + peca.getPreco();
+        return f;
+    }
+    
     public float calculaPreco(Pacote p, Modelo m, List<Peca> pecas) throws PecaNaoExisteException{
         float preco = m.getCustoBase();
         for(Peca peca: pecas)
             preco = preco + peca.getPreco();
         
         if(p != null){
-            for(Peca peca: stringToPeca(p.getPecas())){
-                preco = preco + peca.getPreco();
-            }
-            preco = preco - preco*p.getDesconto();
+            preco = (preco + precoPacote(p))* (1 - p.getDesconto());
         }
         return preco;
     }
@@ -262,13 +266,94 @@ public class ConfiguraFacil {
         c.addCarro(id);
     }
     
-    public List<Peca> stringToPeca(List<String> sPecas) throws PecaNaoExisteException{
-        List<Peca> pecas = new ArrayList<>();
+    public List<Peca> stringToPeca(List<String> sPecas)/* throws PecaNaoExisteException*/{
+        List<Peca> p = new ArrayList<>();
         for(String s: sPecas){
-            if(!this.pecas.containsKey(s))
-                throw new PecaNaoExisteException("Peca " + s + " nao existe");
-            pecas.add(this.pecas.get(s));
+            //if(!this.pecas.containsKey(s))
+               // throw new PecaNaoExisteException("Peca " + s + " nao existe");
+            p.add(this.pecas.get(s));
         }
-        return pecas;
+        return p;
+    }
+    
+    public boolean estaDentro(Modelo m, float preco){
+        boolean b = false;
+        for(Pacote p: m.getPacotes()){
+            float valor = 0;
+            for(Peca peca: stringToPeca(p.getPecas())){
+                valor = valor + peca.getPreco();
+            }
+            if(preco > (valor + m.getCustoBase())*(1 - p.getDesconto()))
+                b = true;
+        }
+        return b;
+    }
+    
+    public Pacote melhorPacote(Modelo m){
+        float f = 0;
+        Pacote melhor = new Pacote();
+        for(Pacote p: m.getPacotes())
+            if(precoPacote(p) > f)
+                melhor = p;
+        return melhor;
+    }
+    
+    public boolean acrescentaPeca(float preco){
+        boolean b = false;
+        List<Peca> componentes = this.pecas.values().stream().map(pe -> pe).collect(Collectors.toList());
+        for(Peca peca: componentes){
+            if(peca instanceof Extras && peca.getPreco() < preco)
+                b = true;
+        }
+        return b;
+    }
+    
+    public List<Peca> getExtras(){
+        return this.pecas.values().stream().filter(p -> p instanceof Extras).collect(Collectors.toList());
+    }
+    
+    public Peca getPecaMaisCara(List<Peca> extras){
+        Peca p = extras.get(0);
+        for(Peca peca: extras){
+            if(peca.getPreco()> p.getPreco())
+                p = peca;
+        }
+        return p;
+    }
+    
+    public float getPrecoObrigatorias(List<Peca> pecas){
+        float f = 0;
+        for(Peca p: pecas){
+            f = f + p.getPreco();
+        }
+        return f;
+    }    
+    
+    public List<Peca> componentesExtra(float preco){
+        List<Peca> p = new ArrayList<>();
+        List<Peca> extras = getExtras().stream().filter(peca -> peca.getPreco() < preco).collect(Collectors.toList());
+        while(extras.size() > 0){
+            Peca cara = getPecaMaisCara(extras);
+            List<Peca> obrigatorias = stringToPeca(cara.getObrigatorias());
+            if(getPrecoObrigatorias(obrigatorias) + cara.getPreco() <= preco){
+                p.add(cara);
+                p.addAll(obrigatorias);
+            }
+            extras.remove(cara);
+        }
+        return p;
+    }
+    
+    public List<Peca> configuracaoOtima(Modelo m, float preco) throws CustoDemasiadoBaixoException{
+        List<Peca> p = new ArrayList<>();
+        if(m.getCustoBase() > preco)
+            throw new CustoDemasiadoBaixoException("O preco esta abaixo do custo do modelo");
+        if(!estaDentro(m, preco)){
+            throw new CustoDemasiadoBaixoException("O preco esta abaixo do valor das pecas");
+        }
+        Pacote pacote = melhorPacote(m);
+        p = componentesExtra(preco - (precoPacote(pacote) + m.getCustoBase())*(1 - pacote.getDesconto()));
+        p.addAll(stringToPeca(pacote.getPecas()));
+        return p;
     }
 }

@@ -166,33 +166,28 @@ public class ConfirmaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_ConfirmarActionPerformed
 
     private void dadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadosActionPerformed
-        try{
-            DefaultTableModel tabPeca = (DefaultTableModel)pecasEsc.getModel();
-            int tam = this.pecas.size();
-            if(tam == 0){
-                tabPeca.addRow(new String[]{null});
+        DefaultTableModel tabPeca = (DefaultTableModel)pecasEsc.getModel();
+        int tam = this.pecas.size();
+        if(tam == 0){
+            tabPeca.addRow(new String[]{null});
+        }
+        else{
+            tabPeca.setRowCount(0);
+            for(int i = 0; i < tam; i++){
+                Peca p = this.pecas.get(i);
+                tabPeca.addRow(new String[]{p.getNome()});
             }
-            else{
-                tabPeca.setRowCount(0);
-                for(int i = 0; i < tam; i++){
-                    Peca p = this.pecas.get(i);
+            if(p!= null)
+                for(Peca p: this.cf.stringToPeca(this.p.getPecas())){
                     tabPeca.addRow(new String[]{p.getNome()});
-                }
-                if(p!= null)
-                    for(Peca p: this.cf.stringToPeca(this.p.getPecas())){
-                        tabPeca.addRow(new String[]{p.getNome()});
-                }
-                this.pecasEsc.setModel(tabPeca);
             }
+            this.pecasEsc.setModel(tabPeca);
+        }
         
-            DefaultTableModel modelo = (DefaultTableModel)pecasEsc.getModel();
-            modelo.setRowCount(0);
-            modelo.addRow(new String[]{p.getNome()});
-            this.modeloEsc.setModel(modelo);
-        }
-        catch(PecaNaoExisteException e){
-            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
-        }
+        DefaultTableModel modelo = (DefaultTableModel)pecasEsc.getModel();
+        modelo.setRowCount(0);
+        modelo.addRow(new String[]{p.getNome()});
+        this.modeloEsc.setModel(modelo);
     }//GEN-LAST:event_dadosActionPerformed
 
     /**
