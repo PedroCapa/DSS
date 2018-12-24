@@ -120,6 +120,8 @@ public class CarroPronto extends javax.swing.JFrame {
         try{
             if(validaDados())
                 cf.carroPronto(this.id.getText());
+            this.setVisible(false);
+            this.dispose();
         }
         catch(CarroNaoExisteException | NaoExisteCarroEmProducaoException e){
             javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
@@ -127,8 +129,7 @@ public class CarroPronto extends javax.swing.JFrame {
     }//GEN-LAST:event_ConfirmarActionPerformed
 
     private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
-        this.setVisible(false);
-        this.dispose();
+        
     }//GEN-LAST:event_idActionPerformed
 
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed

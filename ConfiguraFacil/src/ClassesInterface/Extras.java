@@ -159,7 +159,7 @@ public class Extras extends javax.swing.JFrame {
             pecas.add(this.vidrosEscuros.getText());
         return pecas;
     }
-        
+
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
             ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, this.p, this.cf.stringToPeca(validaDados()));

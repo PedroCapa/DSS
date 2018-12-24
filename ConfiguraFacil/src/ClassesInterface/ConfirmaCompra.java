@@ -6,9 +6,13 @@
 package ClassesInterface;
 
 import Classes.*;
+import Exceptions.PecaNaoExisteException;
+import Exceptions.UtilizadorNaoExisteException;
 import java.awt.Font;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import javax.swing.JTextArea;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -43,18 +47,15 @@ public class ConfirmaCompra extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jScrollPane1 = new javax.swing.JScrollPane();
-        texto = new javax.swing.JTextArea();
         Confirmar = new javax.swing.JButton();
         Voltar = new javax.swing.JButton();
         dados = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        pecasEsc = new javax.swing.JTable();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        modeloEsc = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        texto.setColumns(20);
-        texto.setRows(5);
-        texto.setText("Escolheu o Model T com:\n.\n.\n.");
-        jScrollPane1.setViewportView(texto);
 
         Confirmar.setText("Confirmar Compra");
         Confirmar.setToolTipText("Confirmar Compra");
@@ -80,21 +81,49 @@ public class ConfirmaCompra extends javax.swing.JFrame {
             }
         });
 
+        pecasEsc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null},
+                {null},
+                {null},
+                {null}
+            },
+            new String [] {
+                "Peca"
+            }
+        ));
+        jScrollPane2.setViewportView(pecasEsc);
+
+        modeloEsc.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null},
+                {null, null},
+                {null, null},
+                {null, null}
+            },
+            new String [] {
+                "Modelo", "Preco"
+            }
+        ));
+        jScrollPane1.setViewportView(modeloEsc);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(36, 36, 36)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 289, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGap(0, 149, Short.MAX_VALUE)
                         .addComponent(Voltar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(dados)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(Confirmar)))
                 .addContainerGap())
         );
@@ -103,10 +132,12 @@ public class ConfirmaCompra extends javax.swing.JFrame {
 
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 130, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(64, 64, 64)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(Confirmar)
                     .addComponent(Voltar)
@@ -123,14 +154,45 @@ public class ConfirmaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-        Carro car = this.cf.comprarCarro(this.pecas, this.m, this.cf.calculaPreco(this.p, this.m, this.pecas), this.c);
-        this.cf.insereCarroSistema(this.c, car);
-        this.setVisible(false);
-        this.dispose();
+        try{
+            Carro car = this.cf.comprarCarro(this.pecas, this.m, this.cf.calculaPreco(this.p, this.m, this.pecas), this.c);
+            this.cf.insereCarroSistema(this.c, car);
+            this.setVisible(false);
+            this.dispose();
+        }
+        catch(PecaNaoExisteException e){
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
+        }
     }//GEN-LAST:event_ConfirmarActionPerformed
 
     private void dadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadosActionPerformed
+        try{
+            DefaultTableModel tabPeca = (DefaultTableModel)pecasEsc.getModel();
+            int tam = this.pecas.size();
+            if(tam == 0){
+                tabPeca.addRow(new String[]{null});
+            }
+            else{
+                tabPeca.setRowCount(0);
+                for(int i = 0; i < tam; i++){
+                    Peca p = this.pecas.get(i);
+                    tabPeca.addRow(new String[]{p.getNome()});
+                }
+                if(p!= null)
+                    for(Peca p: this.cf.stringToPeca(this.p.getPecas())){
+                        tabPeca.addRow(new String[]{p.getNome()});
+                }
+                this.pecasEsc.setModel(tabPeca);
+            }
         
+            DefaultTableModel modelo = (DefaultTableModel)pecasEsc.getModel();
+            modelo.setRowCount(0);
+            modelo.addRow(new String[]{p.getNome()});
+            this.modeloEsc.setModel(modelo);
+        }
+        catch(PecaNaoExisteException e){
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
+        }
     }//GEN-LAST:event_dadosActionPerformed
 
     /**
@@ -173,6 +235,8 @@ public class ConfirmaCompra extends javax.swing.JFrame {
     private javax.swing.JButton Voltar;
     private javax.swing.JButton dados;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea texto;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable modeloEsc;
+    private javax.swing.JTable pecasEsc;
     // End of variables declaration//GEN-END:variables
 }

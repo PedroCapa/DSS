@@ -132,20 +132,15 @@ public class StockDisponivel extends javax.swing.JFrame {
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
-        try{
-            DefaultTableModel pecas = (DefaultTableModel)tabela.getModel();
-            int tam = this.cf.getCarrosComprados("email").size();
-            pecas.setRowCount(0);
-            List<Peca> lista = this.cf.getPecas().values().stream().map(p -> p).collect(Collectors.toList());
-            for(int i = 0; i < tam; i++){
-                Peca p = lista.get(i);
-                pecas.addRow(new String[]{p.getNome(),Integer.toString(p.getQuantidade())});
-            }
-            this.tabela.setModel(pecas);
+        DefaultTableModel pecas = (DefaultTableModel)tabela.getModel();
+        int tam = this.cf.getPecas().size();
+        pecas.setRowCount(0);
+        List<Peca> lista = this.cf.getPecas().values().stream().map(p -> p).collect(Collectors.toList());
+        for(int i = 0; i < tam; i++){
+            Peca p = lista.get(i);
+            pecas.addRow(new String[]{p.getNome(),Integer.toString(p.getQuantidade())});
         }
-        catch(UtilizadorNaoExisteException e){
-                javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
-            }
+        this.tabela.setModel(pecas);
     }//GEN-LAST:event_mostrarActionPerformed
 
     /**

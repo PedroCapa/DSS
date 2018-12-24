@@ -123,7 +123,6 @@ public class AdicionaStock extends javax.swing.JFrame {
         boolean vazio = (this.id.getText().equals(""));
         if (vazio)
             javax.swing.JOptionPane.showMessageDialog(this, "Campos por preencher", "Dados incorretos", 0);
-
         return !vazio;
     }
     
@@ -131,6 +130,8 @@ public class AdicionaStock extends javax.swing.JFrame {
         try{
             if(validaDados())
                 this.cf.addStock(this.id.getText(), (Integer)this.quantidade.getValue());
+            this.setVisible(false);
+            this.dispose();
         }catch(PecaNaoExisteException e){
             javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
         }

@@ -369,7 +369,7 @@ public class Personalizar extends javax.swing.JFrame {
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
-            ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, new Pacote(),this.cf.stringToPeca(validaDados()));
+            ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, null,this.cf.stringToPeca(validaDados()));
             cc.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }

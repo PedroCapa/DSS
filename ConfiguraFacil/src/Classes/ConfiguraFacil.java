@@ -240,13 +240,17 @@ public class ConfiguraFacil {
         return preco;
     }
     
-    public float calculaPreco(Pacote p, Modelo m, List<Peca> pecas) {
+    public float calculaPreco(Pacote p, Modelo m, List<Peca> pecas) throws PecaNaoExisteException{
         float preco = m.getCustoBase();
         for(Peca peca: pecas)
             preco = preco + peca.getPreco();
         
-        if(p != null)
+        if(p != null){
+            for(Peca peca: stringToPeca(p.getPecas())){
+                preco = preco + peca.getPreco();
+            }
             preco = preco - preco*p.getDesconto();
+        }
         return preco;
     }
     
@@ -261,8 +265,8 @@ public class ConfiguraFacil {
     public List<Peca> stringToPeca(List<String> sPecas) throws PecaNaoExisteException{
         List<Peca> pecas = new ArrayList<>();
         for(String s: sPecas){
-           // if(!this.pecas.containsKey(s))
-            //    throw new PecaNaoExisteException("Peca " + s + " nao existe");
+            if(!this.pecas.containsKey(s))
+                throw new PecaNaoExisteException("Peca " + s + " nao existe");
             pecas.add(this.pecas.get(s));
         }
         return pecas;

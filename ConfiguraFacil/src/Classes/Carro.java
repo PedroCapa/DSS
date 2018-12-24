@@ -40,6 +40,7 @@ public class Carro {
         this.estado = 0;
         this.data = LocalDate.now();
         this.falta = new ArrayList<>();
+        this.cliente = null;
     }
     
     public Carro(Carro umCarro){

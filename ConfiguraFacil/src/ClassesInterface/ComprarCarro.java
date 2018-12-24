@@ -270,15 +270,9 @@ public class ComprarCarro extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_ThunderbirdActionPerformed
     
-    private Modelo modeloEscolhido(){
-        Modelo m = new Modelo();
-        String s = validaDados();
-        return m;
-    }
-    
     private void PacoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacoteActionPerformed
         if(!validaDados().equals("")){    
-            EscolherPacote ep = new EscolherPacote(this.cf, this.c, this.cf.getModelos().get(validaDados()));
+            EscolherPacote ep = new EscolherPacote(this.cf, this.c, this.cf.getModelos().get(validaDados()).clone());
             ep.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
@@ -286,7 +280,7 @@ public class ComprarCarro extends javax.swing.JFrame {
 
     private void OtimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OtimaActionPerformed
         if(!validaDados().equals("")){
-            ConfiguracaoOtima co = new ConfiguracaoOtima(this.cf, this.c, this.cf.getModelos().get(validaDados()));
+            ConfiguracaoOtima co = new ConfiguracaoOtima(this.cf, this.c, this.cf.getModelos().get(validaDados()).clone());
             co.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
@@ -294,7 +288,7 @@ public class ComprarCarro extends javax.swing.JFrame {
 
     private void PersonalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonalizarActionPerformed
         if(!validaDados().equals("")){
-            Personalizar p = new Personalizar(this.cf, this.c, this.cf.getModelos().get(validaDados()));
+            Personalizar p = new Personalizar(this.cf, this.c, this.cf.getModelos().get(validaDados()).clone());
             p.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
