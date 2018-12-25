@@ -170,4 +170,8 @@ public class Carro {
     public void addFaltaCarro(String s){
         this.falta.add(s);
     }
+    
+    public boolean emProducao(){
+        return (this.estado == 1);
+    }
 }

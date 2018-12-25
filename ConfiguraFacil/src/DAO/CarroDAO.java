@@ -228,4 +228,19 @@ public class CarroDAO implements Map<String, Carro>{
             this.update(c);
         }
     }
+    
+    public List<Carro> getCarrosEspera(){
+        try {
+            Statement stm = conn.createStatement();
+            String sql = "Select * From Carro Where Estado = 0";
+            ResultSet res = stm.executeQuery(sql);
+            List<Carro> carros = new ArrayList<>();
+            while(res.next()){
+                String id = res.getString("Id");
+                Carro car = get(id);
+                carros.add(car);
+            }
+            return carros;
+        } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
+    }
 }

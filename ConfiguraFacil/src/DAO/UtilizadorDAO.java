@@ -192,4 +192,14 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
             int i = stm.executeUpdate("Update Carro Set Utilizador_Email='"+key+"' Where id='"+email+"'");
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
+
+    public boolean containsCliente(String key) {
+       try{    
+            Statement stm = conn.createStatement();
+            String sql = "SELECT * FROM Utilizador WHERE Email='"+(String)key+"' And Tipo=1";
+            ResultSet rs = stm.executeQuery(sql);
+            return rs.next();
+        }
+        catch(SQLException exc){throw new NullPointerException(exc.getMessage());}
+    }
 }
