@@ -186,7 +186,7 @@
         <Property name="buttonGroup" type="javax.swing.ButtonGroup" editor="org.netbeans.modules.form.RADComponent$ButtonGroupPropertyEditor">
           <ComponentRef name="modelos"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="Boss 302 Mustang"/>
+        <Property name="text" type="java.lang.String" value="302 Mustang"/>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="Boss302MustangActionPerformed"/>

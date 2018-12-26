@@ -102,7 +102,12 @@ public class Personalizar extends javax.swing.JFrame {
         jRadioButton6.setText("Boss 302 V8");
 
         Motor.add(jRadioButton7);
-        jRadioButton7.setText(" 385 engine");
+        jRadioButton7.setText(" 385 Engine");
+        jRadioButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton7ActionPerformed(evt);
+            }
+        });
 
         Motor.add(jRadioButton8);
         jRadioButton8.setText("V 12 ");
@@ -388,6 +393,10 @@ public class Personalizar extends javax.swing.JFrame {
     private void jRadioButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton9ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton9ActionPerformed
+
+    private void jRadioButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton7ActionPerformed
 
     /**
      * @param args the command line arguments

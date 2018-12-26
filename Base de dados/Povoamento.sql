@@ -126,3 +126,18 @@ insert into Peca_Carro
           ('EdgeJFEG', 1, 'Couro Alcantara'		   ),
           ('EdgeJFEG', 1, 'Condutor Automático'	   ),
           ('EdgeJFEG', 1, 'Sistema de Climatização');
+
+insert into carro(id, Estado, Data, Preco, Modelo_Nome, Utilizador_Email)
+	VALUES('jfeg1998@gmail.com2' , 2, '2018/12/25', 35100, '302 Mustang', 'jfeg1998@gmail.com');
+
+update peca set quantidade = 0 where nome = 'Preto';
+
+select * from utilizador;
+
+select * from Carro;
+
+select * from peca;
+
+select * from modelo;
+
+select * from pacote;

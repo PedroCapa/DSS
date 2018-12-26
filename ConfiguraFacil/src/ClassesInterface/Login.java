@@ -122,6 +122,7 @@ public class Login extends javax.swing.JFrame {
        try{
            if(validaDados()){
                 String pass = String.valueOf(this.password.getPassword());
+                System.out.println(pass);
                 Utilizador u = this.cf.fazerLogin(this.email.getText(), pass);
                 if(u instanceof Cliente){
                     MenuPrincipal mp = new MenuPrincipal(this.cf, (Cliente)u);

@@ -58,8 +58,7 @@ public class ConfiguraFacil {
         if(!utilizadores.containsKey(email))
             throw new UtilizadorNaoExisteException("Utilizador não existe");
         Utilizador u = utilizadores.get(email);
-        
-        if(u.validaCredenciais(email))
+        if(!u.validaCredenciais(password))
             throw new PasswordIncorretaException("Palavra passe está incorreta");        
         return u;
     }
@@ -75,6 +74,7 @@ public class ConfiguraFacil {
         if(!c.emProducao())
             throw new NaoExisteCarroEmProducaoException("Nao existe carro em producao com o id " + id);
         c.carroPronto();
+        this.carros.update(c);
     }
     
     public List<Carro> getCarrosComprados(String email) throws UtilizadorNaoExisteException{
@@ -152,7 +152,7 @@ public class ConfiguraFacil {
         if(car.getFalta().isEmpty())
             car.setEstado(1);
         else car.setEstado(0);
-        car.setId(c.getNome() + c.getCarros().size());
+        car.setId(c.getEmail() + c.getCarros().size());
         car.setCusto(preco);
         car.setData(LocalDate.now());
         car.setCliente(c.getEmail());
@@ -188,7 +188,7 @@ public class ConfiguraFacil {
             preco = preco + peca.getPreco();
         
         if(p != null){
-            preco = (preco + precoPacote(p))* (1 - p.getDesconto());
+            preco = preco + precoPacote(p)* (1 - p.getDesconto());
         }
         return preco;
     }

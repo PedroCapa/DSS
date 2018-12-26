@@ -78,9 +78,9 @@ public abstract class Utilizador{
         return "Utilizador{" + "nome=" + nome + ", email=" + email + ", password=" + password + '}';
     }
     
-    public boolean validaCredenciais(String email){
+    public boolean validaCredenciais(String pass){
         boolean b;
-        b = email.equals(this.password);
+        b = pass.equals(this.password);
         return b;
     }
 }

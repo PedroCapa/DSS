@@ -124,8 +124,11 @@
     </Component>
     <Component class="javax.swing.JRadioButton" name="teto">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Teto de Abir"/>
+        <Property name="text" type="java.lang.String" value="Teto de Abrir"/>
       </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="tetoActionPerformed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JRadioButton" name="vidrosEscuros">
       <Properties>

@@ -77,7 +77,12 @@ public class Extras extends javax.swing.JFrame {
             }
         });
 
-        teto.setText("Teto de Abir");
+        teto.setText("Teto de Abrir");
+        teto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tetoActionPerformed(evt);
+            }
+        });
 
         vidrosEscuros.setText("Vidros Escurecidos");
 
@@ -171,6 +176,10 @@ public class Extras extends javax.swing.JFrame {
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_VoltarActionPerformed
+
+    private void tetoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tetoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tetoActionPerformed
 
     /**
      * @param args the command line arguments

@@ -134,7 +134,6 @@ public class EscolherPacote extends javax.swing.JFrame {
         for(Enumeration<AbstractButton> buttons = pacotes.getElements(); buttons.hasMoreElements();){
             AbstractButton button = buttons.nextElement();
             if (button.isSelected()) {
-                System.out.println(button.getText());
                 escolhido =  button.getText();
             }
         }

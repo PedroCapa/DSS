@@ -95,7 +95,7 @@ public class ComprarCarro extends javax.swing.JFrame {
         });
 
         modelos.add(Boss302Mustang);
-        Boss302Mustang.setText("Boss 302 Mustang");
+        Boss302Mustang.setText("302 Mustang");
         Boss302Mustang.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 Boss302MustangActionPerformed(evt);
@@ -271,8 +271,10 @@ public class ComprarCarro extends javax.swing.JFrame {
     }//GEN-LAST:event_ThunderbirdActionPerformed
     
     private void PacoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacoteActionPerformed
-        if(!modeloEscolhido().equals("")){    
-            EscolherPacote ep = new EscolherPacote(this.cf, this.c, this.cf.getModelo(modeloEscolhido()));
+        if(!modeloEscolhido().equals("")){
+            Modelo m =  this.cf.getModelo(modeloEscolhido());
+            EscolherPacote ep = new EscolherPacote(this.cf, this.c, m);
+            System.out.println(m);
             ep.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
@@ -288,6 +290,7 @@ public class ComprarCarro extends javax.swing.JFrame {
 
     private void PersonalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonalizarActionPerformed
         if(!modeloEscolhido().equals("")){
+            System.out.println(modeloEscolhido());
             Personalizar p = new Personalizar(this.cf, this.c, this.cf.getModelo(modeloEscolhido()));
             p.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));

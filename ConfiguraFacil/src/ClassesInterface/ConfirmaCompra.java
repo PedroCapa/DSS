@@ -169,28 +169,32 @@ public class ConfirmaCompra extends javax.swing.JFrame {
     }//GEN-LAST:event_ConfirmarActionPerformed
 
     private void dadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadosActionPerformed
-        DefaultTableModel tabPeca = (DefaultTableModel)pecasEsc.getModel();
-        int tam = this.pecas.size();
-        if(tam == 0){
-            tabPeca.addRow(new String[]{null});
-        }
-        else{
-            tabPeca.setRowCount(0);
-            for(int i = 0; i < tam; i++){
-                Peca p = this.pecas.get(i);
-                tabPeca.addRow(new String[]{p.getNome()});
+        try{
+            DefaultTableModel tabPeca = (DefaultTableModel)pecasEsc.getModel();
+            int tam = this.pecas.size();
+            if(tam == 0 && this.p == null){
+                tabPeca.addRow(new String[]{null});
             }
-            if(p!= null)
-                for(Peca p: this.cf.stringToPeca(this.p.getPecas())){
-                    tabPeca.addRow(new String[]{p.getNome()});
+            else{
+                tabPeca.setRowCount(0);
+                for(int i = 0; i < tam; i++){
+                    Peca peca = this.pecas.get(i);
+                    tabPeca.addRow(new String[]{peca.getNome()});
+                }
+                if(this.p!= null)
+                    for(Peca peca: this.cf.stringToPeca(this.p.getPecas())){
+                        tabPeca.addRow(new String[]{peca.getNome()});
+                }
+                this.pecasEsc.setModel(tabPeca);
             }
-            this.pecasEsc.setModel(tabPeca);
+            DefaultTableModel modelo = (DefaultTableModel)modeloEsc.getModel();
+            modelo.setRowCount(0);
+            modelo.addRow(new String[]{this.m.getNome(), Float.toString(this.cf.calculaPreco(this.p, this.m, this.pecas))});
+            this.modeloEsc.setModel(modelo);
         }
-        
-        DefaultTableModel modelo = (DefaultTableModel)pecasEsc.getModel();
-        modelo.setRowCount(0);
-        modelo.addRow(new String[]{p.getNome()});
-        this.modeloEsc.setModel(modelo);
+        catch(PecaNaoExisteException e){
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
+        }
     }//GEN-LAST:event_dadosActionPerformed
 
     /**
