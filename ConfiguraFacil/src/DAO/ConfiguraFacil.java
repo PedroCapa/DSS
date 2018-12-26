@@ -6,6 +6,7 @@
 package DAO;
 import Exceptions.*;
 import Classes.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -116,5 +117,66 @@ public class ConfiguraFacil {
         }
         this.pecas.update(p);
         this.carros.updateAll(espera);
+    }
+    
+    public Carro comprarCarro(List<Peca> pecas, Modelo m, float preco, Cliente c){
+        Carro car = new Carro();
+        car.setModelo(m);
+        
+        for(Peca p: pecas){
+            int stock = p.getQuantidade();
+            String nome = p.getNome();
+            if(stock > 0){
+                car.addPecaCarro(nome);
+                p.reduzStock();
+                this.pecas.update(p);
+            }
+            else{
+                car.addFaltaCarro(nome);
+            }
+        }
+        
+        if(car.getFalta().isEmpty())
+            car.setEstado(1);
+        else car.setEstado(0);
+        car.setId(c.getNome() + c.getCarros().size());
+        car.setCusto(preco);
+        car.setData(LocalDate.now());
+        car.setCliente(c.getEmail());
+        return car;
+    }
+    
+    public void insereCarroSistema(Cliente c, Carro car){
+        String id = car.getId();
+        carros.put(id, car);
+        c.addCarro(id);
+    }
+    
+    public float calculaPreco(Modelo m, List<Peca> pecas){
+        float preco = m.getCustoBase();
+        
+        for(Peca peca: pecas)
+            preco = preco + peca.getPreco();
+        
+        return preco;
+    }
+    
+    public float precoPacote(Pacote p){
+        float f = 0;
+        List<Peca> list = p.getPecas().stream().map(s -> this.pecas.get(s)).collect(Collectors.toList());
+        for(Peca peca: list)
+            f = f + peca.getPreco();
+        return f;
+    }
+    
+    public float calculaPreco(Pacote p, Modelo m, List<Peca> pecas) throws PecaNaoExisteException{
+        float preco = m.getCustoBase();
+        for(Peca peca: pecas)
+            preco = preco + peca.getPreco();
+        
+        if(p != null){
+            preco = (preco + precoPacote(p))* (1 - p.getDesconto());
+        }
+        return preco;
     }
 }
