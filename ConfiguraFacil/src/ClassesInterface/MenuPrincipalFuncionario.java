@@ -6,7 +6,7 @@
 package ClassesInterface;
 
 import Classes.Carro;
-import Classes.ConfiguraFacil;
+import Classes.*;
 import Exceptions.UtilizadorNaoExisteException;
 import java.time.format.DateTimeFormatter;
 import java.util.List;

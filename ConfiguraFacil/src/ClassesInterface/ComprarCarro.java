@@ -236,7 +236,7 @@ public class ComprarCarro extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private String validaDados() {
+    private String modeloEscolhido() {
         String escolhido = "";
         for(Enumeration<AbstractButton> buttons = modelos.getElements(); buttons.hasMoreElements();){
              AbstractButton button = buttons.nextElement();
@@ -271,24 +271,24 @@ public class ComprarCarro extends javax.swing.JFrame {
     }//GEN-LAST:event_ThunderbirdActionPerformed
     
     private void PacoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacoteActionPerformed
-        if(!validaDados().equals("")){    
-            EscolherPacote ep = new EscolherPacote(this.cf, this.c, this.cf.getModelos().get(validaDados()).clone());
+        if(!modeloEscolhido().equals("")){    
+            EscolherPacote ep = new EscolherPacote(this.cf, this.c, this.cf.getModelo(modeloEscolhido()));
             ep.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
     }//GEN-LAST:event_PacoteActionPerformed
 
     private void OtimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OtimaActionPerformed
-        if(!validaDados().equals("")){
-            ConfiguracaoOtima co = new ConfiguracaoOtima(this.cf, this.c, this.cf.getModelos().get(validaDados()).clone());
+        if(!modeloEscolhido().equals("")){
+            ConfiguracaoOtima co = new ConfiguracaoOtima(this.cf, this.c, this.cf.getModelo(modeloEscolhido()));
             co.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
     }//GEN-LAST:event_OtimaActionPerformed
 
     private void PersonalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonalizarActionPerformed
-        if(!validaDados().equals("")){
-            Personalizar p = new Personalizar(this.cf, this.c, this.cf.getModelos().get(validaDados()).clone());
+        if(!modeloEscolhido().equals("")){
+            Personalizar p = new Personalizar(this.cf, this.c, this.cf.getModelo(modeloEscolhido()));
             p.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }

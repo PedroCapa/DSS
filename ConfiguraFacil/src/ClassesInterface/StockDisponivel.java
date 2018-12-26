@@ -135,7 +135,7 @@ public class StockDisponivel extends javax.swing.JFrame {
         DefaultTableModel pecas = (DefaultTableModel)tabela.getModel();
         int tam = this.cf.getPecas().size();
         pecas.setRowCount(0);
-        List<Peca> lista = this.cf.getPecas().values().stream().map(p -> p).collect(Collectors.toList());
+        List<Peca> lista = this.cf.getPecas();
         for(int i = 0; i < tam; i++){
             Peca p = lista.get(i);
             pecas.addRow(new String[]{p.getNome(),Integer.toString(p.getQuantidade())});

@@ -18,12 +18,12 @@ public class MenuInicial extends javax.swing.JFrame {
     
     public MenuInicial(ConfiguraFacil cf) {
         initComponents();
-        cf = new ConfiguraFacil();
+        this.cf = cf;
     }
 
     private MenuInicial() {
         initComponents();
-        cf = new ConfiguraFacil();
+        this.cf = new ConfiguraFacil();
     }
 
     /**

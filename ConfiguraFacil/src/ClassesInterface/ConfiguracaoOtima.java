@@ -8,7 +8,6 @@ package ClassesInterface;
 import Classes.*;
 import Exceptions.CustoDemasiadoBaixoException;
 import java.awt.event.WindowEvent;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

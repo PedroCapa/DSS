@@ -1,57 +1,131 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Classes;
-import Exceptions.*;
-import DAO.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
+
 import java.util.List;
-import java.util.stream.Collectors;
-/**
- *
- * @author Luis
- */
-public class ConfiguraFacil {
-    
-    private CarroDAO carros;
-    private ModeloDAO modelos;
-    private PacoteDAO pacotes;
-    private PecaDAO pecas;
-    private UtilizadorDAO utilizadores;
-    
-    public ConfiguraFacil(){
-        this.carros = new CarroDAO();
-        this.modelos = new ModeloDAO();
-        this.pacotes = new PacoteDAO();
-        this.pecas = new PecaDAO();
-        this.utilizadores = new UtilizadorDAO();
+import java.util.ArrayList;
+import java.util.Map;
+import java.util.HashMap;
+import java.util.Objects;
+import java.util.stream.*;
+import Exceptions.*;
+import java.time.LocalDate;
+
+public class ConfiguraFacilAux {
+
+   private Map<String, Utilizador> utilizadores;
+   private Map<String, Carro> carros;
+   private Map<String, Modelo> modelos;
+   private Map<String, Peca> pecas;
+   private Map<String, Pacote> pacotes;
+   private List<Carro> producao;
+
+    public ConfiguraFacilAux(Map<String, Utilizador> utilizadores, Map<String, Carro> carros, Map<String, Modelo> modelos, Map<String, Peca> pecas, Map<String, Pacote> pacotes, List<Carro> producao) {
+        this.utilizadores = new HashMap<>(utilizadores);
+        this.carros = new HashMap<>(carros);
+        this.modelos = new HashMap<>(modelos);
+        this.pecas = new HashMap<>(pecas);
+        this.pacotes = new HashMap<>(pacotes);
+        this.producao = new ArrayList<>(producao);
+    }
+
+    public ConfiguraFacilAux() {
+        this.utilizadores = new HashMap<>();
+        this.carros = new HashMap<>();
+        this.modelos = new HashMap<>();
+        this.pecas = new HashMap<>();
+        this.pacotes = new HashMap<>();
+        this.producao = new ArrayList<>();
     }
     
-    public Modelo getModelo(String m){
-        return this.modelos.get(m);
+    public ConfiguraFacilAux(ConfiguraFacilAux umConfiguraFacil) {
+        this.utilizadores = umConfiguraFacil.getUtilizadores();
+        this.carros = umConfiguraFacil.getCarros();
+        this.modelos = umConfiguraFacil.getModelos();
+        this.pecas = umConfiguraFacil.getPecas();
+        this.pacotes = umConfiguraFacil.getPacotes();
+        this.producao = umConfiguraFacil.getProducao();
+    }
+
+    public Map<String, Utilizador> getUtilizadores() {
+        return new HashMap<>(this.utilizadores);
+    }
+
+    public void setUtilizadores(Map<String, Utilizador> utilizadores) {
+        this.utilizadores = new HashMap<>(utilizadores);
+    }
+
+    public Map<String, Carro> getCarros() {
+        return new HashMap<>(this.carros);
+    }
+
+    public void setCarros(Map<String, Carro> carros) {
+        this.carros = new HashMap<>(carros);
+    }
+
+    public Map<String, Modelo> getModelos() {
+        return new HashMap<>(this.modelos);
+    }
+
+    public void setModelos(Map<String, Modelo> modelos) {
+        this.modelos = new HashMap<>(modelos);
+    }
+
+    public Map<String, Peca> getPecas() {
+        return new HashMap<>(this.pecas);
+    }
+
+    public void setPecas(Map<String, Peca> pecas) {
+        this.pecas = new HashMap<>(pecas);
+    }
+
+    public Map<String, Pacote> getPacotes() {
+       return new HashMap<>(this.pacotes);
+    }
+
+    public void setPacotes(Map<String, Pacote> pacotes) {
+         this.pacotes = new HashMap<>(pacotes);
+    }
+
+    public List<Carro> getProducao() {
+        return new ArrayList<>(this.producao);
+    }
+
+    public void setProducao(List<Carro> producao) {
+        this.producao = new ArrayList<>(producao);
     }
     
-    public Pacote getPacote(String p){
-        return this.pacotes.get(p);
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.utilizadores);
+        hash = 59 * hash + Objects.hashCode(this.carros);
+        hash = 59 * hash + Objects.hashCode(this.modelos);
+        hash = 59 * hash + Objects.hashCode(this.pecas);
+        hash = 59 * hash + Objects.hashCode(this.pacotes);
+        hash = 59 * hash + Objects.hashCode(this.producao);
+        return hash;
     }
     
-    public List<Peca> getPecas(){
-        return this.pecas.values().stream().collect(Collectors.toList());
-    }
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+        
+        ConfiguraFacilAux other = (ConfiguraFacilAux) obj;
+        return (this.utilizadores.equals(other.getUtilizadores()) && this.carros.equals(other.getCarros()) 
+                && this.modelos.equals(other.getModelos()) && this.pecas.equals(other.getPecas()) 
+                && this.pacotes.equals(other.getPacotes()) && this.producao.equals(other.getProducao()));
+        }
     
-    /*
-    Não devia de retornar um Cliente?????????????????????????????????????????????????????
-    */
-    public Cliente registaCliente(String nome, String password, String email)throws UtilizadorJaRegistadoException{
+    public void registaCliente(String nome, String password, String email)throws UtilizadorJaRegistadoException{
         if(this.utilizadores.containsKey(email)){
             throw new UtilizadorJaRegistadoException("Ja existe um utilizador com essa conta de email registado");
         }
         Cliente c = new Cliente(nome, password, email);
         this.utilizadores.put(email, c);
-        return c;
     }
     
     public Utilizador fazerLogin(String email, String password) throws UtilizadorNaoExisteException, PasswordIncorretaException{
@@ -72,13 +146,14 @@ public class ConfiguraFacil {
         if(!carros.containsKey(id))
             throw new CarroNaoExisteException("Carro não existe no sistema");
         Carro c = carros.get(id);
-        if(!c.emProducao())
+        if(this.producao.contains(c) && c.getEstado() == 1)
             throw new NaoExisteCarroEmProducaoException("Nao existe carro em producao com o id " + id);
+        this.producao.remove(c);
         c.carroPronto();
     }
     
     public List<Carro> getCarrosComprados(String email) throws UtilizadorNaoExisteException{
-        if(!utilizadores.containsCliente(email))
+        if(!utilizadores.containsKey(email))
             throw new UtilizadorNaoExisteException("Utilizador não existe");
         Cliente c = (Cliente)this.utilizadores.get(email);
         List<Carro> l = new ArrayList<>();
@@ -119,33 +194,30 @@ public class ConfiguraFacil {
         Peca p = pecas.get(nome);
         int n = p.getQuantidade();
         p.addStock(numero);
-        List<Carro> espera = this.carros.getCarrosEspera();
         if(n == 0){
-            for(int i = 0; i < espera.size() && p.getQuantidade() > 0; i++){
-                Carro c = espera.get(i);
+            for(int i = 0; i < this.producao.size() && p.getQuantidade() > 0; i++){
+                Carro c = producao.get(i);
                 flag = c.pecaEmFalta(nome);
                 if(flag)
                     p.reduzStock();
             }       
         }
-        this.pecas.update(p);
-        this.carros.updateAll(espera);
     }
     
     public Carro comprarCarro(List<Peca> pecas, Modelo m, float preco, Cliente c){
         Carro car = new Carro();
+        List<String> nomes = pecas.stream().map(p -> p.getNome()).collect(Collectors.toList());
+        
         car.setModelo(m);
         
-        for(Peca p: pecas){
-            int stock = p.getQuantidade();
-            String nome = p.getNome();
+        for(String s: nomes){
+            int stock = this.pecas.get(s).getQuantidade();
             if(stock > 0){
-                car.addPecaCarro(nome);
-                p.reduzStock();
-                this.pecas.update(p);
+                car.addPecaCarro(s);
+                this.pecas.get(s).reduzStock();
             }
             else{
-                car.addFaltaCarro(nome);
+                car.addFaltaCarro(s);
             }
         }
         
@@ -157,12 +229,13 @@ public class ConfiguraFacil {
         car.setData(LocalDate.now());
         car.setCliente(c.getEmail());
         return car;
-    }
+    } 
     
-    public void insereCarroSistema(Cliente c, Carro car){
-        String id = car.getId();
-        carros.put(id, car);
-        c.addCarro(id);
+    public float precoPacote(Pacote p){
+        float f = 0;
+        for(Peca peca:stringToPeca(p.getPecas()))
+            f = f + peca.getPreco();
+        return f;
     }
     
     public float calculaPreco(Modelo m, List<Peca> pecas){
@@ -174,23 +247,23 @@ public class ConfiguraFacil {
         return preco;
     }
     
-    public float precoPacote(Pacote p){
-        float f = 0;
-        List<Peca> list = p.getPecas().stream().map(s -> this.pecas.get(s)).collect(Collectors.toList());
-        for(Peca peca: list)
-            f = f + peca.getPreco();
-        return f;
-    }
-    
     public float calculaPreco(Pacote p, Modelo m, List<Peca> pecas) throws PecaNaoExisteException{
         float preco = m.getCustoBase();
         for(Peca peca: pecas)
             preco = preco + peca.getPreco();
         
         if(p != null){
-            preco = (preco + precoPacote(p))* (1 - p.getDesconto());
+            preco = preco + precoPacote(p) * (1 - p.getDesconto());
         }
         return preco;
+    }
+    
+    public void insereCarroSistema(Cliente c, Carro car){
+        String id = c.getNome() + c.getCarros().size();
+        car.setId(id);
+        producao.add(car);
+        carros.put(id, car);
+        c.addCarro(id);
     }
     
     public List<Peca> stringToPeca(List<String> sPecas)/* throws PecaNaoExisteException*/{
@@ -202,7 +275,8 @@ public class ConfiguraFacil {
         }
         return p;
     }
-        public boolean estaDentro(Modelo m, float preco){
+    
+    public boolean estaDentro(Modelo m, float preco){
         boolean b = false;
         for(Pacote p: m.getPacotes()){
             float valor = 0;

@@ -146,7 +146,7 @@ public class EscolherPacote extends javax.swing.JFrame {
     
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
        if(!validaDados().equals("")){
-            Extras e = new Extras(this.cf, this.c, this.m, this.cf.getPacotes().get(validaDados()).clone());
+            Extras e = new Extras(this.cf, this.c, this.m, this.cf.getPacote(validaDados()));
             e.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
        }

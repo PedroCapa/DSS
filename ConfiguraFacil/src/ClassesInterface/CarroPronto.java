@@ -5,7 +5,7 @@
  */
 package ClassesInterface;
 
-import Classes.ConfiguraFacil;
+import Classes.*;
 import Exceptions.*;
 
 /**
