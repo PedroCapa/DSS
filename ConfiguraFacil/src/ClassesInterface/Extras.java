@@ -148,7 +148,7 @@ public class Extras extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    public List<String> validaDados(){
+    public List<String> extrasEscolhidos(){
         List <String> pecas = new ArrayList<>();
         if (this.escape.isSelected())
             pecas.add(this.escape.getText());
@@ -166,7 +166,7 @@ public class Extras extends javax.swing.JFrame {
     }
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-        ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, this.p, this.cf.stringToPeca(validaDados()));
+        ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, this.p, this.cf.stringToPeca(extrasEscolhidos()));
         cc.setVisible(true);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 

@@ -20,18 +20,18 @@ import javax.swing.AbstractButton;
 public class Personalizar extends javax.swing.JFrame {
 
     private ConfiguraFacil cf;
-    private Cliente c;
-    private Modelo m;
+    private Cliente cliente;
+    private Modelo modelo;
     
     public Personalizar() {
         initComponents();
     }
     
-    public Personalizar(ConfiguraFacil cf, Cliente c, Modelo m){
+    public Personalizar(ConfiguraFacil cf, Cliente cliente, Modelo modelo){
         this();
         this.cf = cf;
-        this.c = c;
-        this.m = m;
+        this.cliente = cliente;
+        this.modelo = modelo;
     }
 
     /**
@@ -364,7 +364,7 @@ public class Personalizar extends javax.swing.JFrame {
     }    
     
     private void jRadioButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton21ActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_jRadioButton21ActionPerformed
 
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
@@ -374,7 +374,7 @@ public class Personalizar extends javax.swing.JFrame {
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
-            ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, null,this.cf.stringToPeca(validaDados()));
+            ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.cliente, this.modelo, null,this.cf.stringToPeca(validaDados()));
             cc.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }

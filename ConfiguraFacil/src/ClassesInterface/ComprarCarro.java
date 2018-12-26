@@ -271,27 +271,29 @@ public class ComprarCarro extends javax.swing.JFrame {
     }//GEN-LAST:event_ThunderbirdActionPerformed
     
     private void PacoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacoteActionPerformed
-        if(!modeloEscolhido().equals("")){
-            Modelo m =  this.cf.getModelo(modeloEscolhido());
+        String escolhido = modeloEscolhido();
+        if(!escolhido.equals("")){
+            Modelo m =  this.cf.getModelo(escolhido);
             EscolherPacote ep = new EscolherPacote(this.cf, this.c, m);
-            System.out.println(m);
             ep.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
     }//GEN-LAST:event_PacoteActionPerformed
 
     private void OtimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OtimaActionPerformed
-        if(!modeloEscolhido().equals("")){
-            ConfiguracaoOtima co = new ConfiguracaoOtima(this.cf, this.c, this.cf.getModelo(modeloEscolhido()));
+        String escolhido = modeloEscolhido();
+        if(!escolhido.equals("")){
+            ConfiguracaoOtima co = new ConfiguracaoOtima(this.cf, this.c, this.cf.getModelo(escolhido));
             co.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
     }//GEN-LAST:event_OtimaActionPerformed
 
     private void PersonalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonalizarActionPerformed
-        if(!modeloEscolhido().equals("")){
+        String escolhido = modeloEscolhido();
+        if(!escolhido.equals("")){
             System.out.println(modeloEscolhido());
-            Personalizar p = new Personalizar(this.cf, this.c, this.cf.getModelo(modeloEscolhido()));
+            Personalizar p = new Personalizar(this.cf, this.c, this.cf.getModelo(escolhido));
             p.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }

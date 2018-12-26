@@ -17,18 +17,18 @@ import javax.swing.AbstractButton;
 public class EscolherPacote extends javax.swing.JFrame {
 
     private ConfiguraFacil cf;
-    private Cliente c;
-    private Modelo m;
+    private Cliente cliente;
+    private Modelo modelo;
     
     public EscolherPacote() {
         initComponents();
     }
     
-    public EscolherPacote(ConfiguraFacil cf, Cliente c, Modelo m){
+    public EscolherPacote(ConfiguraFacil cf, Cliente cliente, Modelo modelo){
         this();
         this.cf = cf;
-        this.c = c;
-        this.m = m;
+        this.cliente = cliente;
+        this.modelo = modelo;
     }
 
     /**
@@ -129,7 +129,7 @@ public class EscolherPacote extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
     
-    private String validaDados() {
+    private String pacoteEscolhido() {
         String escolhido = "";
         for(Enumeration<AbstractButton> buttons = pacotes.getElements(); buttons.hasMoreElements();){
             AbstractButton button = buttons.nextElement();
@@ -144,8 +144,9 @@ public class EscolherPacote extends javax.swing.JFrame {
     }    
     
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-       if(!validaDados().equals("")){
-            Extras e = new Extras(this.cf, this.c, this.m, this.cf.getPacote(validaDados()));
+        Pacote escolhido = this.cf.getPacote(pacoteEscolhido());
+        if(!pacoteEscolhido().equals("") && this.cf.getModelo(this.modelo.getNome()).getPacotes().contains(escolhido)){
+            Extras e = new Extras(this.cf, this.cliente, this.modelo, this.cf.getPacote(pacoteEscolhido()));
             e.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
        }

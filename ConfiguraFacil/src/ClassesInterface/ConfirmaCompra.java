@@ -6,8 +6,7 @@
 package ClassesInterface;
 
 import Classes.*;
-import Exceptions.PecaNaoExisteException;
-import Exceptions.UtilizadorNaoExisteException;
+import Exceptions.*;
 import java.awt.Font;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -21,21 +20,21 @@ import javax.swing.table.DefaultTableModel;
 public class ConfirmaCompra extends javax.swing.JFrame {
 
     private ConfiguraFacil cf;
-    private Cliente c;
-    private Modelo m;
-    private Pacote p;
+    private Cliente cliente;
+    private Modelo modelo;
+    private Pacote pacote;
     private List<Peca> pecas;
     
     public ConfirmaCompra() {
         initComponents();
     }
     
-    public ConfirmaCompra(ConfiguraFacil cf, Cliente c, Modelo m, Pacote p, List<Peca> pecas){
+    public ConfirmaCompra(ConfiguraFacil cf, Cliente cliente, Modelo modelo, Pacote pacote, List<Peca> pecas){
         this();
         this.cf = cf;
-        this.c = c;
-        this.m = m;
-        this.p = p;
+        this.cliente = cliente;
+        this.modelo = modelo;
+        this.pacote = pacote;
         this.pecas = pecas;
     }
     /**
@@ -155,11 +154,14 @@ public class ConfirmaCompra extends javax.swing.JFrame {
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
-            if(p != null){
-                this.pecas.addAll(this.cf.stringToPeca(p.getPecas()));
+            float custo;
+            if(pacote != null){
+                custo = this.cf.calculaPreco(this.modelo, this.pecas);
             }
-            Carro car = this.cf.comprarCarro(this.pecas, this.m, this.cf.calculaPreco(this.p, this.m, this.pecas), this.c);
-            this.cf.insereCarroSistema(this.c, car);
+            else{
+                custo = this.cf.calculaPreco(this.pacote, this.modelo, this.pecas);
+            }
+            Carro car = this.cf.comprarCarro(this.pecas, this.modelo, custo, this.cliente);
             this.setVisible(false);
             this.dispose();
         }
@@ -172,7 +174,7 @@ public class ConfirmaCompra extends javax.swing.JFrame {
         try{
             DefaultTableModel tabPeca = (DefaultTableModel)pecasEsc.getModel();
             int tam = this.pecas.size();
-            if(tam == 0 && this.p == null){
+            if(tam == 0 && this.pacote == null){
                 tabPeca.addRow(new String[]{null});
             }
             else{
@@ -181,16 +183,16 @@ public class ConfirmaCompra extends javax.swing.JFrame {
                     Peca peca = this.pecas.get(i);
                     tabPeca.addRow(new String[]{peca.getNome()});
                 }
-                if(this.p!= null)
-                    for(Peca peca: this.cf.stringToPeca(this.p.getPecas())){
+                if(this.pacote!= null)
+                    for(Peca peca: this.cf.stringToPeca(this.pacote.getPecas())){
                         tabPeca.addRow(new String[]{peca.getNome()});
                 }
                 this.pecasEsc.setModel(tabPeca);
             }
-            DefaultTableModel modelo = (DefaultTableModel)modeloEsc.getModel();
-            modelo.setRowCount(0);
-            modelo.addRow(new String[]{this.m.getNome(), Float.toString(this.cf.calculaPreco(this.p, this.m, this.pecas))});
-            this.modeloEsc.setModel(modelo);
+            DefaultTableModel info = (DefaultTableModel)modeloEsc.getModel();
+            info.setRowCount(0);
+            info.addRow(new String[]{this.modelo.getNome(), Float.toString(this.cf.calculaPreco(this.pacote, this.modelo, this.pecas))});
+            this.modeloEsc.setModel(info);
         }
         catch(PecaNaoExisteException e){
             javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);

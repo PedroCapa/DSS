@@ -5,33 +5,26 @@
  */
 package ClassesInterface;
 
-import Classes.Carro;
 import Classes.*;
-import Exceptions.UtilizadorNaoExisteException;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author pmcca
  */
-public class HistoricoCompras extends javax.swing.JFrame {
+public class CarrosEmFila extends javax.swing.JFrame {
 
-    /**
-     * Creates new form HistoricoCompras
-     */
     private ConfiguraFacil cf;
-    private Cliente cliente;
     
-    public HistoricoCompras() {
+    public CarrosEmFila() {
         initComponents();
     }
     
-    public HistoricoCompras(ConfiguraFacil cf, Cliente cliente){
+    public CarrosEmFila(ConfiguraFacil cf){
         this();
         this.cf = cf;
-        this.cliente = cliente;
     }
 
     /**
@@ -65,7 +58,7 @@ public class HistoricoCompras extends javax.swing.JFrame {
                 {null, null, null}
             },
             new String [] {
-                "Modelo", "Data", "Estado"
+                "Id", "Modelo", "Data"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -95,41 +88,45 @@ public class HistoricoCompras extends javax.swing.JFrame {
         });
 
         jLabel1.setFont(new java.awt.Font("Harlow Solid Italic", 0, 18)); // NOI18N
-        jLabel1.setText("Carros");
+        jLabel1.setText("Carros em Produção");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addContainerGap(379, Short.MAX_VALUE))
+                        .addGap(151, 151, 151)
+                        .addComponent(Voltar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(mostrar))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                        .addContainerGap())))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(Voltar)
-                .addGap(18, 18, 18)
-                .addComponent(mostrar)
-                .addContainerGap())
+                        .addContainerGap()
+                        .addComponent(jLabel1))
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 349, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.HORIZONTAL, new java.awt.Component[] {Voltar, mostrar});
+
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addGap(4, 4, 4)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(Voltar)
-                    .addComponent(mostrar))
-                .addContainerGap())
+                    .addComponent(mostrar)
+                    .addComponent(Voltar))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        layout.linkSize(javax.swing.SwingConstants.VERTICAL, new java.awt.Component[] {Voltar, mostrar});
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -140,32 +137,24 @@ public class HistoricoCompras extends javax.swing.JFrame {
     }//GEN-LAST:event_VoltarActionPerformed
 
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
-        try{
-            DefaultTableModel modelo = (DefaultTableModel)tabela.getModel();
-            int tam = this.cf.getCarrosComprados(cliente.getEmail()).size();
-            if(tam == 0){
-                modelo.addRow(new String[]{null, 
-                                           null,
-                                           null});
-        }        
-            else{
-                modelo.setRowCount(0);
-                List<Carro> lista = this.cf.getCarrosComprados(cliente.getEmail());
-                for(int i = 0; i < tam; i++){
-                    Carro c = lista.get(i);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
-                    String formattedString = c.getData().format(formatter);
-                    modelo.addRow(new String[]{c.getModelo().getNome(),
-                                               formattedString,
-                                               Integer.toString(c.getEstado())});
-                }
-                this.tabela.setModel(modelo);
-            }
+        DefaultTableModel car = (DefaultTableModel)tabela.getModel();
+        int tam = this.cf.getCarrosProducao().size();
+        if(tam == 0){
+            car.addRow(new String[]{null,
+                                       null,
+                                       null});
         }
-        catch(UtilizadorNaoExisteException e){
-                javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
-
+        else{
+            car.setRowCount(0);
+            List<Carro> carros = this.cf.getCarrosProducao();
+            for(int i = 0; i < tam; i++){
+                Carro c = carros.get(i);
+                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd LLLL yyyy");
+                String formattedString = c.getData().format(formatter);
+                car.addRow(new String[]{c.getId(), c.getModelo().getNome(),formattedString});
             }
+        this.tabela.setModel(car);
+        }
     }//GEN-LAST:event_mostrarActionPerformed
 
     /**
@@ -185,20 +174,20 @@ public class HistoricoCompras extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(HistoricoCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarrosEmFila.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(HistoricoCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarrosEmFila.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(HistoricoCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarrosEmFila.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(HistoricoCompras.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(CarrosEmFila.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new HistoricoCompras().setVisible(true);
+                new CarrosEmFila().setVisible(true);
             }
         });
     }

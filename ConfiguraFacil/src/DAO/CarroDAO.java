@@ -243,4 +243,19 @@ public class CarroDAO implements Map<String, Carro>{
             return carros;
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
+    
+        public List<Carro> getCarrosProducao(){
+        try {
+            Statement stm = conn.createStatement();
+            String sql = "Select * From Carro Where Estado = 1";
+            ResultSet res = stm.executeQuery(sql);
+            List<Carro> carros = new ArrayList<>();
+            while(res.next()){
+                String id = res.getString("Id");
+                Carro car = get(id);
+                carros.add(car);
+            }
+            return carros;
+        } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
+    }
 }

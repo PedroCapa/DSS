@@ -17,18 +17,18 @@ import java.util.List;
 public class ConfiguracaoOtima extends javax.swing.JFrame {
 
     private ConfiguraFacil cf;
-    private Cliente c;
-    private Modelo m;
+    private Cliente cliente;
+    private Modelo modelo;
     
     public ConfiguracaoOtima() {
         initComponents();
     }
     
-    public ConfiguracaoOtima(ConfiguraFacil cf, Cliente c, Modelo m){
+    public ConfiguracaoOtima(ConfiguraFacil cf, Cliente cliente, Modelo modelo){
         this();
         this.cf = cf;
-        this.c = c;
-        this.m = m;
+        this.cliente = cliente;
+        this.modelo = modelo;
     }
 
     /**
@@ -111,11 +111,11 @@ public class ConfiguracaoOtima extends javax.swing.JFrame {
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
         float orcamento = Float.parseFloat(this.preco.getText());
-        Pacote p = this.cf.configuracaoOtimaPacote(m, orcamento);
-        orcamento = orcamento - this.m.getCustoBase() - this.cf.precoPacote(p)* (1 - p.getDesconto());
+        Pacote pacote = this.cf.configuracaoOtimaPacote(modelo, orcamento);
+        orcamento = orcamento - this.modelo.getCustoBase() - this.cf.precoPacote(pacote)* (1 - pacote.getDesconto());
         List<Peca> pecas = this.cf.componentesExtra(orcamento);
         
-        ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, p, pecas);
+        ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.cliente, this.modelo, pacote, pecas);
         cc.setVisible(true);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }

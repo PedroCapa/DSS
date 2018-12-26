@@ -6,7 +6,7 @@
 package ClassesInterface;
 
 import Classes.*;
-import Exceptions.UtilizadorNaoExisteException;
+import Exceptions.*;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import java.time.format.DateTimeFormatter;

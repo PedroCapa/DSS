@@ -156,6 +156,7 @@ public class ConfiguraFacil {
         car.setCusto(preco);
         car.setData(LocalDate.now());
         car.setCliente(c.getEmail());
+        insereCarroSistema(c, car);
         return car;
     }
     
@@ -287,5 +288,9 @@ public class ConfiguraFacil {
         }
         Pacote pacote = melhorPacote(m, preco - m.getCustoBase());
         return pacote;
+    }
+    
+    public List<Carro> getCarrosProducao(){
+        return this.carros.getCarrosProducao();
     }
 }
