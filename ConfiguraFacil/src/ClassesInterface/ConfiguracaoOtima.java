@@ -6,8 +6,10 @@
 package ClassesInterface;
 
 import Classes.*;
+import Exceptions.CustoDemasiadoBaixoException;
 import java.awt.event.WindowEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -108,9 +110,19 @@ public class ConfiguracaoOtima extends javax.swing.JFrame {
     }//GEN-LAST:event_SairActionPerformed
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-        ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, new Pacote(), new ArrayList<>());
+        try{
+        float orcamento = Float.parseFloat(this.preco.getText());
+        Pacote p = this.cf.configuracaoOtimaPacote(m, orcamento);
+        orcamento = orcamento - this.m.getCustoBase() - this.cf.precoPacote(p)* (1 - p.getDesconto());
+        List<Peca> pecas = this.cf.componentesExtra(orcamento);
+        
+        ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, p, pecas);
         cc.setVisible(true);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+        catch(CustoDemasiadoBaixoException | NumberFormatException e){
+            javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
+        }
     }//GEN-LAST:event_ConfirmarActionPerformed
 
     /**

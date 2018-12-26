@@ -229,6 +229,13 @@ public class ConfiguraFacil {
         car.setData(LocalDate.now());
         car.setCliente(c.getEmail());
         return car;
+    } 
+    
+    public float precoPacote(Pacote p){
+        float f = 0;
+        for(Peca peca:stringToPeca(p.getPecas()))
+            f = f + peca.getPreco();
+        return f;
     }
     
     public float calculaPreco(Modelo m, List<Peca> pecas){
@@ -240,20 +247,13 @@ public class ConfiguraFacil {
         return preco;
     }
     
-    public float precoPacote(Pacote p){
-        float f = 0;
-        for(Peca peca:stringToPeca(p.getPecas()))
-            f = f + peca.getPreco();
-        return f;
-    }
-    
     public float calculaPreco(Pacote p, Modelo m, List<Peca> pecas) throws PecaNaoExisteException{
         float preco = m.getCustoBase();
         for(Peca peca: pecas)
             preco = preco + peca.getPreco();
         
         if(p != null){
-            preco = (preco + precoPacote(p))* (1 - p.getDesconto());
+            preco = preco + precoPacote(p) * (1 - p.getDesconto());
         }
         return preco;
     }
@@ -289,12 +289,16 @@ public class ConfiguraFacil {
         return b;
     }
     
-    public Pacote melhorPacote(Modelo m){
+    public Pacote melhorPacote(Modelo m, float orc){
         float f = 0;
         Pacote melhor = new Pacote();
-        for(Pacote p: m.getPacotes())
-            if(precoPacote(p) > f)
+        for(Pacote p: m.getPacotes()){
+            float preco = precoPacote(p);
+            if(preco > f && (orc - (preco * (1 - p.getDesconto()))) > 0){
                 melhor = p;
+                f = preco;
+            }
+        }
         return melhor;
     }
     
@@ -330,30 +334,32 @@ public class ConfiguraFacil {
     }    
     
     public List<Peca> componentesExtra(float preco){
-        List<Peca> p = new ArrayList<>();
+        List<Peca> componentes = new ArrayList<>();
         List<Peca> extras = getExtras().stream().filter(peca -> peca.getPreco() < preco).collect(Collectors.toList());
+        float orc = preco;
         while(extras.size() > 0){
             Peca cara = getPecaMaisCara(extras);
             List<Peca> obrigatorias = stringToPeca(cara.getObrigatorias());
             if(getPrecoObrigatorias(obrigatorias) + cara.getPreco() <= preco){
-                p.add(cara);
-                p.addAll(obrigatorias);
+                orc = orc - getPrecoObrigatorias(obrigatorias) - cara.getPreco();
+                componentes.add(cara);
+                componentes.addAll(obrigatorias);
+                for(Peca peca:obrigatorias){
+                    extras.remove(peca);
+                }
             }
             extras.remove(cara);
         }
-        return p;
+        return componentes;
     }
     
-    public List<Peca> configuracaoOtima(Modelo m, float preco) throws CustoDemasiadoBaixoException{
-        List<Peca> p = new ArrayList<>();
+    public Pacote configuracaoOtimaPacote(Modelo m, float preco) throws CustoDemasiadoBaixoException{
         if(m.getCustoBase() > preco)
             throw new CustoDemasiadoBaixoException("O preco esta abaixo do custo do modelo");
         if(!estaDentro(m, preco)){
             throw new CustoDemasiadoBaixoException("O preco esta abaixo do valor das pecas");
         }
-        Pacote pacote = melhorPacote(m);
-        p = componentesExtra(preco - (precoPacote(pacote) + m.getCustoBase())*(1 - pacote.getDesconto()));
-        p.addAll(stringToPeca(pacote.getPecas()));
-        return p;
+        Pacote pacote = melhorPacote(m, preco - m.getCustoBase());
+        return pacote;
     }
 }

@@ -155,6 +155,9 @@ public class ConfirmaCompra extends javax.swing.JFrame {
 
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
+            if(p != null){
+                this.pecas.addAll(this.cf.stringToPeca(p.getPecas()));
+            }
             Carro car = this.cf.comprarCarro(this.pecas, this.m, this.cf.calculaPreco(this.p, this.m, this.pecas), this.c);
             this.cf.insereCarroSistema(this.c, car);
             this.setVisible(false);
