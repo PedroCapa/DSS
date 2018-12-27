@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Exceptions;
-
 /**
+ * Classe que reporta a excecao no caso de se tentar inserir uma peça que ja exista
  *
- * @author pmcca
  */
 public class PecaJaExisteException extends Exception{
-	public PecaJaExisteException(){
+        /** Mensagem vazia no caso de existir a peca*/	
+        public PecaJaExisteException(){
 		super();
 	}
-
+        /** Mensagem no caso de existir a peca*/
 	public PecaJaExisteException(String s){
 		super(s);
 	}

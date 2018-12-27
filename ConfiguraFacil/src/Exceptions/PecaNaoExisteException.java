@@ -1,16 +1,11 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Exceptions;
-
 /**
+ * Classe que reporta a excecao no caso de nao existir a peca
  *
- * @author pmcca
  */
 public class PecaNaoExisteException extends Exception{
-	public PecaNaoExisteException(){
+	/** Mensagem vazia no caso de nao existir a peca*/
+        public PecaNaoExisteException(){
 		super();
 	}
 

@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Exceptions;
-
 /**
+ * Classe que reporta a excecao no caso da palavra passe estar incorreta
  *
- * @author pmcca
  */
 public class PasswordIncorretaException extends Exception{
-	public PasswordIncorretaException(){
+	/** Mensagem vazia no caso da palavra passe estar incorreta*/
+        public PasswordIncorretaException(){
 		super();
 	}
-
+        /** Mensagem no caso da palavra passe estar incorreta*/
 	public PasswordIncorretaException(String s){
 		super(s);
 	}

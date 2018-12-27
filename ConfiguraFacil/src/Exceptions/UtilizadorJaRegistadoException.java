@@ -1,19 +1,14 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package Exceptions;
-
 /**
+ * Classe que reporta a excecao no caso de se tentar registar um utilizador ja existente
  *
- * @author pmcca
  */
 public class UtilizadorJaRegistadoException extends Exception{
-	public UtilizadorJaRegistadoException(){
+	/** Mensagem vazia no caso de existir um certo utilizador*/
+        public UtilizadorJaRegistadoException(){
 		super();
 	}
-
+        /** Mensagem no caso de existir um certo utilizador*/
 	public UtilizadorJaRegistadoException(String s){
 		super(s);
 	}

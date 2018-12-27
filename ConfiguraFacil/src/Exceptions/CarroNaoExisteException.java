@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Exceptions;
 
+package Exceptions;
 /**
+ * Classe que reporta a excecao no caso de do carro não exitir
  *
- * @author pmcca
  */
 public class CarroNaoExisteException extends Exception{
-	public CarroNaoExisteException(){
+	/** Mensagem vazia no caso de nao existir um certo carro*/
+        public CarroNaoExisteException(){
 		super();
 	}
-
+        /** Mensagem no caso de nao existir um certo carro*/
 	public CarroNaoExisteException(String s){
 		super(s);
 	}

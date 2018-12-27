@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Exceptions;
 
+package Exceptions;
 /**
+ * Classe que reporta a excecao no caso do custo de configura Otimo seja demasiado baixo
  *
- * @author pmcca
  */
 public class CustoDemasiadoBaixoException extends Exception{
-	public CustoDemasiadoBaixoException(){
+	/** Mensagem vazia no caso do orçamento ser demasiado baixo*/
+        public CustoDemasiadoBaixoException(){
 		super();
 	}
-
+        /** Mensagem no caso do orçamento ser demasiado baixo*/
 	public CustoDemasiadoBaixoException(String s){
 		super(s);
 	}

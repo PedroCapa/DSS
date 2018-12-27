@@ -1,19 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-package Exceptions;
 
+package Exceptions;
 /**
+ * Classe que reporta a excecao no caso de se houver pecas que ainda nao foram escolhidas
  *
- * @author pmcca
  */
 public class FaltamEscolherPecasException extends Exception{
-	public FaltamEscolherPecasException(){
+	/** Mensagem vazia no caso de faltarem escolher peças*/
+        public FaltamEscolherPecasException(){
 		super();
 	}
-
+        /** Mensagem no caso de faltarem escolher peças*/
 	public FaltamEscolherPecasException(String s){
 		super(s);
 	}
