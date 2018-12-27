@@ -1,21 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
 import Exceptions.*;
 import java.awt.event.WindowEvent;
-public class Registar extends javax.swing.JFrame {
 
-    private ConfiguraFacil cf;
+/**
+ * Classe associada ao menu de registo
+ */
+public class Registar extends javax.swing.JFrame {
     
+    /**Variável de instância que contêm informação sobe o sistema*/
+    private ConfiguraFacil cf;
+    /**Construtor vazio*/
     public Registar() {
         initComponents();
     }
-    
+    /**
+     * Construtor parameterizado
+     * @param cf Contêm informação sobe o sistema
+     */
     public Registar(ConfiguraFacil cf){
         this();
         this.cf = cf;
@@ -119,7 +122,10 @@ public class Registar extends javax.swing.JFrame {
     private void userNameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_userNameActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_userNameActionPerformed
-    
+    /**
+     * Método que verifica se campos estão preenchidos
+     * @return false se os campos estão preenchidos, true case contrário
+     */
     private boolean validaDados() {
         boolean vazio = (this.password.getPassword().equals("") || this.userName.getText().equals("") 
                 || this.email.getText().equals(""));
@@ -128,7 +134,10 @@ public class Registar extends javax.swing.JFrame {
 
         return !vazio;
     }
-    
+    /**
+     * Método que regista um cliente e o envia para o menu principal
+     * @param evt Evento associado ao botão registar
+     */
     private void RegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistarActionPerformed
         try{        
             if(validaDados()){

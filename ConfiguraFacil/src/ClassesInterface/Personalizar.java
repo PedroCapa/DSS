@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
@@ -14,19 +9,26 @@ import java.util.List;
 import javax.swing.AbstractButton;
 
 /**
- *
- * @author pmcca
+ *Classe associada ao menu que permite ao utilizador personalizar o carro
  */
 public class Personalizar extends javax.swing.JFrame {
-
-    private ConfiguraFacil cf;
-    private Cliente cliente;
-    private Modelo modelo;
     
+    /**Variável de instância que contêm informação sobe o sistema*/
+    private ConfiguraFacil cf;
+    /**Cliente autenticado no sistema*/
+    private Cliente cliente;
+    /**Modelo selecionado pelo cliente*/
+    private Modelo modelo;
+    /**Construtor vazio*/
     public Personalizar() {
         initComponents();
     }
-    
+    /**
+     * Construtor parameterizado
+     * @param cf Contêm informação sobe o sistema
+     * @param cliente Cliente autenticado no sistema
+     * @param modelo Modelo escolhido pelo cliente do novo carro
+     */
     public Personalizar(ConfiguraFacil cf, Cliente cliente, Modelo modelo){
         this();
         this.cf = cf;
@@ -319,7 +321,12 @@ public class Personalizar extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método que verifica se os campos obrigatórios estão totalmente preenchidos e obtém a lista de peças escolhidas pelo cliente
+     * @return Lista de peças escolhidas pelo cliente
+     * @throws PecaNaoExisteException Caso o cliente escolha uma peça que não exista
+     * @throws FaltamEscolherPecasException Se há algum campo por preencher
+     */
     private List<String> validaDados() throws PecaNaoExisteException, FaltamEscolherPecasException{
         List<String> pecas = new ArrayList<>();
         for(Enumeration<AbstractButton> buttons = Cor.getElements(); buttons.hasMoreElements();){
@@ -366,12 +373,18 @@ public class Personalizar extends javax.swing.JFrame {
     private void jRadioButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton21ActionPerformed
 
     }//GEN-LAST:event_jRadioButton21ActionPerformed
-
+    /**
+     * Método que faz cliente regressar ao menu principal
+     * @param evt Evento associado ao botão voltar
+     */
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_VoltarActionPerformed
-
+    /**
+     * Método que permite ao cliente comprar um carro criando uma nova janela com informação sobre o carro
+     * @param evt Evento associado ao botão confirmar
+     */
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
             ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.cliente, this.modelo, null,this.cf.stringToPeca(validaDados()));

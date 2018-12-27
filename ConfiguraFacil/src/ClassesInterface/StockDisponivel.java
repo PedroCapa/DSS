@@ -1,29 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
-import Exceptions.UtilizadorNaoExisteException;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.stream.Collectors;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author pmcca
+ *Classe que mostra ao funcipnário o stock de todas as peças na fábrica
  */
 public class StockDisponivel extends javax.swing.JFrame {
-
-    private ConfiguraFacil cf;
     
+    /**Variável de instância que contêm informação sobe o sistema*/
+    private ConfiguraFacil cf;
+    /**Construtor vazio*/
     public StockDisponivel() {
         initComponents();
     }
-    
+    /**
+     * Construtor parameterizado
+     * @param cf Contêm informação sobe o sistema
+     */
     public StockDisponivel(ConfiguraFacil cf){
         this();
         this.cf = cf;
@@ -125,12 +120,18 @@ public class StockDisponivel extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método que permite ao funcionário voltar ao menu principal
+     * @param evt Evento associado ao botao voltar
+     */
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_VoltarActionPerformed
-
+    /**
+     * Método que mostra na tabela o stock das peças
+     * @param evt Evento associado ao botao mostrar
+     */
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
         DefaultTableModel pecas = (DefaultTableModel)tabela.getModel();
         int tam = this.cf.getPecas().size();

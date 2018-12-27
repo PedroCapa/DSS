@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
@@ -11,17 +6,18 @@ import Exceptions.UtilizadorNaoExisteException;
 import java.awt.event.WindowEvent;
 
 /**
- *
- * @author pmcca
+ * Classe que autentica um utilizador no sistema
  */
 public class Login extends javax.swing.JFrame {
-
+    /**Variável de instância que contêm informação sobe o sistema*/
     private ConfiguraFacil cf;
-    
+    /**Construtor vazio*/
     public Login() {
         initComponents();
     }
-    
+    /**Construtor parameterizad
+     * @param cf Classe que contêm informação sobre o sistema
+    */
     public Login(ConfiguraFacil cf){
         this();
         this.cf = cf;
@@ -105,7 +101,10 @@ public class Login extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método que teste se a caixa de texto do email ou pass estão vazias
+     * @return false se os campos estão preenchidos, true case contrário
+     */
     private boolean validaDados() {
         boolean vazio = (this.password.getPassword().equals("") || this.email.getText().equals(""));
         if (vazio)
@@ -117,7 +116,11 @@ public class Login extends javax.swing.JFrame {
     private void passwordActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_passwordActionPerformed
         
     }//GEN-LAST:event_passwordActionPerformed
-
+    /**
+     * Método que está associado ao botão login. Avança para o menu principal caso se consiga autenticar.
+     * Case contrário continua no mesmo menu. Se algum campo estiver por preencher aparece uma janela de aviso
+     * @param evt Evento associado ao botão 
+     */
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
        try{
            if(validaDados()){

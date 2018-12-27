@@ -1,32 +1,25 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
-import Exceptions.*;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
-import java.time.format.DateTimeFormatter;
 
 /**
- *
- * @author pmcca
+ * Classe associada ao menu principal de um cliente
  */
 public class MenuPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuPrincipal
-     */
-private ConfiguraFacil cf;
-private Cliente c;
-    
+    /**Variável de instância que contêm informação sobe o sistema*/
+    private ConfiguraFacil cf;
+    /**Cliente que está autenticado no sistema*/
+    private Cliente c;
+    /**Construtor vazio*/
     public MenuPrincipal() {
         initComponents();
     }
-    
+    /**
+     * Construtor parameterizado
+     * @param cf Contêm informação sobe o sistema
+     * @param c Cliente que está autenticado no sistema
+     */
     public MenuPrincipal(ConfiguraFacil cf, Cliente c){
         this();
         this.cf = cf;
@@ -98,12 +91,18 @@ private Cliente c;
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /*
+    * Método que permite ao cliente comprar um carro, abrindo uma janela nova
+    * @param evt Evento associado ao botão comprar
+    */
     private void ComprarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ComprarActionPerformed
         ComprarCarro cc = new ComprarCarro(this.cf, this.c);
         cc.setVisible(true);
     }//GEN-LAST:event_ComprarActionPerformed
-
+    /*
+    * Método que permite ao cliente ver todos os carros que comprou
+    * @param evt Evento associado ao botão histórico
+    */
     private void HistoricoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_HistoricoActionPerformed
         HistoricoCompras cc = new HistoricoCompras(this.cf, this.c);
         cc.setVisible(true);

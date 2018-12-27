@@ -1,32 +1,21 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
-import Classes.Carro;
 import Classes.*;
-import Exceptions.UtilizadorNaoExisteException;
-import java.time.format.DateTimeFormatter;
-import java.util.List;
-import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author pmcca
+ *Classe associada ao menu principal de um funcionário
  */
 public class MenuPrincipalFuncionario extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MenuPrincipalFuncionario
-     */
+    /**Variável de instância que contêm informação sobe o sistema*/
     private ConfiguraFacil cf;
-    
+    /**Construtor vazio*/
     public MenuPrincipalFuncionario() {
         initComponents();
     }
-    
+    /**Construtor parameterizado
+     * @param cf Contêm informação sobe o sistema
+     */
     public MenuPrincipalFuncionario(ConfiguraFacil cf){
         this();
         this.cf = cf;
@@ -123,22 +112,34 @@ public class MenuPrincipalFuncionario extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método que permite ao funcionário adicionar peças
+     * @param evt Evento associado ao botão adicionar stock
+     */
     private void AdicionarStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AdicionarStockActionPerformed
         AdicionaStock as = new AdicionaStock(this.cf);
         as.setVisible(true);
     }//GEN-LAST:event_AdicionarStockActionPerformed
-
+    /**
+     * Método que permite ao funcinário colocar um carro pronto
+     * @param evt Evento associado ao botão carro pronto
+     */
     private void CarroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CarroActionPerformed
         CarroPronto cc = new CarroPronto(this.cf);
         cc.setVisible(true);
     }//GEN-LAST:event_CarroActionPerformed
-
+    /**
+     * Método que permite ao funcionário ver o stock disponível na fábrica, abrindo uma nova janela
+     * @param evt Evento associado ao botão stock disponivel
+     */
     private void StockDisponivelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_StockDisponivelActionPerformed
         StockDisponivel cc = new StockDisponivel(this.cf);
         cc.setVisible(true);
     }//GEN-LAST:event_StockDisponivelActionPerformed
-
+    /**
+     * Método que permite ao funcinário ver os carros em produção, abrindo uma janela nova
+     * @param evt Evento associado ao botão carros em producao
+     */
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CarrosEmFila cc = new CarrosEmFila(this.cf);
         cc.setVisible(true);

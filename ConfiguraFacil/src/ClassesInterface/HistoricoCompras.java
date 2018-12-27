@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.Carro;
@@ -13,21 +8,22 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author pmcca
+ *Classe da janela que mostra para o cliente a lista de carros comprados por este
  */
 public class HistoricoCompras extends javax.swing.JFrame {
 
-    /**
-     * Creates new form HistoricoCompras
-     */
+    /**Variável de instância que contêm informação sobe o sistema*/
     private ConfiguraFacil cf;
+    /**Cliente que está autenticado no sistema*/
     private Cliente cliente;
-    
+    /**Construtor vazio*/
     public HistoricoCompras() {
         initComponents();
     }
-    
+    /**Construtor parameterizad
+     * @param cf Classe que contêm informação sobre o sistema
+     * @param cliente Cliente que está autenticado no sistema
+    */
     public HistoricoCompras(ConfiguraFacil cf, Cliente cliente){
         this();
         this.cf = cf;
@@ -133,12 +129,18 @@ public class HistoricoCompras extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /*
+    * Método que faz regressar ao menu anterior
+    * @param evt Evento associado ao botão voltar
+    */
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_VoltarActionPerformed
-
+    /*
+    * Método que imprime na tabela todos os carros comprados pelo cliente
+    * @param evt Evento associado ao botão mostrar
+    */
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
         try{
             DefaultTableModel modelo = (DefaultTableModel)tabela.getModel();

@@ -1,26 +1,24 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
 import java.awt.event.WindowEvent;
 
 /**
- *
- * @author pmcca
+ *Classe associada ao menu inicial
  */
 public class MenuInicial extends javax.swing.JFrame {
     
+    /**Variável de instância que contêm informação sobe o sistema*/
     private ConfiguraFacil cf;
-    
+    /**
+     * Construtor parameterizado
+     * @param cf Contêm informação sobe o sistema
+     */
     public MenuInicial(ConfiguraFacil cf) {
         initComponents();
         this.cf = cf;
     }
-
+    /** Construtor parameterizado */
     private MenuInicial() {
         initComponents();
         this.cf = new ConfiguraFacil();
@@ -96,14 +94,20 @@ public class MenuInicial extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método que cria uma janela de login caso o utilizador se queira autenticar
+     * @param evt Evento associado ao botão login
+     */
     private void LoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LoginActionPerformed
         this.cf = new ConfiguraFacil();
         Login l = new Login(this.cf);
         l.setVisible(true);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
     }//GEN-LAST:event_LoginActionPerformed
-
+    /**
+     * Método que cria a janela de registo caso o cliente se queira registar
+     * @param evt Evento associado ao botão registar
+     */
     private void RegistarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RegistarActionPerformed
         this.cf = new ConfiguraFacil();
         Registar r = new Registar(this.cf);
