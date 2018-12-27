@@ -140,7 +140,8 @@ public class MenuPrincipalFuncionario extends javax.swing.JFrame {
     }//GEN-LAST:event_StockDisponivelActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        CarrosEmFila cc = new CarrosEmFila(this.cf);
+        cc.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

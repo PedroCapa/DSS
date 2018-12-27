@@ -112,7 +112,7 @@ public class ConfiguracaoOtima extends javax.swing.JFrame {
         try{
         float orcamento = Float.parseFloat(this.preco.getText());
         Pacote pacote = this.cf.configuracaoOtimaPacote(modelo, orcamento);
-        orcamento = orcamento - this.modelo.getCustoBase() - this.cf.precoPacote(pacote)* (1 - pacote.getDesconto());
+        orcamento = orcamento - this.modelo.getCustoBase() - this.cf.precoPacote(pacote);
         List<Peca> pecas = this.cf.componentesExtra(orcamento);
         
         ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.cliente, this.modelo, pacote, pecas);

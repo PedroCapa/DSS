@@ -149,7 +149,10 @@ public class EscolherPacote extends javax.swing.JFrame {
             Extras e = new Extras(this.cf, this.cliente, this.modelo, this.cf.getPacote(pacoteEscolhido()));
             e.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-       }
+       }else{
+            javax.swing.JOptionPane.showMessageDialog(this, "O pacote " + escolhido.getNome() + 
+                    " não está deiponivel para o modelo "  + this.modelo.getNome(), "Dados incorretos", 0);
+        }
     }//GEN-LAST:event_ConfirmarActionPerformed
 
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed

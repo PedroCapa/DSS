@@ -185,7 +185,7 @@ public class ConfiguraFacil {
         List<Peca> list = p.getPecas().stream().map(s -> this.pecas.get(s)).collect(Collectors.toList());
         for(Peca peca: list)
             f = f + peca.getPreco();
-        return f;
+        return f*(1 - p.getDesconto());
     }
     
     public float calculaPreco(Pacote p, Modelo m, List<Peca> pecas) throws PecaNaoExisteException{
@@ -194,7 +194,7 @@ public class ConfiguraFacil {
             preco = preco + peca.getPreco();
         
         if(p != null){
-            preco = preco + precoPacote(p)* (1 - p.getDesconto());
+            preco = preco + precoPacote(p);
         }
         return preco;
     }
@@ -211,11 +211,8 @@ public class ConfiguraFacil {
         public boolean estaDentro(Modelo m, float preco){
         boolean b = false;
         for(Pacote p: m.getPacotes()){
-            float valor = 0;
-            for(Peca peca: stringToPeca(p.getPecas())){
-                valor = valor + peca.getPreco();
-            }
-            if(preco > (valor + m.getCustoBase())*(1 - p.getDesconto()))
+            float valor = precoPacote(p);            
+            if(preco > (valor + m.getCustoBase()))
                 b = true;
         }
         return b;
@@ -226,7 +223,7 @@ public class ConfiguraFacil {
         Pacote melhor = new Pacote();
         for(Pacote p: m.getPacotes()){
             float preco = precoPacote(p);
-            if(preco > f && (orc - (preco * (1 - p.getDesconto()))) > 0){
+            if(preco > f && (orc - preco) > 0){
                 melhor = p;
                 f = preco;
             }
@@ -272,7 +269,7 @@ public class ConfiguraFacil {
         while(extras.size() > 0){
             Peca cara = getPecaMaisCara(extras);
             List<Peca> obrigatorias = stringToPeca(cara.getObrigatorias());
-            if(getPrecoObrigatorias(obrigatorias) + cara.getPreco() <= preco){
+            if(getPrecoObrigatorias(obrigatorias) + cara.getPreco() <= orc){
                 orc = orc - getPrecoObrigatorias(obrigatorias) - cara.getPreco();
                 componentes.add(cara);
                 componentes.addAll(obrigatorias);
