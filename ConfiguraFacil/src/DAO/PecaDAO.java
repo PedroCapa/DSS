@@ -17,14 +17,16 @@ import java.util.Collection;
 import java.util.List;
 import java.util.ArrayList;
 import java.sql.*;
-/**
- *
- * @author Luis
- */
+
+
 public class PecaDAO implements Map<String, Peca>{
     
     private Connection conn;
-    
+        /**
+     * Método DAO que permite aceder à informação relacionada com as peças na base de dados
+     * 
+     * @author Eu
+     */
     public PecaDAO(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -33,12 +35,22 @@ public class PecaDAO implements Map<String, Peca>{
         }
         catch(ClassNotFoundException | SQLException exc){}
     }
-    
+        /**
+     * Método que cria um set de peças
+     * 
+     * @author Eu
+     */
     @Override
     public Set<Map.Entry<String,Peca>> entrySet() {
         throw new NullPointerException("public Set<Map.Entry<String,Peca>> entrySet() not implemented!");
     }
-
+        /**
+     * Método que cria uma coleção de peças
+     * 
+     * @return coleção criada
+     * 
+     * @author Eu
+     */
     @Override
     public Collection<Peca> values(){
         Collection<Peca> pecas = new HashSet<>();
@@ -49,7 +61,13 @@ public class PecaDAO implements Map<String, Peca>{
         }
         return pecas;
     }
-    
+        /**
+     * Método que cria um set com os ids das peças
+     * 
+     * @return set dos ids
+     * 
+     * @author Eu
+     */
     @Override
     public Set<String> keySet() {
         try{
@@ -64,7 +82,11 @@ public class PecaDAO implements Map<String, Peca>{
         }
         catch(SQLException exc){throw new NullPointerException(exc.getMessage());}
     }
-    
+        /**
+     * Método que apaga caraterísticas de peças
+     * 
+     * @author Eu
+     */
     @Override
     public void clear(){
         try {
@@ -76,11 +98,26 @@ public class PecaDAO implements Map<String, Peca>{
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método não implementado
+     * 
+     * @author Eu
+     */
     @Override
     public void putAll(Map<? extends String,? extends Peca> p) {
         throw new NullPointerException("Not implemented!");
     }
+        /**
+     * Método que insere caraterísticas numa peça
+     * 
+     * @param key chave que dá acesso à peça
+     * 
+     * @param value peça cujas caraterísticas serão alteradas
+     * 
+     * @return peça com novas caraterísticas
+     * 
+     * @author Eu
+     */
     @Override
     public Peca remove(Object key) {
         try {
@@ -99,14 +136,30 @@ public class PecaDAO implements Map<String, Peca>{
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método que insere caraterísticas numa peça
+     * 
+     * @param key chave que dá acesso à peça
+     * 
+     * @param value peça cujas caraterísticas serão alteradas
+     * 
+     * @return peça com novas caraterísticas
+     * 
+     * @author Eu
+     */
     @Override
     public Peca put(String key, Peca value) {
         Peca peca = this.putPeca(key, value);
         this.putPeca_Peca(value);
         return peca;
     }
-    
+        /**
+     * Método que insere numa peça as caraterísticas que estão relacionadas com esta e outras peças
+     * 
+     * @param value peça que recebe as caraterísticas
+     * 
+     * @author Eu
+     */
     public void putPeca_Peca(Peca value){
         try {
             String id1 = value.getNome();
@@ -121,7 +174,15 @@ public class PecaDAO implements Map<String, Peca>{
             }
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
-    
+        /**
+     * Método que insere numa peça as caraterísticas que estão relacionadas com ela
+     * 
+     * @param key chave que dá acesso à peça
+     * 
+     * @param value peça que recebe as caraterísticas
+     * 
+     * @author Eu
+     */
     public Peca putPeca(String key, Peca value){
         try {
             Peca p;
@@ -138,7 +199,13 @@ public class PecaDAO implements Map<String, Peca>{
             return p;
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
-    
+        /**
+     * Método que permite obter as caraterísticas da peça
+     * 
+     * @param key chave que dá acesso à peça
+     * 
+     * @author Eu
+     */
     @Override
     public Peca get(Object key) {
         try {
@@ -185,7 +252,15 @@ public class PecaDAO implements Map<String, Peca>{
         }
         catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método que verifica se a chave está correta
+     * 
+     * @param key chave a ser verificada
+     * 
+     * @return boolean que diz se a chave está correta ou não
+     * 
+     * @author Eu
+     */
     @Override
     public boolean containsKey(Object key){
         try{    
@@ -196,12 +271,24 @@ public class PecaDAO implements Map<String, Peca>{
         }
         catch(SQLException exc){throw new NullPointerException(exc.getMessage());}
     }
-    
+        /**
+     * Método que verifica se um dado objeto existe
+     * 
+     * @param value objeto a ser verificado
+     * 
+     * @author Eu
+     */
     @Override
     public boolean containsValue(Object value) {
         throw new NullPointerException("public boolean containsValue(Object value) not implemented!");
     }
-    
+        /**
+     * Método que verifica se uma string está vazia
+     * 
+     * @return boolean que diz se a string está vazia ou não
+     * 
+     * @author Eu
+     */
     @Override
     public boolean isEmpty(){
         try {
@@ -211,7 +298,13 @@ public class PecaDAO implements Map<String, Peca>{
             return rs.next();
         } catch (SQLException exc) {throw new NullPointerException(exc.getMessage());}
     }
-    
+        /**
+     * Método que verifica o tamanho de uma statement
+     * 
+     * @return tamanho da statement
+     * 
+     * @author Eu
+     */
     @Override
     public int size() {
         try {
@@ -223,7 +316,13 @@ public class PecaDAO implements Map<String, Peca>{
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método que atualiza o estado de uma peça
+     * 
+     * @param p Peça a ser atualizada
+     * 
+     * @author Eu
+     */
     public void update(Peca p){
         try {
             String s = p.getNome();

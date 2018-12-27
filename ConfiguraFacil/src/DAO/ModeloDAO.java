@@ -12,14 +12,17 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Collection;
 import java.sql.*;
-/**
- *
- * @author Luis
- */
+
+
 public class ModeloDAO implements Map<String, Modelo>{
         
     private Connection conn;
     
+        /**
+     * Método DAO que permite aceder à informação relacionada com os modelos na base de dados
+     * 
+     * @author Eu
+     */
     public ModeloDAO(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -28,12 +31,22 @@ public class ModeloDAO implements Map<String, Modelo>{
         }
         catch(ClassNotFoundException | SQLException exc){}
     }
-    
+        /**
+     * Método que cria um set de modelos
+     * 
+     * @author Eu
+     */
     @Override
     public Set<Map.Entry<String,Modelo>> entrySet() {
         throw new NullPointerException("public Set<Map.Entry<String,Modelo>> entrySet() not implemented!");
     }
-    
+        /**
+     * Método que cria uma coleção de modelos
+     * 
+     * @return coleção criada
+     * 
+     * @author Eu
+     */
     @Override
     public Collection<Modelo> values(){
         Collection<Modelo> modelos = new HashSet<>();
@@ -44,7 +57,13 @@ public class ModeloDAO implements Map<String, Modelo>{
         }
         return modelos;
     }
-    
+        /**
+     * Método que cria um set com os ids dos modelos
+     * 
+     * @return set dos ids
+     * 
+     * @author Eu
+     */
     @Override
     public Set<String> keySet() {
         try{
@@ -59,7 +78,11 @@ public class ModeloDAO implements Map<String, Modelo>{
         }
         catch(SQLException exc){throw new NullPointerException(exc.getMessage());}
     }
-    
+        /**
+     * Método que apaga caraterísticas de modelos
+     * 
+     * @author Eu
+     */
     @Override
     public void clear(){
         try {
@@ -71,12 +94,22 @@ public class ModeloDAO implements Map<String, Modelo>{
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método não implementado
+     * 
+     * @author Eu
+     */
     @Override
     public void putAll(Map<? extends String,? extends Modelo> p) {
         throw new NullPointerException("Not implemented!");
     }
-    
+        /**
+     * Método que remove caraterísticas de um modelo específico
+     * 
+     * @param key chave que dá acesso ao modelo
+     * 
+     * @author Eu
+     */
     @Override
     public Modelo remove(Object key) {
         try {
@@ -91,7 +124,17 @@ public class ModeloDAO implements Map<String, Modelo>{
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método que insere caraterísticas num modelo
+     * 
+     * @param key chave que dá acesso ao modelo
+     * 
+     * @param value modelo cujas caraterísticas serão alteradas
+     * 
+     * @return modelo com novas caraterísticas
+     * 
+     * @author Eu
+     */
     @Override
     public Modelo put(String key, Modelo value) {
         Modelo m = new Modelo(value);
@@ -99,7 +142,15 @@ public class ModeloDAO implements Map<String, Modelo>{
         this.putPacoteModelo(key, value);
         return m;
     }
-    
+        /**
+     * Método que insere num modelo as caraterísticas que estão relacionadas com ele
+     * 
+     * @param key chave que dá acesso ao modelo
+     * 
+     * @param value modelo que recebe as caraterísticas
+     * 
+     * @author Eu
+     */
     public void putModelo(String key, Modelo value){
         try {
             Statement stm = conn.createStatement();
@@ -107,7 +158,15 @@ public class ModeloDAO implements Map<String, Modelo>{
             int i  = stm.executeUpdate(sql);
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
-        
+        /**
+     * Método que insere num modelo as caraterísticas que estão relacionadas com este e com os pacotes
+     * 
+     * @param key chave que dá acesso ao modelo e ao pacote
+     * 
+     * @param value modelo que recebe as caraterísticas
+     * 
+     * @author Eu
+     */
     public void putPacoteModelo(String key, Modelo value){
         try {
             Statement stm = conn.createStatement();
@@ -118,7 +177,13 @@ public class ModeloDAO implements Map<String, Modelo>{
             }
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
-    
+        /**
+     * Método que permite obter as caraterísticas do modelo
+     * 
+     * @param key chave que dá acesso ao modelo
+     * 
+     * @author Eu
+     */
     @Override
     public Modelo get(Object key) {
         try {
@@ -137,7 +202,15 @@ public class ModeloDAO implements Map<String, Modelo>{
         }
         catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método que verifica se a chave está correta
+     * 
+     * @param key chave a ser verificada
+     * 
+     * @return boolean que diz se a chave está correta ou não
+     * 
+     * @author Eu
+     */
     @Override
     public boolean containsKey(Object key){
         try{    
@@ -148,12 +221,24 @@ public class ModeloDAO implements Map<String, Modelo>{
         }
         catch(SQLException exc){throw new NullPointerException(exc.getMessage());}
     }
-    
+        /**
+     * Método que verifica se um dado objeto existe
+     * 
+     * @param value objeto a ser verificado
+     * 
+     * @author Eu
+     */
     @Override
     public boolean containsValue(Object value) {
         throw new NullPointerException("public boolean containsValue(Object value) not implemented!");
     }
-    
+        /**
+     * Método que verifica se uma string está vazia
+     * 
+     * @return boolean que diz se a string está vazia ou não
+     * 
+     * @author Eu
+     */
     @Override
     public boolean isEmpty(){
         try {
@@ -163,7 +248,13 @@ public class ModeloDAO implements Map<String, Modelo>{
             return rs.next();
         } catch (SQLException exc) {throw new NullPointerException(exc.getMessage());}
     }
-    
+        /**
+     * Método que verifica o tamanho de uma statement
+     * 
+     * @return tamanho da statement
+     * 
+     * @author Eu
+     */
     @Override
     public int size() {
         try {
@@ -175,7 +266,15 @@ public class ModeloDAO implements Map<String, Modelo>{
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método que obtém 
+     * 
+     * @param key chave que dá acesso ao carro
+     * 
+     * @param value carro a ser verificado
+     * 
+     * @author Eu
+     */
     public void getModeloCarro(String key, Carro car, String nome){
         Modelo m = this.get(nome);
         car.setModelo(m);

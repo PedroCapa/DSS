@@ -12,14 +12,17 @@ import java.util.Set;
 import java.util.HashSet;
 import java.util.Collection;
 import java.sql.*;
-/**
- *
- * @author Luis
- */
+
+
 public class UtilizadorDAO implements Map<String, Utilizador>{
     
     private Connection conn;
     
+        /**
+     * Método DAO que permite aceder à informação relacionada com os utilizadores na base de dados
+     * 
+     * @author Eu
+     */
     public UtilizadorDAO(){
         try{
             Class.forName("com.mysql.jdbc.Driver");
@@ -28,12 +31,22 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         }
         catch(ClassNotFoundException | SQLException exc){}
     }
-    
+        /**
+     * Método que cria um set de utilizadores
+     * 
+     * @author Eu
+     */
     @Override
     public Set<Map.Entry<String,Utilizador>> entrySet() {
         throw new NullPointerException("public Set<Map.Entry<String,Utilizador>> entrySet() not implemented!");
     }
-    
+        /**
+     * Método que cria uma coleção de utilizadores
+     * 
+     * @return coleção criada
+     * 
+     * @author Eu
+     */
     @Override
     public Collection<Utilizador> values(){
         Collection<Utilizador> utilizadores = new HashSet<>();
@@ -44,7 +57,13 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         }
         return utilizadores;
     }
-    
+        /**
+     * Método que cria um set com os ids dos utilizadores
+     * 
+     * @return set dos ids
+     * 
+     * @author Eu
+     */
     @Override
     public Set<String> keySet() {
         try{
@@ -59,7 +78,11 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         }
         catch(SQLException exc){throw new NullPointerException(exc.getMessage());}
     }
-    
+        /**
+     * Método que apaga caraterísticas de utilizadores
+     * 
+     * @author Eu
+     */
     @Override
     public void clear(){
         try {
@@ -70,12 +93,26 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método não implementado
+     * 
+     * @author Eu
+     */
     @Override
     public void putAll(Map<? extends String,? extends Utilizador> p) {
         throw new NullPointerException("Not implemented!");
     }
-    
+        /**
+     * Método que insere caraterísticas num utilizador
+     * 
+     * @param key chave que dá acesso ao utilizador
+     * 
+     * @param value utilizador cujas caraterísticas serão alteradas
+     * 
+     * @return utilizador com novas caraterísticas
+     * 
+     * @author Eu
+     */
     @Override
     public Utilizador remove(Object key) {
         try {
@@ -88,7 +125,17 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método que insere caraterísticas num utilizador
+     * 
+     * @param key chave que dá acesso ao utilizador
+     * 
+     * @param value utilizador cujas caraterísticas serão alteradas
+     * 
+     * @return utilizador com novas caraterísticas
+     * 
+     * @author Eu
+     */
     @Override
     public Utilizador put(String key, Utilizador value) {
         try {
@@ -112,7 +159,13 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método que permite obter as caraterísticas do utilizador
+     * 
+     * @param key chave que dá acesso ao utilizador
+     * 
+     * @author Eu
+     */
     @Override
     public Utilizador get(Object key) {
         try {
@@ -143,7 +196,15 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         }
         catch (NumberFormatException | SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+     * Método que verifica se a chave está correta
+     * 
+     * @param key chave a ser verificada
+     * 
+     * @return boolean que diz se a chave está correta ou não
+     * 
+     * @author Eu
+     */
     @Override
     public boolean containsKey(Object key){
         try{    
@@ -154,12 +215,24 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         }
         catch(SQLException exc){throw new NullPointerException(exc.getMessage());}
     }
-    
+        /**
+     * Método que verifica se um dado objeto existe
+     * 
+     * @param value objeto a ser verificado
+     * 
+     * @author Eu
+     */
     @Override
     public boolean containsValue(Object value) {
         throw new NullPointerException("public boolean containsValue(Object value) not implemented!");
     }
-    
+        /**
+     * Método que verifica se uma string está vazia
+     * 
+     * @return boolean que diz se a string está vazia ou não
+     * 
+     * @author Eu
+     */
     @Override
     public boolean isEmpty(){
         try {
@@ -169,7 +242,13 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
             return rs.next();
         } catch (SQLException exc) {throw new NullPointerException(exc.getMessage());}
     }
-    
+        /**
+     * Método que verifica o tamanho de uma statement
+     * 
+     * @return tamanho da statement
+     * 
+     * @author Eu
+     */
     @Override
     public int size() {
         try {
@@ -192,7 +271,15 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
             int i = stm.executeUpdate("Update Carro Set Utilizador_Email='"+key+"' Where id='"+email+"'");
         } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
     }
-
+        /**
+     * Método que verifica se um dado cliente existe
+     * 
+     * @param key chave do cliente a ser verificado
+     * 
+     * @return boolean que diz se o cliente existe ou não
+     * 
+     * @author Eu
+     */
     public boolean containsCliente(String key) {
        try{    
             Statement stm = conn.createStatement();
