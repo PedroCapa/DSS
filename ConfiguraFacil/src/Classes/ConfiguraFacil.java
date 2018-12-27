@@ -42,6 +42,11 @@ public class ConfiguraFacil {
         return this.pecas.values().stream().collect(Collectors.toList());
     }
     
+    public Peca getPeca(String peca){
+        Peca p = this.pecas.get(peca);
+        return p;
+    }
+    
     /*
     Não devia de retornar um Cliente?????????????????????????????????????????????????????
     */
@@ -258,7 +263,7 @@ public class ConfiguraFacil {
             f = f + p.getPreco();
         }
         return f;
-    }    
+    }
     
     public List<Peca> componentesExtra(float preco){
         List<Peca> componentes = new ArrayList<>();
@@ -284,7 +289,7 @@ public class ConfiguraFacil {
         if(m.getCustoBase() > preco)
             throw new CustoDemasiadoBaixoException("O preco esta abaixo do custo do modelo");
         if(!estaDentro(m, preco)){
-            throw new CustoDemasiadoBaixoException("O preco esta abaixo do valor das pecas");
+            throw new CustoDemasiadoBaixoException("O preco esta abaixo do valor das pecas basicas");
         }
         Pacote pacote = melhorPacote(m, preco - m.getCustoBase());
         return pacote;
