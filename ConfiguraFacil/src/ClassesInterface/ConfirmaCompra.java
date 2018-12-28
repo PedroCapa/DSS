@@ -177,9 +177,7 @@ public class ConfirmaCompra extends javax.swing.JFrame {
             else{
                 custo = this.cf.calculaPreco(this.pacote, this.modelo, this.pecas);
             }
-            Carro car = this.cf.comprarCarro(this.pecas, this.modelo, custo, this.cliente);
-            for(String p: car.getPecas())
-                System.out.println(p);
+            Carro car = this.cf.comprarCarro(this.pecas, this.modelo, this.pacote, custo, this.cliente);
             this.setVisible(false);
             this.dispose();
         }

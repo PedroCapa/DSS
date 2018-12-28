@@ -186,11 +186,11 @@ public class PecaDAO implements Map<String, Peca>{
             Peca p;
             int tipo;
             Statement stm = conn.createStatement();
-            if(value instanceof Motor){tipo = 1; p = new Motor(value);}
-            else if(value instanceof Cor){tipo = 2; p = new Cor(value);}
-            else if(value instanceof Jantes){tipo = 3; p = new Jantes(value);}
-            else if(value instanceof Estofos){tipo = 4; p = new Estofos(value);}
-            else{tipo = 5; p = new Extras(value);}
+            if(value instanceof Motor){tipo = 1; p = new Motor((Motor)value);}
+            else if(value instanceof Cor){tipo = 2; p = new Cor((Cor)value);}
+            else if(value instanceof Jantes){tipo = 3; p = new Jantes((Jantes)value);}
+            else if(value instanceof Estofos){tipo = 4; p = new Estofos((Estofos)value);}
+            else{tipo = 5; p = new Extras((Extras)value);}
             String sql = "INSERT INTO Peca VALUES ("+value.getQuantidade()+",'"+key+"',";
             sql += +tipo+","+value.getPreco()+")";
             int i  = stm.executeUpdate(sql);

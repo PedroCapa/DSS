@@ -234,10 +234,10 @@ public class ConfiguraFacil {
      * 
      * @return Carro criado
      */
-    public Carro comprarCarro(List<Peca> pecas, Modelo m, float preco, Cliente c){
+    public Carro comprarCarro(List<Peca> pecas, Modelo m, Pacote pacote, float preco, Cliente c){
         Carro car = new Carro();
         car.setModelo(m);
-        
+        pecas.addAll(stringToPeca(pacote.getPecas()));
         for(Peca p: pecas){
             int stock = p.getQuantidade();
             String nome = p.getNome();

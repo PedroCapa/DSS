@@ -158,7 +158,7 @@ public class EscolherPacote extends javax.swing.JFrame {
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         Pacote escolhido = this.cf.getPacote(pacoteEscolhido());
         if(!pacoteEscolhido().equals("") && this.cf.getModelo(this.modelo.getNome()).getPacotes().contains(escolhido)){
-            Extras e = new Extras(this.cf, this.cliente, this.modelo, this.cf.getPacote(pacoteEscolhido()));
+            Extras e = new Extras(this.cf, this.cliente, this.modelo, escolhido);
             e.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
        }else{
