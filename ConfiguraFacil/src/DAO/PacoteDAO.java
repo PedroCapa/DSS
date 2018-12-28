@@ -104,13 +104,11 @@ public class PacoteDAO implements Map<String, Pacote>{
         throw new NullPointerException("Not implemented!");
     }
         /**
-     * Método que insere caraterísticas num pacote
+     * Método que remove um pacote da base de dados
      * 
      * @param key chave que dá acesso ao pacote
      * 
-     * @param value pacote cujas caraterísticas serão alteradas
-     * 
-     * @return pacote com novas caraterísticas
+     * @return pacote removido da base de dados
      * 
      * @author Eu
      */
@@ -291,7 +289,11 @@ public class PacoteDAO implements Map<String, Pacote>{
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
+        /**
+    * Método que obtém os pacotes disponíveis para um modelo
+    * 
+    * @param m modelo no qual se pretende verificar os pacotes
+    */
     public void getPacoteModelo(Modelo m){
         try {
             List<Pacote> pacotes = new ArrayList<>();

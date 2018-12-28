@@ -108,13 +108,11 @@ public class PecaDAO implements Map<String, Peca>{
         throw new NullPointerException("Not implemented!");
     }
         /**
-     * Método que insere caraterísticas numa peça
-     * 
-     * @param key chave que dá acesso à peça
+     * Método que remove uma peça da base de dados
      * 
      * @param value peça cujas caraterísticas serão alteradas
      * 
-     * @return peça com novas caraterísticas
+     * @return peça removida da base de dados
      * 
      * @author Eu
      */

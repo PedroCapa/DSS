@@ -106,9 +106,11 @@ public class CarroDAO implements Map<String, Carro>{
         throw new NullPointerException("Not implemented!");
     }
         /**
-     * Método que remove caraterísticas de um carro específico
+     * Método que remove um carro da base de dados
      * 
      * @param key chave que dá acesso ao carro
+     * 
+     * @return carro removido da base de dados
      * 
      * @author Eu
      */

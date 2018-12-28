@@ -104,9 +104,11 @@ public class ModeloDAO implements Map<String, Modelo>{
         throw new NullPointerException("Not implemented!");
     }
         /**
-     * Método que remove caraterísticas de um modelo específico
+     * Método que remove um modelo da base de dados
      * 
      * @param key chave que dá acesso ao modelo
+     * 
+     * @return modelo removido da base de dados
      * 
      * @author Eu
      */
@@ -267,11 +269,13 @@ public class ModeloDAO implements Map<String, Modelo>{
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
         /**
-     * Método que obtém 
+     * Método que obtém a partir da base de dados o modelo de um carro
      * 
-     * @param key chave que dá acesso ao carro
+     * @param key chave que dá acesso ao carro e ao modelo
      * 
-     * @param value carro a ser verificado
+     * @param car carro a ser verificado
+     * 
+     * @param nome modelo do carro verificado
      * 
      * @author Eu
      */

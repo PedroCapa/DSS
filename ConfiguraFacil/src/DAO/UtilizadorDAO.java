@@ -103,13 +103,11 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         throw new NullPointerException("Not implemented!");
     }
         /**
-     * Método que insere caraterísticas num utilizador
+     * Método que remove um utilizador da base de dados
      * 
      * @param key chave que dá acesso ao utilizador
      * 
-     * @param value utilizador cujas caraterísticas serão alteradas
-     * 
-     * @return utilizador com novas caraterísticas
+     * @return utilizador removido da base de dados
      * 
      * @author Eu
      */
