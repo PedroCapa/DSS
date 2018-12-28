@@ -12,7 +12,7 @@ public abstract class Utilizador{
     private String email;
     /**Password da conta de forma a garantir a segurança de cada conta*/
     private String password;
-    /**Construtor com todas as variaveis de instancia do utilizador*/
+    /**Construtor parametrizado do utilizador*/
     public Utilizador(String nome, String password, String email) {
         this.nome = nome;
         this.password = password;

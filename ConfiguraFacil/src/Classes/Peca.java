@@ -13,7 +13,7 @@ public abstract class Peca {
     private int quantidade;
     /**Nome da peca*/
     private String nome;
-    /**Custo da pecas*/
+    /**Custo da peca*/
     private float preco;
     /**Lista dos nomes das pecas obrigatorias*/
     private List<String> obrigatorias;

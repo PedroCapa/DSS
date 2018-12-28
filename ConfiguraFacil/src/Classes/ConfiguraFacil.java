@@ -137,7 +137,7 @@ public class ConfiguraFacil {
         this.carros.update(c);
     }
     /**
-     * Metodo que retorna os carros comprados por um cliente 
+     * Metodo que retorna os carros comprados por um cliente
      * 
      * @param email Email do utilizador que se pretende visualizar a lista de carros comprados
      * 
@@ -228,6 +228,8 @@ public class ConfiguraFacil {
      * 
      * @param m Modelo do carro
      * 
+     * @param pacote Pacote escolhido para o carro
+     * 
      * @param preco preco do carro
      * 
      * @param c cliente que comprou o carro
@@ -237,7 +239,8 @@ public class ConfiguraFacil {
     public Carro comprarCarro(List<Peca> pecas, Modelo m, Pacote pacote, float preco, Cliente c){
         Carro car = new Carro();
         car.setModelo(m);
-        pecas.addAll(stringToPeca(pacote.getPecas()));
+        if(pacote != null)
+            pecas.addAll(stringToPeca(pacote.getPecas()));
         for(Peca p: pecas){
             int stock = p.getQuantidade();
             String nome = p.getNome();
@@ -340,7 +343,16 @@ public class ConfiguraFacil {
             p.add(this.pecas.get(s));
         return p;
     }
-        public boolean estaDentro(Modelo m, float preco){
+    /**
+     * Metodo que verifica se existe algum pacote com determindao orcamento
+     * 
+     * @param m Modelo escolhido
+     * 
+     * @param preco Orcamento disponivel
+     * 
+     * @return true caso exista pacote com o valor menor do que preco false caso contrario
+     */
+    public boolean estaDentro(Modelo m, float preco){
         boolean b = false;
         for(Pacote p: m.getPacotes()){
             float valor = precoPacote(p);            
@@ -369,21 +381,6 @@ public class ConfiguraFacil {
             }
         }
         return melhor;
-    }
-    /**
-     * Metdo que acrescenta verifica se e possivel acrescentar uma peca 
-     * 
-     * @param preco Valor das pecas tem de ser inferior a valor desta variavel
-     * 
-     * @return true caso haja pecas false caso contrario
-     */
-    public boolean acrescentaPeca(float preco){
-        boolean b = false;
-        List<Peca> componentes = this.pecas.values().stream().filter(pe -> pe instanceof Extras && pe.getPreco() < preco)
-                                 .collect(Collectors.toList());
-        if(!componentes.isEmpty())
-            b = true;
-        return b;
     }
     /**
      * Metodo que retorna todos os extras das pecas
