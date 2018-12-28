@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
@@ -12,20 +7,31 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
- * @author pmcca
+ * Classe associada à adição de extras ao carro durante a compra por parte do cliente
  */
 public class Extras extends javax.swing.JFrame {
-
+    /** Variáveis de instância que contêm informação sobre o sistema */
     private ConfiguraFacil cf;
     private Cliente c;
     private Modelo m;
     private Pacote p;
-    
+    /**
+     * Construtor vazio
+     */
     public Extras() {
         initComponents();
     }
-    
+    /**
+     * Construtor parametrizado
+     * 
+     * @param cf Classe que contém informação sobre o sistema
+     * 
+     * @param c Variável que contém informação sobre o cliente
+     * 
+     * @param m Variável que contém informação sobre o modelo
+     * 
+     * @param p Variável que contém informação sobre o pacote
+     */
     public Extras(ConfiguraFacil cf, Cliente c, Modelo m, Pacote p){
         this();
         this.cf = cf;
@@ -147,7 +153,11 @@ public class Extras extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método que permite escolher peças extra para o carro por parte do cliente
+     * 
+     * @return extras escolhidos para o carro
+     */
     public List<String> extrasEscolhidos(){
         List <String> pecas = new ArrayList<>();
         if (this.escape.isSelected())
@@ -164,14 +174,22 @@ public class Extras extends javax.swing.JFrame {
             pecas.add(this.vidrosEscuros.getText());
         return pecas;
     }
-
+    /**
+     * Método que confirma uma ação correspondente ao botão "Confirmar" 
+     * 
+     * @param evt evento associado ao botão "Confirmar"
+     */
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, this.p, this.cf.stringToPeca(extrasEscolhidos()));
         cc.setVisible(true);
         this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
 
     }//GEN-LAST:event_ConfirmarActionPerformed
-
+    /**
+     * Método que permite ao utilizador voltar ao menu principal a partir do menu "Extras"
+     * 
+     * @param evt evento associado ao botão "Voltar"
+     */
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
         this.setVisible(false);
         this.dispose();

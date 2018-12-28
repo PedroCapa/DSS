@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
@@ -11,17 +6,22 @@ import java.time.format.DateTimeFormatter;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author pmcca
+ * Classe associada à visualização dos carros à espera de serem produzidos
  */
 public class CarrosEmFila extends javax.swing.JFrame {
-
+    /** Variável de instância que contém informação sobre o sistema */
     private ConfiguraFacil cf;
-    
+    /**
+     * Construtor vazio
+     */
     public CarrosEmFila() {
         initComponents();
     }
-    
+    /**
+     * Construtor parametrizado
+     * 
+     * @param cf Classe que contém informação sobre o sistema
+     */
     public CarrosEmFila(ConfiguraFacil cf){
         this();
         this.cf = cf;
@@ -130,12 +130,20 @@ public class CarrosEmFila extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método que permite o utilizador voltar ao menu principal a partir do menu "CarrosEmFila"
+     * 
+     * @param evt evento associado ao botão "Voltar"
+     */
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_VoltarActionPerformed
-
+    /**
+     * Método que permite o utilizador ver os dados dos carros em fila de espera
+     * 
+     * @param evt evento associado ao botão "Mostrar Dados"
+     */
     private void mostrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarActionPerformed
         DefaultTableModel car = (DefaultTableModel)tabela.getModel();
         int tam = this.cf.getCarrosProducao().size();

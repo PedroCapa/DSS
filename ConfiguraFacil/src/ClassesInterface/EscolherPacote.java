@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
@@ -11,19 +6,28 @@ import java.util.Enumeration;
 import javax.swing.AbstractButton;
 
 /**
- *
- * @author pmcca
+ * Classe associada à escolha de um pacote de peças por parte do cliente
  */
 public class EscolherPacote extends javax.swing.JFrame {
-
+    /** Variáveis de instância que contêm informação sobre o sistema */
     private ConfiguraFacil cf;
     private Cliente cliente;
     private Modelo modelo;
-    
+    /**
+     * Construtor vazio
+     */
     public EscolherPacote() {
         initComponents();
     }
-    
+    /**
+     * Construtor parametrizado
+     * 
+     * @param cf Classe que contém informação sobre o sistema
+     * 
+     * @param cliente Variável que contém informação sobre o cliente
+     * 
+     * @param modelo Variável que contém informação sobre o modelo
+     */
     public EscolherPacote(ConfiguraFacil cf, Cliente cliente, Modelo modelo){
         this();
         this.cf = cf;
@@ -128,7 +132,11 @@ public class EscolherPacote extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+    /**
+     * Método que permite ao cliente escolher um pacote para o carro
+     * 
+     * @return pacote escolhido pelo cliente
+     */
     private String pacoteEscolhido() {
         String escolhido = "";
         for(Enumeration<AbstractButton> buttons = pacotes.getElements(); buttons.hasMoreElements();){
@@ -142,7 +150,11 @@ public class EscolherPacote extends javax.swing.JFrame {
 
         return escolhido;
     }    
-    
+    /**
+     * Método que confirma uma ação correspondente ao botão "Confirmar" 
+     * 
+     * @param evt evento associado ao botão "Confirmar"
+     */
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         Pacote escolhido = this.cf.getPacote(pacoteEscolhido());
         if(!pacoteEscolhido().equals("") && this.cf.getModelo(this.modelo.getNome()).getPacotes().contains(escolhido)){
@@ -154,7 +166,11 @@ public class EscolherPacote extends javax.swing.JFrame {
                     " não está deiponivel para o modelo "  + this.modelo.getNome(), "Dados incorretos", 0);
         }
     }//GEN-LAST:event_ConfirmarActionPerformed
-
+    /**
+     * Método que permite ao utilizador voltar ao menu principal a partir do menu "EscolherPacote"
+     * 
+     * @param evt evento associado ao botão "Voltar"
+     */
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
         this.setVisible(false);
         this.dispose();

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
@@ -11,18 +6,25 @@ import java.util.Enumeration;
 import javax.swing.AbstractButton;
 
 /**
- *
- * @author pmcca
+ * Classe associada à compra de um carro por parte de um cliente
  */
 public class ComprarCarro extends javax.swing.JFrame {
-
+    /** Variáveis de instância que contêm informação sobre o sistema */
     private ConfiguraFacil cf;
     private Cliente c;
-    
+    /**
+     * Construtor vazio
+     */
     public ComprarCarro() {
         initComponents();
     }
-    
+    /**
+     * Construtor parametrizado
+     * 
+     * @param cf Classe que contém informação sobre o sistema
+     * 
+     * @param c Variável com informações sobre o cliente
+     */
     public ComprarCarro(ConfiguraFacil cf, Cliente c){
         this();
         this.cf = cf;
@@ -235,7 +237,11 @@ public class ComprarCarro extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+/**
+ * Método que permite ao cliente escolher o carro a comprar
+ * 
+ * @return nome do modelo escolhido pelo cliente
+ */
     private String modeloEscolhido() {
         String escolhido = "";
         for(Enumeration<AbstractButton> buttons = modelos.getElements(); buttons.hasMoreElements();){
@@ -269,7 +275,11 @@ public class ComprarCarro extends javax.swing.JFrame {
     private void ThunderbirdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ThunderbirdActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_ThunderbirdActionPerformed
-    
+    /**
+     * Método que permite ao cliente escolher um pacote para o seu carro
+     * 
+     * @param evt evento associado ao botão "Escolher Pacote"
+     */
     private void PacoteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PacoteActionPerformed
         String escolhido = modeloEscolhido();
         if(!escolhido.equals("")){
@@ -279,7 +289,11 @@ public class ComprarCarro extends javax.swing.JFrame {
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
     }//GEN-LAST:event_PacoteActionPerformed
-
+    /**
+     * Método que permite ao cliente escolher a configuração ótima para o seu carro
+     * 
+     * @param evt evento associado ao botão "Configuração Ótima"
+     */
     private void OtimaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_OtimaActionPerformed
         String escolhido = modeloEscolhido();
         if(!escolhido.equals("")){
@@ -288,7 +302,11 @@ public class ComprarCarro extends javax.swing.JFrame {
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
         }
     }//GEN-LAST:event_OtimaActionPerformed
-
+    /**
+     * Método que permite ao cliente personalizar o seu carro a seu gosto
+     * 
+     * @param evt evento associado ao botão "Personalizar"
+     */
     private void PersonalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonalizarActionPerformed
         String escolhido = modeloEscolhido();
         if(!escolhido.equals("")){

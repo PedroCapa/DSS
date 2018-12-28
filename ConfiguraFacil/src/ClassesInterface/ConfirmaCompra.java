@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
@@ -14,21 +9,34 @@ import javax.swing.JTextArea;
 import javax.swing.table.DefaultTableModel;
 
 /**
- *
- * @author pmcca
+ * Classe que permite ao utilizador ver os dados do carro e confirmar a sua compra
  */
 public class ConfirmaCompra extends javax.swing.JFrame {
-
+    /** Variáveis de instância que contêm informação sobre o sistema */
     private ConfiguraFacil cf;
     private Cliente cliente;
     private Modelo modelo;
     private Pacote pacote;
     private List<Peca> pecas;
-    
+    /**
+     * Construtor vazio
+     */
     public ConfirmaCompra() {
         initComponents();
     }
-    
+    /**
+     * Construtor parametrizado
+     * 
+     * @param cf Classe que contém informação sobre o sistema
+     * 
+     * @param cliente Variável que contém informação sobre o cliente
+     * 
+     * @param modelo Variável que contém informação sobre o modelo
+     * 
+     * @param pacote Variável que contém informação sobre o pacote
+     * 
+     * @param pecas Lista das pecas que o carro a ser comprado contém
+     */
     public ConfirmaCompra(ConfiguraFacil cf, Cliente cliente, Modelo modelo, Pacote pacote, List<Peca> pecas){
         this();
         this.cf = cf;
@@ -146,12 +154,20 @@ public class ConfirmaCompra extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    /**
+     * Método que permite ao utilizador voltar ao menu principal a partir do menu "ConfirmaCompra"
+     * 
+     * @param evt evento associado ao botão "Voltar"
+     */
     private void VoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_VoltarActionPerformed
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_VoltarActionPerformed
-
+    /**
+     * Método que confirma uma ação correspondente ao botão "Confirmar" 
+     * 
+     * @param evt evento associado ao botão "Confirmar"
+     */
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
             float custo;
@@ -169,7 +185,11 @@ public class ConfirmaCompra extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
         }
     }//GEN-LAST:event_ConfirmarActionPerformed
-
+    /**
+     * Método que permite ver os dados do carro a ser comprado
+     * 
+     * @param evt evento associado ao botão "Ver dados carro"
+     */
     private void dadosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dadosActionPerformed
         try{
             DefaultTableModel tabPeca = (DefaultTableModel)pecasEsc.getModel();

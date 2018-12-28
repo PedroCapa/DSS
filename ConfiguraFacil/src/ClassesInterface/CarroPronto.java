@@ -1,25 +1,22 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
 import Exceptions.*;
 
 /**
- *
- * @author pmcca
+ *Classe associada à adição de um carro à lista de carros prontos
  */
 public class CarroPronto extends javax.swing.JFrame {
-
+    /** Variável de instância que contém informação sobre o sistema */
     private ConfiguraFacil cf;
-    
+    /** Construtor vazio */
     public CarroPronto() {
         initComponents();
     }
-    
+    /** Construtor parametrizado
+     * 
+     * @param cf Classe que contém informação sobre o sistema
+     */
     public CarroPronto(ConfiguraFacil cf){
         this();
         this.cf = cf;
@@ -107,7 +104,11 @@ public class CarroPronto extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-    
+    /**
+     * Método que verifica se o utilizador preencheu o campo necessário
+     * 
+     * @return Um boolean que diz se o campo foi ou não preenchido
+     */
     private boolean validaDados() {
         boolean vazio = this.id.getText().equals("");
         if (vazio)
@@ -115,7 +116,11 @@ public class CarroPronto extends javax.swing.JFrame {
 
         return !vazio;
     }
-    
+    /**
+     * Método que confirma uma ação correspondente ao botão "Confirmar" 
+     * 
+     * @param evt evento associado ao botão "Confirmar"
+     */
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
             if(validaDados())
@@ -131,7 +136,11 @@ public class CarroPronto extends javax.swing.JFrame {
     private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
         
     }//GEN-LAST:event_idActionPerformed
-
+    /**
+     * Método que permite o utilizador voltar ao menu principal a partir do menu "CarroPronto"
+     * 
+     * @param evt evento associado ao botão "Voltar"
+     */
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         this.setVisible(false);
         this.dispose();

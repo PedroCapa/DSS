@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ClassesInterface;
 
 import Classes.*;
@@ -11,19 +6,28 @@ import java.awt.event.WindowEvent;
 import java.util.List;
 
 /**
- *
- * @author pmcca
+ * Classe associada à criação de uma configuração ótima de acordo com o orçamento do cliente
  */
 public class ConfiguracaoOtima extends javax.swing.JFrame {
-
+    /** Variáveis de instância que contêm informação sobre o sistema */
     private ConfiguraFacil cf;
     private Cliente cliente;
     private Modelo modelo;
-    
+    /**
+     * Construtor vazio
+     */
     public ConfiguracaoOtima() {
         initComponents();
     }
-    
+    /**
+     * Construtor parametrizado
+     * 
+     * @param cf Classe que contém informação sobre o sistema
+     * 
+     * @param cliente Variável que contém informação sobre o cliente
+     * 
+     * @param modelo Variável que contém informação sobre o modelo
+     */
     public ConfiguracaoOtima(ConfiguraFacil cf, Cliente cliente, Modelo modelo){
         this();
         this.cf = cf;
@@ -102,12 +106,20 @@ public class ConfiguracaoOtima extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+        /**
+     * Método que permite ao utilizador voltar ao menu principal a partir do menu "ConfiguracaoOtima"
+     * 
+     * @param evt evento associado ao botão "Voltar"
+     */
     private void SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SairActionPerformed
         this.setVisible(false);
         this.dispose();
     }//GEN-LAST:event_SairActionPerformed
-
+    /**
+     * Método que confirma uma ação correspondente ao botão "Confirmar" 
+     * 
+     * @param evt evento associado ao botão "Confirmar"
+     */
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
         float orcamento = Float.parseFloat(this.preco.getText());

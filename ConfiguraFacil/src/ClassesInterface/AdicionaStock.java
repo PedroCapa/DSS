@@ -3,24 +3,23 @@ package ClassesInterface;
 import Classes.ConfiguraFacil;
 import Exceptions.PecaNaoExisteException;
 
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 /**
- *
- * @author pmcca
+ * Classe associada à adição de stock por parte do funcionário
  */
 public class AdicionaStock extends javax.swing.JFrame {
-
+    /** Variável de instância que contém informação sobre o sistema */
     private ConfiguraFacil cf;
-    
+    /**
+     * Construtor vazio
+     */
     public AdicionaStock() {
         initComponents();
     }
-    
+    /**
+     * Construtor parametrizado
+     * 
+     * @param cf Classe que contém informação sobre o sistema
+     */
     public AdicionaStock(ConfiguraFacil cf){
         this();
         this.cf = cf;
@@ -119,13 +118,22 @@ public class AdicionaStock extends javax.swing.JFrame {
     private void idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_idActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_idActionPerformed
+    /**
+     * Método que verifica se o utilizador preencheu o campo necessário
+     * 
+     * @return Um boolean que diz se o campo foi ou não preenchido
+     */
     private boolean validaDados() {
         boolean vazio = (this.id.getText().equals(""));
         if (vazio)
             javax.swing.JOptionPane.showMessageDialog(this, "Campos por preencher", "Dados incorretos", 0);
         return !vazio;
     }
-    
+    /**
+     * Método que confirma uma ação correspondente ao botão "Confirmar" 
+     * 
+     * @param evt evento associado ao botão "Confirmar"
+     */
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
             if(validaDados())
@@ -136,7 +144,11 @@ public class AdicionaStock extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, e.getMessage(), "Dados incorretos", 0);
         }
     }//GEN-LAST:event_ConfirmarActionPerformed
-
+    /**
+     * Método que permite ao utilizador voltar ao menu principal a partir do menu "AdicionaStock"
+     * 
+     * @param evt evento associado ao botão "Voltar"
+     */
     private void CancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CancelarActionPerformed
         this.setVisible(false);
         this.dispose();
