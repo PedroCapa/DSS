@@ -136,6 +136,8 @@ select * from utilizador;
 
 select * from Carro;
 
+select * from Peca_Carro;
+
 select * from peca;
 
 select * from modelo;
