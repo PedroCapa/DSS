@@ -258,18 +258,7 @@ public class UtilizadorDAO implements Map<String, Utilizador>{
         }
         catch (SQLException e) {throw new NullPointerException(e.getMessage());}
     }
-    
-    /*
-    Talvez n seja necessario este metodo
-    */
-    public void setCarroUser(String key, Cliente c){
-        try {
-            String email = c.getEmail();
-            Statement stm = conn.createStatement();
-            int i = stm.executeUpdate("Update Carro Set Utilizador_Email='"+key+"' Where id='"+email+"'");
-        } catch (SQLException ex) {throw new NullPointerException(ex.getMessage());}
-    }
-        /**
+    /**
      * Método que verifica se um dado cliente existe
      * 
      * @param key chave do cliente a ser verificado

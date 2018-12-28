@@ -14,8 +14,8 @@ public class Estofos extends Peca{
         super();
     }
     /**Construtor com um estofo*/
-    public Estofos(Peca umaPeca) {
-        super(umaPeca);
+    public Estofos(Estofos unsEstofos) {
+        super(unsEstofos);
     }   
     /**
      * Metodo que faz uma copia do estofo

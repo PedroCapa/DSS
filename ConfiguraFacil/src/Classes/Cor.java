@@ -14,8 +14,8 @@ public class Cor extends Peca{
         super();
     }
     /**Construtor com uma cor*/
-    public Cor(Peca umaPeca) {
-        super(umaPeca);
+    public Cor(Cor umaCor) {
+        super(umaCor);
     }
     /**
      * Metodo que faz uma copia da cor

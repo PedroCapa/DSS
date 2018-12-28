@@ -171,13 +171,15 @@ public class ConfirmaCompra extends javax.swing.JFrame {
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
             float custo;
-            if(pacote != null){
+            if(this.pacote == null){
                 custo = this.cf.calculaPreco(this.modelo, this.pecas);
             }
             else{
                 custo = this.cf.calculaPreco(this.pacote, this.modelo, this.pecas);
             }
             Carro car = this.cf.comprarCarro(this.pecas, this.modelo, custo, this.cliente);
+            for(String p: car.getPecas())
+                System.out.println(p);
             this.setVisible(false);
             this.dispose();
         }

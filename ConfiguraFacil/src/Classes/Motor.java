@@ -14,8 +14,8 @@ public class Motor extends Peca{
         super();
     }
     /**Construtor com um motor*/
-    public Motor(Peca umaPeca) {
-        super(umaPeca);
+    public Motor(Motor umMotor) {
+        super(umMotor);
     }
     /**
      * Metodo que faz uma copia do motor

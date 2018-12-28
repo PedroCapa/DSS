@@ -14,8 +14,8 @@ public class Extras extends Peca{
         super();
     }
     /**Construtor com um extra*/
-    public Extras(Peca umaPeca) {
-        super(umaPeca);
+    public Extras(Extras umaExtras) {
+        super(umaExtras);
     }
     /**
      * Metodo que faz uma copia do extra

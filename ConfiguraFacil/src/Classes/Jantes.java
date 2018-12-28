@@ -14,8 +14,8 @@ public class Jantes extends Peca{
         super();
     }
     /**Construtor com uma jante*/
-    public Jantes(Peca umaPeca) {
-        super(umaPeca);
+    public Jantes(Jantes umaJantes) {
+        super(umaJantes);
     }
     /**
      * Metodo que faz uma copia das jantes
