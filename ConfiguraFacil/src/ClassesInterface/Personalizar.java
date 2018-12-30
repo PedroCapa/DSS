@@ -98,13 +98,23 @@ public class Personalizar extends javax.swing.JFrame {
         jLabel1.setText("Motor");
 
         Motor.add(jRadioButton5);
-        jRadioButton5.setText("177 cu in ");
+        jRadioButton5.setText("177 cu in");
+        jRadioButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton5ActionPerformed(evt);
+            }
+        });
 
         Motor.add(jRadioButton6);
         jRadioButton6.setText("Boss 302 V8");
+        jRadioButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton6ActionPerformed(evt);
+            }
+        });
 
         Motor.add(jRadioButton7);
-        jRadioButton7.setText(" 385 Engine");
+        jRadioButton7.setText("385 Engine");
         jRadioButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton7ActionPerformed(evt);
@@ -112,7 +122,12 @@ public class Personalizar extends javax.swing.JFrame {
         });
 
         Motor.add(jRadioButton8);
-        jRadioButton8.setText("V 12 ");
+        jRadioButton8.setText("V 12");
+        jRadioButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jRadioButton8ActionPerformed(evt);
+            }
+        });
 
         Motor.add(jRadioButton9);
         jRadioButton9.setText("225 Horsepower 312 Cubic Inch V8");
@@ -123,7 +138,7 @@ public class Personalizar extends javax.swing.JFrame {
         });
 
         Motor.add(jRadioButton10);
-        jRadioButton10.setText("2.3 EcoBoost 290cv ");
+        jRadioButton10.setText("2.3 EcoBoost 290cv");
 
         Motor.add(jRadioButton11);
         jRadioButton11.setText("Lynx");
@@ -188,7 +203,7 @@ public class Personalizar extends javax.swing.JFrame {
         jRadioButton22.setText("Couro Alcantara");
 
         Estofos.add(jRadioButton23);
-        jRadioButton23.setText("Couro Recaro  Red");
+        jRadioButton23.setText("Couro Recaro Red");
 
         vidrosEscuros.setText("Vidros Escurecidos");
 
@@ -387,9 +402,15 @@ public class Personalizar extends javax.swing.JFrame {
      */
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
         try{
-            ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.cliente, this.modelo, null,this.cf.stringToPeca(validaDados()));
-            cc.setVisible(true);
-            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+            List<Peca> list = this.cf.stringToPeca(validaDados());
+            if(this.cf.validaPecas(list)){
+                ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.cliente, this.modelo, null, list);
+                cc.setVisible(true);
+                this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+            }
+            else{
+                javax.swing.JOptionPane.showMessageDialog(this, "Peças Inválidas", "Peças Inválidas", 0);
+            }
         }
         catch(FaltamEscolherPecasException  e){
             javax.swing.JOptionPane.showMessageDialog(this, "Campos por preencher", "Dados incorretos", 0);
@@ -410,6 +431,18 @@ public class Personalizar extends javax.swing.JFrame {
     private void jRadioButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRadioButton7ActionPerformed
+
+    private void jRadioButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton8ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton8ActionPerformed
+
+    private void jRadioButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton5ActionPerformed
+
+    private void jRadioButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jRadioButton6ActionPerformed
 
     /**
      * @param args the command line arguments

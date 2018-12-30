@@ -168,9 +168,22 @@ public class ConfiguraFacil {
         boolean flag = true;
         for(String str: pecas){
             for(String s: proibidas)
-                if(!str.equals(s))
+                if(str.equals(s))
                 flag = false;
         }
+        return flag;
+    }
+    /**
+     * Método que verifica se todas as peças obrigatórias estão colocadas
+     * @param pecas Peças esolhidas na compra do carro
+     * @param obrigatorias Peças obrigatorias de uma determinada peça
+     * @return true se todas as peças obrigatórias estão no parametro pecas, false caso contrário
+     */
+    public boolean contem(List<String> pecas, List<String> obrigatorias){
+        boolean flag = true;
+        for(String s: obrigatorias)
+            if(!pecas.contains(s))
+                flag = false;
         return flag;
     }
     /**
@@ -186,7 +199,7 @@ public class ConfiguraFacil {
         for(Peca p: pecas){
             List<String> proibidas = p.getIncompativeis();
             List<String> obrigatorias = p.getObrigatorias();
-            boolean ob = nomes.retainAll(obrigatorias);
+            boolean ob = contem(nomes, obrigatorias);
             boolean pr = valido(nomes, proibidas);
             if(!ob || !pr)
                 flag = false;

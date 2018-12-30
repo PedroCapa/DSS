@@ -310,7 +310,6 @@ public class ComprarCarro extends javax.swing.JFrame {
     private void PersonalizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PersonalizarActionPerformed
         String escolhido = modeloEscolhido();
         if(!escolhido.equals("")){
-            System.out.println(modeloEscolhido());
             Personalizar p = new Personalizar(this.cf, this.c, this.cf.getModelo(escolhido));
             p.setVisible(true);
             this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));

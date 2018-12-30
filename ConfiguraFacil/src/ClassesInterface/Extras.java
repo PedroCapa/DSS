@@ -12,9 +12,9 @@ import java.util.List;
 public class Extras extends javax.swing.JFrame {
     /** Variáveis de instância que contêm informação sobre o sistema */
     private ConfiguraFacil cf;
-    private Cliente c;
-    private Modelo m;
-    private Pacote p;
+    private Cliente cliente;
+    private Modelo modelo;
+    private Pacote pacote;
     /**
      * Construtor vazio
      */
@@ -35,9 +35,9 @@ public class Extras extends javax.swing.JFrame {
     public Extras(ConfiguraFacil cf, Cliente c, Modelo m, Pacote p){
         this();
         this.cf = cf;
-        this.c = c;
-        this.m = m;
-        this.p = p;
+        this.cliente = c;
+        this.modelo = m;
+        this.pacote = p;
     }
 
     /**
@@ -180,10 +180,17 @@ public class Extras extends javax.swing.JFrame {
      * @param evt evento associado ao botão "Confirmar"
      */
     private void ConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ConfirmarActionPerformed
-        ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.c, this.m, this.p, this.cf.stringToPeca(extrasEscolhidos()));
-        cc.setVisible(true);
-        this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-
+        List<Peca> list = this.cf.stringToPeca(extrasEscolhidos());
+        List<Peca> pac = this.cf.stringToPeca(this.pacote.getPecas());
+        pac.addAll(list);
+        if(this.cf.validaPecas(pac)){
+            ConfirmaCompra cc = new ConfirmaCompra(this.cf, this.cliente, this.modelo, this.pacote, list);
+            cc.setVisible(true);
+            this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+        }
+        else{
+            javax.swing.JOptionPane.showMessageDialog(this, "Peças Inválidas", "Peças Inválidas", 0);
+        }
     }//GEN-LAST:event_ConfirmarActionPerformed
     /**
      * Método que permite ao utilizador voltar ao menu principal a partir do menu "Extras"

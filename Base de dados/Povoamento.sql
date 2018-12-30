@@ -82,7 +82,6 @@ insert into Peca_Peca
           (0, '177 cu in'						, '2.3 Ecoboost 290cv'				),
           (0, 'Boss 302 V8'						, '385 Engine'						),
           (0, 'Boss 302 V8'						, 'V 12'							),
-          (0, 'Boss 302 V8'						, 'V 12'							),
           (0, 'Boss 302 V8'						, 'Lynx'							),
           (0, 'Boss 302 V8'						, '255 Horsepower 312 Cubic Inch V8'),
           (0, 'Boss 302 V8'						, '2.3 Ecoboost 290cv'				),
@@ -105,7 +104,9 @@ insert into Peca_Peca
           (0, 'Liga Leve'						, 'Ferro'							),
           (0, 'Couro Cognac'					, 'Couro Alcantara'					),
           (0, 'Couro Cognac'					, 'Couro Recaro Red'				),
-          (0, 'Couro Alcantara'					, 'Couro Recaro Red'				);
+          (0, 'Couro Alcantara'					, 'Couro Recaro Red'				),
+          (0, 'Branco'							, 'Spoiler'							),
+          (1, 'V 12'							, 'Sistema de Climatização'			);
           
 insert into carro(id, Estado, Data, Preco, Modelo_Nome, Utilizador_Email)
 	VALUES('MustTMP' , 2, '2018/12/21', 35100, '302 Mustang', 'tmp1998@hotmail.com'),
@@ -135,6 +136,8 @@ update peca set quantidade = 0 where nome = 'Preto';
 select * from utilizador;
 
 select * from Carro;
+
+select * from peca_peca;
 
 select * from Peca_Carro;
 

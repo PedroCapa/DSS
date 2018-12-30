@@ -240,7 +240,7 @@ public class PecaDAO implements Map<String, Peca>{
                 if(type == true && idPeca1.equals((String)key)){obrig.add(idPeca2);}
                 else if(type == true && idPeca2.equals((String)key)){obrig.add(idPeca1);}
                 else if(type == false && idPeca1.equals((String)key)){proib.add(idPeca2);}
-                else {proib.add(idPeca1);}
+                else if(type == false && idPeca2.equals((String)key)){proib.add(idPeca1);}
             }
             if(p!=null){
                 p.setObrigatorias(obrig);
