@@ -433,7 +433,10 @@ public class ConfiguraFacil {
         while(extras.size() > 0){
             Peca cara = getPecaMaisCara(extras);
             List<Peca> obrigatorias = stringToPeca(cara.getObrigatorias());
-            if(getPrecoObrigatorias(obrigatorias) + cara.getPreco() <= orc){
+            List<Peca> valida = new ArrayList<>(obrigatorias);
+            valida.add(cara);
+            valida.addAll(componentes);
+            if(getPrecoObrigatorias(obrigatorias) + cara.getPreco() <= orc && validaPecas(valida)){
                 orc = orc - getPrecoObrigatorias(obrigatorias) - cara.getPreco();
                 componentes.add(cara);
                 componentes.addAll(obrigatorias);
