@@ -35,45 +35,141 @@ Este relatório tem o objetivo de clarificar o trabalho realizado no geral, bem 
 \newpage
 \section{Trabalho realizado}\label{trabalho}
 Para este trabalho foram criados alguns modelos UML como o modelo de dominio, UseCase, os diagramas de estado, os diagramas de sequência, diagramas de classes e os diagramas de packages.
+
 \subsection{Modelo de domínio}
-Inicialmente, no "Visual Paradigm" foi criado um modelo de domínio que mostra as prinicipais relações entre entidades criadas para este problema, a título de exemplo, foram consideradas algumas relações entre os componentes do carro.
+Inicialmente, no "Visual Paradigm" foi criado um modelo de domínio que mostra os principais conceitos e relações entre entidades criadas para este problema, a título de exemplo, foram consideradas algumas relações entre os componentes do carro.
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=12cm]{Modelo_de_Dominio}
+\caption{Modelo de domínio}
+\label{MD}
+\end{figure}
+
 \subsection{Diagrama de use cases}
 De seguida, no mesmo programa foi criado o modelo de use cases. Este modelo mostra as principais interações entre os atores do sistema com o própio sistema.De notar que só foram criados os use cases que achamos absolutamente necessário para cumprir alguns requisitos pré-estabelecidos. Para cada use case foi feita uma descrição detalhada da iteração entre o ator e o sistema. Neste sistema foram considerados dois atores, o cliente que faria a compra online e o funcionário que utilizaria a aplicação na fábrica.
 
-O cliente tem os seguintes use cases:
-\begin{itemize}
-\item Registar;
-\item Comprar carro;
-\item Ver lista de carros comprados;
-\item Escolher pacote;
-\item Escolher especificações;
-\item Escolher configuração ótima;
-\item Login
-\end{itemize}
-O Funcionário tem os seguintes use cases:
-\begin{itemize}
-\item Login
-\item Adicionar stock
-\item Ver stock disponível
-\item Carro pronto
-\item Ver lista de carros
-\end{itemize}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=12cm]{Diagrama_UC}
+\caption{Diagrama de Use Cases}
+\label{Diagrama UC}
+\end{figure}
 
+\newpage
+\subsection{Protótipo da interface}
+Tendo em conta os use cases que foram criados, foi pensado uma forma dos utilizadores interagirem com o sistema. Assim, foram feitas alguns protótipos para cada use case.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=7cm]{InterfaceConfiguraFacil}
+\caption{Menu Inicial}
+\label{Menu I}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=4cm]{InterfaceAdicionarStock}
+\caption{Janela na qual o funcionário vai adicionar stock}
+\label{Menu AS}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=6cm]{InterfaceStockDisponivel}
+\caption{Menu no qual o funcionário ve o stock das peças}
+\label{Menu SD}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=5cm]{InterfaceCarroPronto}
+\caption{Menu no qual o funcionário coloca o carro pronto}
+\label{Menu CP}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=7cm]{InterfaceMenuPrincipalFuncionario}
+\caption{Menu principal do funcionário}
+\label{Menu PF}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=10cm]{InterfaceLogin}
+\caption{Menu no qual o funcionário e o cliente se autenticavam no sistema}
+\label{Menu L}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm]{InterfaceRegistar}
+\caption{Menu no qual o cliente se regista}
+\label{Menu R}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=8cm]{InterfaceMenuPrincipal}
+\caption{Menu principal do cliente}
+\label{Menu CO}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=9cm]{InterfaceComprarCarro}
+\caption{Menu no qual o cliente vai comprar o carro, começando por escolher o modelo e depois a forma da compra}
+\label{Menu CC}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=7cm]{InterfaceEscolherPacote}
+\caption{Menu no qual o cliente escolhe um pacote para o carro}
+\label{Menu CO}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=5cm]{InterfaceConfiguracaoOtima}
+\caption{Menu no qual o cliente indica o orçamento que dispõe}
+\label{Menu CO}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=9cm]{InterfaceEscolherEspecificacoes}
+\caption{Menu no qual o cliente personaliza por completo o carro}
+\label{Menu EE}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=7cm]{InterfaceConfirmarCompra}
+\caption{Menu no qual o cliente confirma a compra de um carro}
+\label{Menu CCC}
+\end{figure}
+
+\newpage
+Sempre que um utilizador realizava uma ação inválida aparecia uma nova janela no ecrã que indicava o motivo do aviso, por exemplo, se um utilizador se tentasse autenticar a aplicação mostrava uma janela que indicava que não se conseguiu autenticar
+Este sistema não foi totalmente fiável, porque à medida que o trabalho foi desenvolvido estes modelos foram um pouco alterados e ainda foi acrescentado um menu.
 \subsection{Máquinas de estado}
 No desenvolvimento da aplicação foram consideradas duas entidades que teriam diferentes estados, o carro e a peça. Para descrever as diferentes fases destas entidades foi criado para cada uma um modelo de estado.
 
-Para o carro foram considerados os seguintes estados:
-\begin{description}[align=left]
-\item [Em espera] Quando algum componente do carro está sem stock;
-\item [Em produção] No caso de todos os componentes para o carro existirem;
-\item [Pronto] Ao fim do carro ser produzido;
-\end{description}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=12cm]{MaquinaEstadoCarro}
+\caption{Máquina de estados da entidade Carro}
+\label{ME_Carro}
+\end{figure}
 
-A peça ou componente tinham os seguintes estados:
-\begin{description}[align=left]
-\item [Esgotado] Se não houver em stock esta peça;
-\item [Disponível] No caso de haver em stock esta peça
-\end{description}
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=12cm]{MaquinaEstadoPeca}
+\caption{Máquina de estados da entidade Peça}
+\label{ME_Peca}
+\end{figure}
+
 \subsection{Diagrama de sequência de sistema}
 Para se obter uma melhor perceção da interação entre o cliente e o sistema foram criados os DSS para cada use case. Inicialmente foram usadas as descrições dos use cases criados em "Excel", para criar um modelo simples, mas em seguida foram criados mais alguns DSS e em cada um era aumentado o detalhe. Em segundo lugar, foram criados os DSS que além de representar a interação do sistema com o utilizador, também representava a relação entre a interface do sistema e a camada de negócio deste. Em sguida foram criados os DSS de subsistemas, que, basicamente, representa as várias entidades no sistema e como cada use case interage com essas entidades, por exemplo o use case "Adicionar Stock" relacionava-se com o subsistema da peça e do carro. De seguida, foram criados DSS para especificar os métodos que eram utilizados nos DSS anteriores. A partir de alguns dos útlimos DSS, aqueles que tinham de aceder à base de dados, foram criados uns DSS, em que as listas e os conjuntos de entidades eram subsitituídas por DAO, classes que acediam à base de dados, por exemplo no método getListaCarrosComprados(), antes o sistema ia a um map buscar os carros que eram do cliente, mas no último DSS esse map era substituído pela classe CarroDAO, que continha um método para trazer da base de dados as especificações dos carros que o cliente comprou.
 \subsection{Diagrama de classes}
