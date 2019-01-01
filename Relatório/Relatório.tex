@@ -178,9 +178,54 @@ Para se obter uma melhor perceção da interação entre o cliente e o sistema f
 \label{DSS EE}
 \end{figure}
 
-Inicialmente foram usadas as descrições dos use cases criados em "Excel", para criar um modelo simples, mas em seguida foram criados mais alguns DSS e em cada um era aumentado o detalhe. Em segundo lugar, foram criados os DSS que além de representar a interação do sistema com o utilizador, também representava a relação entre a interface do sistema e a camada de negócio deste.
+Em segundo lugar, foram criados os DSS que além de representar a interação do sistema com o utilizador, também representava a relação entre a interface do sistema e a camada de negócio deste. Em sguida foram criados os DSS de subsistemas, que, basicamente, representa as várias entidades no sistema e como cada use case interage com essas entidades, por exemplo o use case "Adicionar Stock" relacionava-se com o subsistema da peça e do carro. 
 
-Em sguida foram criados os DSS de subsistemas, que, basicamente, representa as várias entidades no sistema e como cada use case interage com essas entidades, por exemplo o use case "Adicionar Stock" relacionava-se com o subsistema da peça e do carro. 
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=10cm]{DSSSubAddStock}
+\caption{DSS de subsistemas do use case Adicionar Stock}
+\label{DSSSubAS}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=10cm]{DSSSubCarroPronto}
+\caption{DSS de subsistemas do use case Carro Pronto}
+\label{DSSSubCP}
+\end{figure}
+
+
+\newpage
+\subsection{Diagramas de Implementação}
+De seguida, foram criados DSS para especificar os métodos que eram utilizados nos DSS anteriores. A partir de alguns dos útlimos DSS, aqueles que tinham de aceder à base de dados, foram criados uns DSS, em que as listas e os conjuntos de entidades eram subsitituídas por DAO, classes que acediam à base de dados, por exemplo no método getListaCarrosComprados(), antes o sistema ia a um map buscar os carros que eram do cliente, mas no último DSS esse map era substituído pela classe CarroDAO, que continha um método para trazer da base de dados as especificações dos carros que o cliente comprou.
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=11cm]{DIAddStock}
+\caption{Diagrama de Implementação AddStock}
+\label{DIAS}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=11cm]{DIcomprarCarrocomprarCarro}
+\caption{Diagrama de Implementação Comprar Carro}
+\label{DICC}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=11cm]{DIAddStockDAO}
+\caption{Diagrama de Implementação AddStockDAO}
+\label{DIASDAO}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=11cm]{DIcomprarCarrocomprarCarroDAO}
+\caption{Diagrama de Implementação Comprar Carro DAO}
+\label{DICCDAO}
+\end{figure}
 
 
 \newpage
@@ -188,17 +233,57 @@ Em sguida foram criados os DSS de subsistemas, que, basicamente, representa as v
 Para os DSS criados foi criado um diagrama de classes, que indicava as classes que eram precisas criar, as variáveis de instância para cada classe e todos os métodos que eram necessários implementar. Não foram criados diagramas de classes para todos os DSS, pois os use cases do "Escolher configuração ótima", "Escolher Especificações" e o "Escolher Pacote" foram todos incluídos no diagrama de classes do "Comprar Carro", pois os métodos nestes DSS eram quase sempre os mesmos e achamos que não havia necessidade de criar diagramas de classes para cada um. O mesmo aconteceu para os diagramas de classes para os DSS que tinham os DAO.
 No fim de todos os diagramas de classes serem feitos, foram todos juntados num só, em que continha todas as classes, variáveis de instância e métodos.
 
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=9cm]{DCAdicionarStock}
+\caption{Diagrama de classes do use case Adicionar Stock}
+\label{DCAS}
+\end{figure}
 
-\subsection{Diagramas de Implementação}
-De seguida, foram criados DSS para especificar os métodos que eram utilizados nos DSS anteriores. A partir de alguns dos útlimos DSS, aqueles que tinham de aceder à base de dados, foram criados uns DSS, em que as listas e os conjuntos de entidades eram subsitituídas por DAO, classes que acediam à base de dados, por exemplo no método getListaCarrosComprados(), antes o sistema ia a um map buscar os carros que eram do cliente, mas no último DSS esse map era substituído pela classe CarroDAO, que continha um método para trazer da base de dados as especificações dos carros que o cliente comprou.
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=9cm]{DCComprarCarro}
+\caption{Diagrama de classes do use case Comprar Carro}
+\label{DCCP}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=9cm]{DCAdicionarStockDAO}
+\caption{Diagrama de classes do use case Adicionar Stock DAO}
+\label{DCASDAO}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=9cm]{DCComprarCarroDAO}
+\caption{Diagrama de classes do use case Comprar Carro DAO}
+\label{DCCPDAO}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=9cm]{DiagramaClasses}
+\caption{Diagrama de classes}
+\label{DC}
+\end{figure}
+
+\begin{figure}[!htb]
+\centering
+\includegraphics[width=9cm]{DiagramaClassesDAO}
+\caption{Diagrama de classes DAO}
+\label{DC}
+\end{figure}
 
 
+\newpage
 \subsection{Diagrama de packages}
 Em seguida, os diagramas de classes e o modelo de domínio foram divididos em packages. Além destes diagramas de packages, do mesmo modo foi criado um diagrama de packages para demonstrar as diferentes camadas aplicacionais do sistema. Esta foi dividida em três partes, a Interface, a camada de negócio e a base de dados. Na camada de negócio estava contida as várias classes do sistema.
 
 
+\newpage
 \section{Funcionamento da aplicação}
-Como já foi referido acima há dois tipos de utilizadores, os clientes e os funcionários. Os funcionários são responsáveis por colocar um carro em produção pronto e adicionar peças na fábrica. Quando são adicionadas peças pelos funcionários, o sistema verifica se há algum carro à espera dessa peça e põe essa peça como colocada no carro. O cliente tem acesso à lista de carros que comprou, pode comprar um carro de três formas diferentes, escolher um pacote, escolher a melhor configuração com um determinado orçamento ou personalizar por completo o carro. Na compra do carro, o cliente escolhe primeiro qual o modelo do carro e só em seguida escolhe a forma de compra. Se um cliente escolher um pacote, este não tem a opção de alterar as peças obrigatórias, neste caso, o motor, a cor, jantes e estofos, no entanto, pode escolher todas os extras que quiser. Ao escolher esta opção o cliente tem um desconto associado a cada pacote. Se o cliente escolher personalizar tem a possiblidade de escolher todas as peças que quiser, desde que não tenha peças incompatíveis ou não tenha peças obrigatórias em falta. Ao escolher a configuração ótima não há garantia que tenha a melhor configuração dado o orçamento disponível. Nesta opção o sistema vai tentar encontrar o melhor pacote para, ou seja, o pacote mais caro para o dado modelo e orçamento que escolheu. Se ainda houver margem o sistema vai adicionar todos os extras que puder, começando sempre por adicionar os mais caros. Este algoritmo não garante que seja escolhida a melhor configuração, pois não verifica todas as diferentes.
+Como já foi referido acima há dois tipos de utilizadores, os clientes e os funcionários. Os funcionários são responsáveis por colocar um carro em produção pronto e adicionar peças na fábrica. Quando são adicionadas peças pelos funcionários, o sistema verifica se há algum carro à espera dessa peça e põe essa peça como colocada no carro. O cliente tem acesso à lista de carros que comprou, pode comprar um carro de três formas diferentes, escolher um pacote, escolher a melhor configuração com um determinado orçamento ou personalizar por completo o carro. Na compra do carro, o cliente escolhe primeiro qual o modelo do carro e só em seguida escolhe a forma de compra. Se um cliente escolher um pacote, este não tem a opção de alterar as peças obrigatórias, neste caso, o motor, a cor, jantes e estofos, no entanto, pode escolher todas os extras que quiser. Ao escolher esta opção o cliente tem um desconto associado a cada pacote. Se o cliente escolher personalizar tem a possiblidade de escolher todas as peças que quiser, desde que não tenha peças incompatíveis ou não tenha peças obrigatórias em falta. Ao escolher a configuração ótima não há garantia que tenha a melhor configuração dado o orçamento disponível. Nesta opção o sistema vai tentar encontrar o melhor pacote, ou seja, o pacote mais caro para o dado modelo e orçamento que escolheu. Se ainda houver margem o sistema vai adicionar todos os extras que puder, começando sempre por adicionar os mais caros. Este algoritmo não garante que seja escolhida a melhor configuração, pois não verifica todas as diferentes.
 
 
 \newpage
