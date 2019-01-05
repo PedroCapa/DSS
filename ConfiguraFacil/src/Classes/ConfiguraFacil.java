@@ -539,9 +539,7 @@ public class ConfiguraFacil {
                 orc = orc - getPrecoObrigatorias(valida) - cara.getPreco();
                 componentes.add(cara);
                 componentes.addAll(valida);
-                for(Peca peca:valida){
-                    extras.remove(peca);
-                }
+                extras.removeAll(valida);
             }
             extras.remove(cara);
         }

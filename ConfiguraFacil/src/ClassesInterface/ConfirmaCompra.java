@@ -93,25 +93,40 @@ public class ConfirmaCompra extends javax.swing.JFrame {
                 {null},
                 {null},
                 {null},
+                {null},
+                {null},
                 {null}
             },
             new String [] {
                 "Peca"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane2.setViewportView(pecasEsc);
 
         modeloEsc.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
                 {null, null}
             },
             new String [] {
                 "Modelo", "Preco"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(modeloEsc);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
