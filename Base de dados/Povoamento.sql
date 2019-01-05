@@ -107,7 +107,8 @@ insert into Peca_Peca
           (0, 'Couro Alcantara'					, 'Couro Recaro Red'				),
           (0, 'Branco'							, 'Spoiler'							),
           (1, '385 Engine'						, 'Sistema de Climatização'			),
-          (1, '385 Engine'						, 'Condutor Automático'				);
+          (1, '385 Engine'						, 'Condutor Automático'				),
+          (1, 'Condutor Automático'				, 'Teto de Abrir'					);
           
 insert into carro(id, Estado, Data, Preco, Modelo_Nome, Utilizador_Email)
 	VALUES('MustTMP' , 2, '2018/12/21', 35100, '302 Mustang', 'tmp1998@hotmail.com'),
