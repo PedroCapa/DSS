@@ -115,7 +115,7 @@ public class Modelo {
         }
         
         Modelo other = (Modelo) obj;
-        return (this.custoBase != other.getCustoBase() && this.nome.equals(other.getNome()) 
+        return (this.custoBase == other.getCustoBase() && this.nome.equals(other.getNome()) 
             && this.pacotes.equals(other.getPacotes()));
     }
     /**

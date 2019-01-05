@@ -158,8 +158,8 @@ public abstract class Peca {
         }
         
         Peca other = (Peca) obj;
-        return (this.quantidade != other.quantidade && this.nome.equals(other.nome) && this.preco == other.getPreco()
-            && this.obrigatorias.equals(other.obrigatorias) && this.incompativeis.equals(other.getIncompativeis()));
+        return (this.quantidade == other.getQuantidade() && this.nome.equals(other.getNome()) && this.preco == other.getPreco()
+            && this.obrigatorias.equals(other.getObrigatorias()) && this.incompativeis.equals(other.getIncompativeis()));
     }
     /**
      * Metodo que adiciona uma peca proibida a lista de proibidas

@@ -92,7 +92,7 @@ public class Personalizar extends javax.swing.JFrame {
             }
         });
 
-        teto.setText("Teto de Abir");
+        teto.setText("Teto de Abrir");
 
         jLabel1.setFont(new java.awt.Font("Harlow Solid Italic", 0, 18)); // NOI18N
         jLabel1.setText("Motor");
@@ -130,7 +130,7 @@ public class Personalizar extends javax.swing.JFrame {
         });
 
         Motor.add(jRadioButton9);
-        jRadioButton9.setText("225 Horsepower 312 Cubic Inch V8");
+        jRadioButton9.setText("255 Horsepower 312 Cubic Inch V8");
         jRadioButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jRadioButton9ActionPerformed(evt);

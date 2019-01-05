@@ -375,6 +375,53 @@ public class ConfiguraFacil {
         return b;
     }
     /**
+     * Metodo que calcula o valor de uma lista de pecas
+     * 
+     * @param pecas Lista de pecas que se vai verificar o valor
+     * 
+     * @return O valor das pecas
+     */
+    public float valorListaPecas(List<Peca> pecas){
+        float res = 0;
+        for(Peca p: pecas)
+            res = res + p.getPreco();
+        return res;
+    }
+    /**
+     * Metodo que acrescenta as peças obrigatorias de um pacote
+     * 
+     * @param peca Peca que se vai verificar as obrigatorias
+     * 
+     * @param pecas Extras que o pacote precisa
+     * 
+     * @param obg List de pecas obrigatorias da peca
+     */
+    public void podeEntrar(Peca peca, List<Peca> pecas, List<Peca> obg){
+        for(Peca p: obg){
+            if(!pecas.contains(p) && p instanceof Extras){
+                pecas.add(p);
+                podeEntrar(p, pecas, stringToPeca(p.getObrigatorias()));
+            }
+        }
+    }
+    /**
+     * Metodo que verifica se e possivel que os componentes extras do pacote cabem no orçamento
+     * 
+     * @param pecas Lista de pecas do pacote
+     * 
+     * @return list de pecas obrigatorias
+     */
+    public List<Peca> podeEntrar(List<Peca> pecas){
+        List<Peca> com = new ArrayList<>();
+        List<Peca> obg = new ArrayList<>();
+        for(Peca p: pecas){
+            obg = stringToPeca(p.getObrigatorias());
+            podeEntrar(p, com, obg);
+        }
+        return com;
+    }
+    
+    /**
      * Metodo que verifica qual o melhor pacote com um determinado orcamento
      * 
      * @param m Modelo escolhido
@@ -385,10 +432,12 @@ public class ConfiguraFacil {
      */
     public Pacote melhorPacote(Modelo m, float orc){
         float f = 0;
-        Pacote melhor = new Pacote();
+        List<Peca> obg = new ArrayList<>();
+        Pacote melhor = null;
         for(Pacote p: m.getPacotes()){
             float preco = precoPacote(p);
-            if(preco > f && (orc - preco) > 0){
+            obg = podeEntrar(stringToPeca(p.getPecas()));
+            if(preco > f && (orc - preco - valorListaPecas(obg)) > 0){
                 melhor = p;
                 f = preco;
             }
@@ -433,27 +482,64 @@ public class ConfiguraFacil {
         return f;
     }
     /**
+     * Verifica quais são todas as peças obrigatorias necessarias para a instalação de peca cara, porque as obrigatorias tambem têm
+     * pecas que são obrigatorias
+     * 
+     * @param cara Peca que se verifica quais são as suas obrigatorias
+     * 
+     * @param obg A lista de pecas obrigatorias da peca p
+     * 
+     * @param componentes Componentes que o carro ja apresenta
+     * 
+     * @param valida Lista temporaria das pecas que ao adicionar a peca p são obrigadas a inserir
+     * 
+     * @return true caso seja possivel inserir a peca p false caso contrario
+     */
+    public boolean adicionaObrigatorias(Peca cara, List<Peca> obg, List<Peca> componentes, List<Peca> valida){
+        boolean flag = true;
+        for(Peca p: obg){
+            if(!componentes.contains(p) && p instanceof Extras && !valida.contains(p)){
+                valida.add(p);
+            }
+            else if (!componentes.contains(p))
+                return false;
+            flag = adicionaObrigatorias(p, stringToPeca(p.getObrigatorias()), componentes, valida);
+            if(!flag)
+                return false;
+        }
+        return true;
+    }
+    
+    /**
      * Metodo que calcula quais sao os melhores extras com um determindo preco
      * 
      * @param preco Orcamento dispivel para as pecas extras
+     *
+     * @param pacote Pacote escolhido
      * 
      * @return Lista de pecas extras do carro
      */
-    public List<Peca> componentesExtra(float preco){
+    public List<Peca> componentesExtra(float preco, Pacote pacote){
         List<Peca> componentes = new ArrayList<>();
         List<Peca> extras = getExtras().stream().filter(peca -> peca.getPreco() < preco).collect(Collectors.toList());
         float orc = preco;
+        List<Peca> extrasPacote = podeEntrar(stringToPeca(pacote.getPecas()));
+        componentes.addAll(extrasPacote);
+        extras.removeAll(extrasPacote);
+        orc = orc - valorListaPecas(extras);
         while(extras.size() > 0){
             Peca cara = getPecaMaisCara(extras);
             List<Peca> obrigatorias = stringToPeca(cara.getObrigatorias());
-            List<Peca> valida = new ArrayList<>(obrigatorias);
-            valida.add(cara);
-            valida.addAll(componentes);
-            if(getPrecoObrigatorias(obrigatorias) + cara.getPreco() <= orc && validaPecas(valida)){
-                orc = orc - getPrecoObrigatorias(obrigatorias) - cara.getPreco();
+            List<Peca> valida = new ArrayList<>();
+            List<Peca> tmp = new ArrayList<>(componentes);
+            boolean flag = adicionaObrigatorias(cara, obrigatorias, componentes, valida);
+            tmp.addAll(valida);
+            tmp.addAll(stringToPeca(pacote.getPecas()));
+            if(flag && getPrecoObrigatorias(valida) + cara.getPreco() <= orc && validaPecas(tmp)){
+                orc = orc - getPrecoObrigatorias(valida) - cara.getPreco();
                 componentes.add(cara);
-                componentes.addAll(obrigatorias);
-                for(Peca peca:obrigatorias){
+                componentes.addAll(valida);
+                for(Peca peca:valida){
                     extras.remove(peca);
                 }
             }
@@ -479,6 +565,8 @@ public class ConfiguraFacil {
             throw new CustoDemasiadoBaixoException("O preco esta abaixo do valor das pecas basicas");
         }
         Pacote pacote = melhorPacote(m, preco - m.getCustoBase());
+        if(pacote == null)
+            throw new CustoDemasiadoBaixoException("O preco esta abaixo do valor das pecas extras");
         return pacote;
     }
     /**
